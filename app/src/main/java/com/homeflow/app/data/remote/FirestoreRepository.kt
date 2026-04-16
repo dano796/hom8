@@ -1,6 +1,10 @@
 package com.homeflow.app.data.remote
 
+import android.util.Log
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.homeflow.app.data.local.entity.ActivityLogEntity
 import com.homeflow.app.data.local.entity.ExpenseEntity
 import com.homeflow.app.data.local.entity.HomeEntity
@@ -18,91 +22,269 @@ class FirestoreRepository @Inject constructor(
     private val firestore: FirebaseFirestore
 ) {
 
+    companion object {
+        private const val TAG = "FirestoreRepository"
+    }
+    
+    private val gson = Gson()
+
     // ─── Tasks ────────────────────────────────────────────────────────────────
 
     fun syncTask(task: TaskEntity) {
+        val taskData = task.toMap()
+        
         firestore.collection("homes/${task.hogarId}/tasks")
             .document(task.id)
-            .set(task.toMap())
+            .set(taskData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync task ${task.id}: ${e.message}", e)
+            }
+    }
+    
+    /**
+     * Sincroniza una tarea con metadata adicional (nombres de usuarios)
+     * para hacer los datos más legibles en Firebase Console
+     */
+    fun syncTaskWithMetadata(
+        task: TaskEntity,
+        creatorName: String,
+        assigneeName: String
+    ) {
+        val taskData = task.toMapWithMetadata(creatorName, assigneeName)
+        
+        firestore.collection("homes/${task.hogarId}/tasks")
+            .document(task.id)
+            .set(taskData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync task ${task.id}: ${e.message}", e)
+            }
     }
 
     fun deleteTask(hogarId: String, taskId: String) {
         firestore.collection("homes/$hogarId/tasks")
             .document(taskId)
             .delete()
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to delete task $taskId: ${e.message}", e)
+            }
     }
 
     // ─── Expenses ─────────────────────────────────────────────────────────────
 
     fun syncExpense(expense: ExpenseEntity) {
+        val expenseData = expense.toMap()
+        
         firestore.collection("homes/${expense.hogarId}/expenses")
             .document(expense.id)
-            .set(expense.toMap())
+            .set(expenseData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync expense ${expense.id}: ${e.message}", e)
+            }
+    }
+    
+    /**
+     * Sincroniza un gasto con metadata adicional (nombres de usuarios)
+     * para hacer los datos más legibles en Firebase Console
+     */
+    fun syncExpenseWithMetadata(
+        expense: ExpenseEntity,
+        payerName: String,
+        participantNames: Map<String, String>
+    ) {
+        val expenseData = expense.toMapWithMetadata(payerName, participantNames)
+        
+        firestore.collection("homes/${expense.hogarId}/expenses")
+            .document(expense.id)
+            .set(expenseData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync expense ${expense.id}: ${e.message}", e)
+            }
     }
 
     fun deleteExpense(hogarId: String, expenseId: String) {
         firestore.collection("homes/$hogarId/expenses")
             .document(expenseId)
             .delete()
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to delete expense $expenseId: ${e.message}", e)
+            }
     }
 
     // ─── Homes ────────────────────────────────────────────────────────────────
 
     fun syncHome(home: HomeEntity) {
+        val homeData = home.toMap()
+        
         firestore.collection("homes")
             .document(home.id)
-            .set(home.toMap())
+            .set(homeData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync home ${home.id}: ${e.message}", e)
+            }
     }
 
     // ─── Activity log ─────────────────────────────────────────────────────────
 
     fun syncActivityLog(log: ActivityLogEntity) {
+        val logData = log.toMap()
+        
         firestore.collection("homes/${log.hogarId}/activity_log")
             .document(log.id)
-            .set(log.toMap())
+            .set(logData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync activity log ${log.id}: ${e.message}", e)
+            }
     }
 
     // ─── Users ────────────────────────────────────────────────────────────────
 
     fun syncUser(user: UserEntity) {
+        val userData = user.toMap()
+        
         firestore.collection("users")
             .document(user.id)
-            .set(user.toMap())
+            .set(userData)
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync user ${user.id}: ${e.message}", e)
+            }
     }
 
     // ─── Entity → Firestore map ───────────────────────────────────────────────
 
-    private fun TaskEntity.toMap(): Map<String, Any?> = mapOf(
-        "id" to id,
-        "titulo" to titulo,
-        "descripcion" to descripcion,
-        "responsableId" to responsableId,
-        "creadoPor" to creadoPor,
-        "hogarId" to hogarId,
-        "fechaLimite" to fechaLimite,
-        "prioridad" to prioridad,
-        "estado" to estado,
-        "recurrencia" to recurrencia,
-        "etiquetas" to etiquetas,
-        "checklist" to checklist,
-        "comentarios" to comentarios,
-        "actividad" to actividad,
-        "adjuntos" to adjuntos,
-        "creadoEn" to creadoEn,
-        "actualizadoEn" to actualizadoEn
-    )
+    private fun TaskEntity.toMap(): Map<String, Any?> {
+        // Parsear arrays JSON a listas nativas
+        val etiquetasList = parseJsonArray(etiquetas)
+        val checklistList = parseJsonArray(checklist)
+        val comentariosList = parseJsonArray(comentarios)
+        val actividadList = parseJsonArray(actividad)
+        val adjuntosList = parseJsonArray(adjuntos)
+        
+        return mapOf(
+            "id" to id,
+            "titulo" to titulo,
+            "descripcion" to descripcion,
+            "responsableId" to responsableId,
+            "creadoPor" to creadoPor,
+            "hogarId" to hogarId,
+            "fechaLimite" to fechaLimite,
+            "prioridad" to prioridad,
+            "estado" to estado,
+            "recurrencia" to recurrencia,
+            // Arrays nativos en lugar de strings JSON
+            "etiquetas" to etiquetasList,
+            "checklist" to checklistList,
+            "comentarios" to comentariosList,
+            "actividad" to actividadList,
+            "adjuntos" to adjuntosList,
+            "creadoEn" to creadoEn,
+            "actualizadoEn" to actualizadoEn,
+            // Timestamp del servidor para sincronización
+            "serverTimestamp" to FieldValue.serverTimestamp()
+        )
+    }
+    
+    /**
+     * Convierte TaskEntity a Map con metadata adicional para mejor legibilidad
+     */
+    private fun TaskEntity.toMapWithMetadata(
+        creatorName: String,
+        assigneeName: String
+    ): Map<String, Any?> {
+        // Parsear arrays JSON a listas nativas
+        val etiquetasList = parseJsonArray(etiquetas)
+        val checklistList = parseJsonArray(checklist)
+        val comentariosList = parseJsonArray(comentarios)
+        val actividadList = parseJsonArray(actividad)
+        val adjuntosList = parseJsonArray(adjuntos)
+        
+        return mapOf(
+            "id" to id,
+            "titulo" to titulo,
+            "descripcion" to descripcion,
+            // IDs para referencias
+            "responsableId" to responsableId,
+            "creadoPor" to creadoPor,
+            "hogarId" to hogarId,
+            // Nombres para legibilidad (metadata)
+            "responsableNombre" to assigneeName,
+            "creadoPorNombre" to creatorName,
+            // Fechas
+            "fechaLimite" to fechaLimite,
+            "creadoEn" to creadoEn,
+            "actualizadoEn" to actualizadoEn,
+            // Estados y prioridad
+            "prioridad" to prioridad,
+            "estado" to estado,
+            "recurrencia" to recurrencia,
+            // Arrays nativos en lugar de strings JSON
+            "etiquetas" to etiquetasList,
+            "checklist" to checklistList,
+            "comentarios" to comentariosList,
+            "actividad" to actividadList,
+            "adjuntos" to adjuntosList,
+            // Timestamp del servidor para sincronización
+            "serverTimestamp" to FieldValue.serverTimestamp()
+        )
+    }
 
-    private fun ExpenseEntity.toMap(): Map<String, Any?> = mapOf(
-        "id" to id,
-        "descripcion" to descripcion,
-        "monto" to monto,
-        "categoria" to categoria,
-        "pagadorId" to pagadorId,
-        "hogarId" to hogarId,
-        "fecha" to fecha,
-        "nota" to nota,
-        "participantes" to participantes
-    )
+    private fun ExpenseEntity.toMap(): Map<String, Any?> {
+        // Parsear participantes JSON a lista nativa
+        val participantesList = parseParticipantesJson(participantes)
+        
+        return mapOf(
+            "id" to id,
+            "descripcion" to descripcion,
+            "monto" to monto,
+            "categoria" to categoria,
+            "pagadorId" to pagadorId,
+            "hogarId" to hogarId,
+            "fecha" to fecha,
+            "nota" to nota,
+            // Array nativo en lugar de string JSON
+            "participantes" to participantesList,
+            // Timestamp del servidor
+            "serverTimestamp" to FieldValue.serverTimestamp()
+        )
+    }
+    
+    /**
+     * Convierte ExpenseEntity a Map con metadata adicional para mejor legibilidad
+     */
+    private fun ExpenseEntity.toMapWithMetadata(
+        payerName: String,
+        participantNames: Map<String, String>
+    ): Map<String, Any?> {
+        // Parsear participantes JSON a lista nativa
+        val participantIds = parseParticipantesJson(participantes)
+        
+        // Crear lista de participantes con nombres
+        val participantesConNombres = participantIds.map { userId ->
+            mapOf(
+                "userId" to userId,
+                "nombre" to (participantNames[userId] ?: "Usuario")
+            )
+        }
+        
+        return mapOf(
+            "id" to id,
+            "descripcion" to descripcion,
+            "monto" to monto,
+            "categoria" to categoria,
+            // IDs para referencias
+            "pagadorId" to pagadorId,
+            "hogarId" to hogarId,
+            // Nombres para legibilidad
+            "pagadorNombre" to payerName,
+            // Fechas
+            "fecha" to fecha,
+            "nota" to nota,
+            // Arrays nativos con información completa
+            "participantes" to participantesConNombres,
+            "participantIds" to participantIds,  // IDs simples para queries
+            // Timestamp del servidor
+            "serverTimestamp" to FieldValue.serverTimestamp()
+        )
+    }
 
     private fun HomeEntity.toMap(): Map<String, Any?> {
         val memberIds = parseMembersJson(miembros)
@@ -137,5 +319,37 @@ class FirestoreRepository @Inject constructor(
         val trimmed = json.trim().removePrefix("[").removeSuffix("]")
         if (trimmed.isBlank()) return emptyList()
         return trimmed.split(",").map { it.trim().removeSurrounding("\"") }.filter { it.isNotEmpty() }
+    }
+    
+    /**
+     * Parsea un string JSON a una lista nativa de Firestore
+     * Maneja tanto arrays de strings como arrays de objetos
+     */
+    private fun parseJsonArray(jsonString: String?): List<Any> {
+        if (jsonString.isNullOrBlank() || jsonString == "[]") return emptyList()
+        
+        return try {
+            // Intentar parsear como lista de objetos genéricos
+            val type = object : TypeToken<List<Any>>() {}.type
+            gson.fromJson<List<Any>>(jsonString, type) ?: emptyList()
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to parse JSON array: $jsonString", e)
+            emptyList()
+        }
+    }
+    
+    /**
+     * Parsea el JSON de participantes a una lista de IDs
+     */
+    private fun parseParticipantesJson(jsonString: String?): List<String> {
+        if (jsonString.isNullOrBlank() || jsonString == "[]") return emptyList()
+        
+        return try {
+            val type = object : TypeToken<List<String>>() {}.type
+            gson.fromJson<List<String>>(jsonString, type) ?: emptyList()
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to parse participantes JSON: $jsonString", e)
+            emptyList()
+        }
     }
 }

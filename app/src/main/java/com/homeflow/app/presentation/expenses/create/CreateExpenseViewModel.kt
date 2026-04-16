@@ -1,5 +1,6 @@
 package com.homeflow.app.presentation.expenses.create
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.homeflow.app.data.local.dao.ActivityLogDao
@@ -45,6 +46,10 @@ class CreateExpenseViewModel @Inject constructor(
     private val session: SessionManager,
     private val firestoreRepo: FirestoreRepository
 ) : ViewModel() {
+
+    companion object {
+        private const val TAG = "CreateExpenseViewModel"
+    }
 
     private val _uiState = MutableStateFlow(CreateExpenseUiState())
     val uiState: StateFlow<CreateExpenseUiState> = _uiState.asStateFlow()
@@ -153,44 +158,58 @@ class CreateExpenseViewModel @Inject constructor(
         val participantes = "[" + participantIds.joinToString(",") { "\"$it\"" } + "]"
 
         viewModelScope.launch {
-            val expense = state.existingExpense?.copy(
-                descripcion = description,
-                monto = parsedAmount,
-                categoria = state.selectedCategory,
-                pagadorId = payerId,
-                fecha = state.selectedDate,
-                nota = note,
-                participantes = participantes,
-                synced = 0
-            ) ?: ExpenseEntity(
-                id = UUID.randomUUID().toString(),
-                descripcion = description,
-                monto = parsedAmount,
-                categoria = state.selectedCategory,
-                pagadorId = payerId,
-                hogarId = hogarId,
-                fecha = state.selectedDate,
-                nota = note,
-                participantes = participantes,
-                synced = 0
-            )
-            expenseDao.insertExpense(expense)
-            firestoreRepo.syncExpense(expense)
+            try {
+                val expense = state.existingExpense?.copy(
+                    descripcion = description,
+                    monto = parsedAmount,
+                    categoria = state.selectedCategory,
+                    pagadorId = payerId,
+                    fecha = state.selectedDate,
+                    nota = note,
+                    participantes = participantes,
+                    synced = 0
+                ) ?: ExpenseEntity(
+                    id = UUID.randomUUID().toString(),
+                    descripcion = description,
+                    monto = parsedAmount,
+                    categoria = state.selectedCategory,
+                    pagadorId = payerId,
+                    hogarId = hogarId,
+                    fecha = state.selectedDate,
+                    nota = note,
+                    participantes = participantes,
+                    synced = 0
+                )
+                
+                expenseDao.insertExpense(expense)
+                
+                // Obtener nombres de usuarios para metadata
+                val payerName = state.members.find { it.id == payerId }?.name 
+                    ?: if (payerId == session.userId) session.userName else "Usuario"
+                
+                val participantNames = state.members.associate { it.id to it.name }
+                
+                firestoreRepo.syncExpenseWithMetadata(expense, payerName, participantNames)
 
-            val tipo = if (state.existingExpense != null) "EXPENSE_UPDATED" else "EXPENSE_CREATED"
-            val log = ActivityLogEntity(
-                id = UUID.randomUUID().toString(),
-                hogarId = hogarId,
-                actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
-                tipo = tipo,
-                targetTitle = description,
-                timestamp = System.currentTimeMillis()
-            )
-            activityLogDao.insertActivity(log)
-            firestoreRepo.syncActivityLog(log)
+                val tipo = if (state.existingExpense != null) "EXPENSE_UPDATED" else "EXPENSE_CREATED"
+                val log = ActivityLogEntity(
+                    id = UUID.randomUUID().toString(),
+                    hogarId = hogarId,
+                    actorId = session.userId,
+                    actorName = session.userName.ifEmpty { "Someone" },
+                    tipo = tipo,
+                    targetTitle = description,
+                    timestamp = System.currentTimeMillis()
+                )
+                
+                activityLogDao.insertActivity(log)
+                firestoreRepo.syncActivityLog(log)
 
-            _uiState.update { it.copy(isSaved = true, error = null) }
+                _uiState.update { it.copy(isSaved = true, error = null) }
+            } catch (e: Exception) {
+                Log.e(TAG, "❌ Failed to save expense: ${e.message}", e)
+                _uiState.update { it.copy(error = e.message ?: "Failed to save expense") }
+            }
         }
     }
 

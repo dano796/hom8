@@ -1,5 +1,6 @@
 package com.homeflow.app.presentation.tasks.create
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -44,6 +45,10 @@ class CreateTaskViewModel @Inject constructor(
     private val session: SessionManager,
     private val firestoreRepo: FirestoreRepository
 ) : ViewModel() {
+
+    companion object {
+        private const val TAG = "CreateTaskViewModel"
+    }
 
     private val _uiState = MutableStateFlow(CreateTaskUiState())
     val uiState: StateFlow<CreateTaskUiState> = _uiState.asStateFlow()
@@ -127,7 +132,21 @@ class CreateTaskViewModel @Inject constructor(
                 )
 
                 taskDao.insertTask(entity)
-                firestoreRepo.syncTask(entity)
+                
+                // Obtener nombres de usuarios para información adicional
+                val creatorName = if (entity.creadoPor == userId) {
+                    session.userName
+                } else {
+                    userDao.getUsersByIds(listOf(entity.creadoPor)).firstOrNull()?.nombre ?: "Usuario"
+                }
+                
+                val assigneeName = if (assigneeId == userId) {
+                    session.userName
+                } else {
+                    userDao.getUsersByIds(listOf(assigneeId)).firstOrNull()?.nombre ?: "Usuario"
+                }
+                
+                firestoreRepo.syncTaskWithMetadata(entity, creatorName, assigneeName)
 
                 val tipo = if (taskId != null) "TASK_UPDATED" else "TASK_CREATED"
                 val log = ActivityLogEntity(
@@ -139,11 +158,13 @@ class CreateTaskViewModel @Inject constructor(
                     targetTitle = titulo,
                     timestamp = now
                 )
+                
                 activityLogDao.insertActivity(log)
                 firestoreRepo.syncActivityLog(log)
 
                 _uiState.update { it.copy(saved = true) }
             } catch (e: Exception) {
+                Log.e(TAG, "❌ Failed to save task: ${e.message}", e)
                 _uiState.update { it.copy(error = e.message ?: "Failed to save task") }
             }
         }
