@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageButton
+        android:id="@+id/btnTopBarBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:padding="8dp"
+        android:src="@drawable/ic_back"
+        android:visibility="gone"
+        app:tint="@color/colorTextPrimary"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvTopBarTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/jetbrains_mono"
+        android:gravity="center"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Screen Title" />
+
+    <ImageButton
+        android:id="@+id/btnTopBarAction"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Action"
+        android:padding="8dp"
+        android:src="@drawable/ic_more"
+        android:visibility="gone"
+        app:tint="@color/colorTextPrimary"
+        tools:visibility="visible" />
+
+</merge>

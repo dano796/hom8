@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageButton
+        android:id="@+id/wire_top_bar_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@drawable/ic_back"
+        android:visibility="gone"
+        android:scaleType="centerInside"
+        android:padding="4dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/wire_top_bar_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/jetbrains_mono"
+        android:textAppearance="@style/Wire.TextAppearance.Title"
+        android:gravity="center"
+        tools:text="Title" />
+
+    <ImageButton
+        android:id="@+id/wire_top_bar_action"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Action"
+        android:src="@drawable/ic_more"
+        android:visibility="gone"
+        android:scaleType="centerInside"
+        android:padding="4dp"
+        tools:visibility="visible" />
+
+</merge>

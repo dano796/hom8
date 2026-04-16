@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:id="@+id/taskDetailTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@color/colorSurface"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing2">
+
+        <ImageButton
+            android:id="@+id/btnDetailBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/colorTextPrimary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/jetbrains_mono"
+            android:gravity="center"
+            android:text="@string/tasks_task_detail"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnDetailMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="More options"
+            android:padding="8dp"
+            android:src="@drawable/ic_more"
+            app:tint="@color/colorTextPrimary" />
+
+    </LinearLayout>
+
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/taskDetailScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/topBarHeight"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing4">
+
+            <!-- Title + badges -->
+            <TextView
+                android:id="@+id/tvDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing2"
+                android:fontFamily="@font/jetbrains_mono"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Clean the kitchen thoroughly" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing4"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDetailPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing2"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:background="@drawable/bg_priority_medium"
+                    tools:text="MEDIUM"
+                    tools:textColor="@color/priorityMediumText" />
+
+                <TextView
+                    android:id="@+id/tvDetailStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:background="@drawable/bg_status_pending"
+                    tools:text="PENDING"
+                    tools:textColor="@color/statusPendingText" />
+
+            </LinearLayout>
+
+            <!-- Details card -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.HomeFlow.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing3"
+                        android:fontFamily="@font/jetbrains_mono"
+                        android:letterSpacing="0.05"
+                        android:text="DETAILS"
+                        android:textColor="@color/colorTextTertiary"
+                        android:textSize="11sp" />
+
+                    <!-- Created by -->
+                    <LinearLayout
+                        android:id="@+id/rowCreatedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing3"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="@string/tasks_created_by"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="12sp" />
+
+                        <com.homeflow.app.presentation.common.WireAvatar
+                            android:id="@+id/avatarDetailCreator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing2"
+                            app:wireAvatarSize="xs"
+                            app:wireInitials="C" />
+
+                        <TextView
+                            android:id="@+id/tvDetailCreatedBy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="13sp"
+                            tools:text="Ana García" />
+
+                    </LinearLayout>
+
+                    <!-- Assigned to -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing3"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="@string/tasks_assigned_to"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="12sp" />
+
+                        <com.homeflow.app.presentation.common.WireAvatar
+                            android:id="@+id/avatarDetailAssignee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing2"
+                            app:wireAvatarSize="xs"
+                            app:wireInitials="A" />
+
+                        <TextView
+                            android:id="@+id/tvDetailAssignee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="13sp"
+                            tools:text="Ana García" />
+
+                    </LinearLayout>
+
+                    <!-- Due date -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="Due"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvDetailDueDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="13sp"
+                            tools:text="Apr 15, 2025 · 6:00 PM" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Description card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDescription"
+                style="@style/Widget.HomeFlow.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing3"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing3"
+                        android:fontFamily="@font/jetbrains_mono"
+                        android:letterSpacing="0.05"
+                        android:text="DESCRIPTION"
+                        android:textColor="@color/colorTextTertiary"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvDetailDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/jetbrains_mono"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="13sp"
+                        android:lineSpacingMultiplier="1.4"
+                        tools:text="Make sure to clean under the stove and behind the refrigerator. Use the heavy-duty cleaner." />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Checklist card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardChecklist"
+                style="@style/Widget.HomeFlow.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing3"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing2"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:letterSpacing="0.05"
+                            android:text="CHECKLIST"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvChecklistProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            tools:text="2/4" />
+
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressChecklist"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginBottom="@dimen/spacing3"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressBackgroundTint="@color/colorOutlineVariant"
+                        android:progressTint="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutChecklistItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Sticky Mark Complete button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMarkComplete"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/spacing4"
+        android:fontFamily="@font/jetbrains_mono"
+        android:text="@string/tasks_mark_complete"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- =====================================================
+         HomeFlow Color System
+         Primary   : Blue-Indigo  (organization, trust)
+         Secondary : Amber-Orange (expenses, money)
+         Tertiary  : Emerald      (completion, success)
+         ===================================================== -->
+
+    <!-- Primary - Blue Indigo -->
+    <color name="colorPrimary">#4361EE</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#DBE4FF</color>
+    <color name="colorOnPrimaryContainer">#00174D</color>
+    <color name="colorPrimaryVariant">#3A0CA3</color>
+
+    <!-- Secondary - Amber Orange (Expenses) -->
+    <color name="colorSecondary">#F77F00</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#FFE8CC</color>
+    <color name="colorOnSecondaryContainer">#4D2600</color>
+
+    <!-- Tertiary - Emerald Green (Success, Done) -->
+    <color name="colorTertiary">#2DC653</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorTertiaryContainer">#C8F7D6</color>
+    <color name="colorOnTertiaryContainer">#003912</color>
+
+    <!-- Error - Red (Overdue, Destructive) -->
+    <color name="colorError">#E53935</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorErrorContainer">#FFEBEE</color>
+    <color name="colorOnErrorContainer">#7F0000</color>
+
+    <!-- Warning - Amber (Due Soon) -->
+    <color name="colorWarning">#FFB300</color>
+    <color name="colorOnWarning">#FFFFFF</color>
+    <color name="colorWarningContainer">#FFF8E1</color>
+
+    <!-- Background & Surface -->
+    <color name="colorBackground">#F5F6FA</color>
+    <color name="colorOnBackground">#1A1A2E</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#1A1A2E</color>
+    <color name="colorSurfaceVariant">#EEF1FF</color>
+    <color name="colorOnSurfaceVariant">#4A4A6A</color>
+
+    <!-- Outline -->
+    <color name="colorOutline">#C4C9E2</color>
+    <color name="colorOutlineVariant">#E0E4F4</color>
+
+    <!-- Text -->
+    <color name="colorTextPrimary">#1A1A2E</color>
+    <color name="colorTextSecondary">#4A4A6A</color>
+    <color name="colorTextTertiary">#8891A4</color>
+    <color name="colorTextHint">#B0B8D0</color>
+    <color name="colorTextOnPrimary">#FFFFFF</color>
+
+    <!-- Priority -->
+    <color name="priorityHighBg">#FFEBEE</color>
+    <color name="priorityHighText">#C62828</color>
+    <color name="priorityMediumBg">#FFF3E0</color>
+    <color name="priorityMediumText">#E65100</color>
+    <color name="priorityLowBg">#E8F5E9</color>
+    <color name="priorityLowText">#2E7D32</color>
+
+    <!-- Task Status -->
+    <color name="statusPendingBg">#EEF1FF</color>
+    <color name="statusPendingText">#3A4A9E</color>
+    <color name="statusInProgressBg">#E3F2FD</color>
+    <color name="statusInProgressText">#1565C0</color>
+    <color name="statusDoneBg">#E8F5E9</color>
+    <color name="statusDoneText">#2E7D32</color>
+    <color name="statusOverdueBg">#FFEBEE</color>
+    <color name="statusOverdueText">#C62828</color>
+
+    <!-- Bottom Navigation -->
+    <color name="bottomNavBackground">#FFFFFF</color>
+    <color name="bottomNavActive">#4361EE</color>
+    <color name="bottomNavInactive">#8891A4</color>
+
+    <!-- FAB -->
+    <color name="fabBackground">#4361EE</color>
+    <color name="fabIcon">#FFFFFF</color>
+
+    <!-- Card/Component -->
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="cardBorder">#E0E4F4</color>
+    <color name="divider">#F0F2FF</color>
+    <color name="skeleton">#E8EBF5</color>
+
+    <!-- Avatar -->
+    <color name="avatarBackground">#DBE4FF</color>
+    <color name="avatarBorder">#C4C9E2</color>
+    <color name="avatarText">#4361EE</color>
+
+    <!-- Chip -->
+    <color name="chipActiveBg">#4361EE</color>
+    <color name="chipActiveText">#FFFFFF</color>
+    <color name="chipInactiveBg">#FFFFFF</color>
+    <color name="chipInactiveText">#4A4A6A</color>
+    <color name="chipInactiveBorder">#C4C9E2</color>
+
+    <!-- Badge -->
+    <color name="badgeRed">#E53935</color>
+    <color name="badgeText">#FFFFFF</color>
+
+    <!-- Toggle -->
+    <color name="toggleOn">#4361EE</color>
+    <color name="toggleOff">#C4C9E2</color>
+    <color name="toggleThumb">#FFFFFF</color>
+
+    <!-- Input -->
+    <color name="inputBorder">#C4C9E2</color>
+    <color name="inputBorderFocused">#4361EE</color>
+    <color name="inputBackground">#FFFFFF</color>
+
+    <!-- Notification Types -->
+    <color name="notifTaskAssigned">#4361EE</color>
+    <color name="notifDueSoon">#FFB300</color>
+    <color name="notifOverdue">#E53935</color>
+    <color name="notifComment">#7B61FF</color>
+    <color name="notifExpense">#F77F00</color>
+    <color name="notifMemberJoined">#2DC653</color>
+    <color name="notifDigest">#9C27B0</color>
+
+    <!-- Expense Category Colors -->
+    <color name="categoryFood">#E53935</color>
+    <color name="categorySupermarket">#43A047</color>
+    <color name="categoryServices">#1E88E5</color>
+    <color name="categoryCleaning">#00ACC1</color>
+    <color name="categoryTransport">#FB8C00</color>
+    <color name="categoryEntertainment">#8E24AA</color>
+    <color name="categoryHealth">#00897B</color>
+    <color name="categoryOther">#546E7A</color>
+
+    <!-- Expense Balance -->
+    <color name="balancePositive">#2DC653</color>
+    <color name="balanceNegative">#E53935</color>
+    <color name="balanceNeutral">#8891A4</color>
+
+    <!-- Home members (up to 6 distinct colors) -->
+    <color name="memberColor1">#4361EE</color>
+    <color name="memberColor2">#F77F00</color>
+    <color name="memberColor3">#2DC653</color>
+    <color name="memberColor4">#E53935</color>
+    <color name="memberColor5">#9C27B0</color>
+    <color name="memberColor6">#00897B</color>
+
+    <!-- Scrim / overlay -->
+    <color name="scrim">#66000000</color>
+
+    <!-- Legacy aliases for old drawables that still reference wire_* names -->
+    <color name="wire_text_primary">@color/colorTextPrimary</color>
+    <color name="wire_text_secondary">@color/colorTextSecondary</color>
+    <color name="wire_text_tertiary">@color/colorTextTertiary</color>
+    <color name="wire_text_hint">@color/colorTextHint</color>
+    <color name="wire_bg">@color/colorBackground</color>
+    <color name="wire_surface">@color/colorSurface</color>
+    <color name="wire_border">@color/colorOutline</color>
+    <color name="wire_border_light">@color/colorOutlineVariant</color>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing (base 4dp) -->
+    <dimen name="spacing1">4dp</dimen>
+    <dimen name="spacing2">8dp</dimen>
+    <dimen name="spacing3">12dp</dimen>
+    <dimen name="spacing4">16dp</dimen>
+    <dimen name="spacing5">20dp</dimen>
+    <dimen name="spacing6">24dp</dimen>
+    <dimen name="spacing8">32dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="cardCorner">16dp</dimen>
+    <dimen name="cardPadding">16dp</dimen>
+    <dimen name="cardPaddingSm">12dp</dimen>
+
+    <!-- Navigation -->
+    <dimen name="bottomNavHeight">64dp</dimen>
+    <dimen name="topBarHeight">56dp</dimen>
+    <dimen name="topBarPaddingH">16dp</dimen>
+
+    <!-- FAB -->
+    <dimen name="fabSize">56dp</dimen>
+    <dimen name="fabMargin">16dp</dimen>
+
+    <!-- Avatar sizes -->
+    <dimen name="avatarXs">20dp</dimen>
+    <dimen name="avatarSm">28dp</dimen>
+    <dimen name="avatarMd">40dp</dimen>
+    <dimen name="avatarLg">56dp</dimen>
+    <dimen name="avatarBorderWidth">1.5dp</dimen>
+
+    <!-- Inputs -->
+    <dimen name="inputHeight">52dp</dimen>
+    <dimen name="inputCorner">12dp</dimen>
+
+    <!-- Chips -->
+    <dimen name="chipCorner">20dp</dimen>
+    <dimen name="chipPaddingH">12dp</dimen>
+    <dimen name="chipPaddingV">6dp</dimen>
+    <dimen name="chipHeight">32dp</dimen>
+
+    <!-- Priority badge -->
+    <dimen name="priorityBadgeCorner">6dp</dimen>
+    <dimen name="priorityBadgePaddingH">8dp</dimen>
+    <dimen name="priorityBadgePaddingV">3dp</dimen>
+
+    <!-- Progress bar -->
+    <dimen name="progressHeight">6dp</dimen>
+    <dimen name="progressCorner">3dp</dimen>
+
+    <!-- Empty state -->
+    <dimen name="emptyIconSize">80dp</dimen>
+
+    <!-- Divider -->
+    <dimen name="dividerHeight">1dp</dimen>
+
+    <!-- Shadows/Elevation -->
+    <dimen name="elevationCard">2dp</dimen>
+    <dimen name="elevationFab">6dp</dimen>
+    <dimen name="elevationBottomNav">8dp</dimen>
+
+    <!-- Borders -->
+    <dimen name="borderWidth">1dp</dimen>
+    <dimen name="borderWidthFocused">2dp</dimen>
+
+    <!-- Section header -->
+    <dimen name="sectionHeaderSpacing">20dp</dimen>
+
+    <!-- Onboarding step indicators -->
+    <dimen name="indicator_active_width">24dp</dimen>
+    <dimen name="indicator_inactive_width">8dp</dimen>
+
+    <!-- Legacy aliases (for backward compat with existing layouts) -->
+    <dimen name="wire_spacing_1">4dp</dimen>
+    <dimen name="wire_spacing_2">8dp</dimen>
+    <dimen name="wire_spacing_3">12dp</dimen>
+    <dimen name="wire_spacing_4">16dp</dimen>
+    <dimen name="wire_spacing_6">24dp</dimen>
+    <dimen name="wire_bottom_nav_height">64dp</dimen>
+    <dimen name="wire_top_bar_height">56dp</dimen>
+    <dimen name="wire_fab_size">56dp</dimen>
+    <dimen name="wire_border_width">1dp</dimen>
+    <dimen name="wire_avatar_xs">20dp</dimen>
+    <dimen name="wire_avatar_sm">28dp</dimen>
+    <dimen name="wire_avatar_md">40dp</dimen>
+    <dimen name="wire_avatar_lg">56dp</dimen>
+</resources>

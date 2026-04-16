@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardHome"
+    style="@style/Widget.HomeFlow.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing4">
+
+        <!-- Home icon -->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_label_chip"
+            android:padding="10dp"
+            android:src="@drawable/ic_home"
+            app:tint="@color/colorPrimary" />
+
+        <!-- Name + code -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing3"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvHomeCardName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jetbrains_mono"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="García Family Home" />
+
+            <TextView
+                android:id="@+id/tvHomeCardCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jetbrains_mono"
+                android:textColor="@color/colorTextTertiary"
+                android:textSize="11sp"
+                tools:text="HF-ABCD12" />
+
+            <TextView
+                android:id="@+id/tvHomeCardMembers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jetbrains_mono"
+                android:textColor="@color/colorTextTertiary"
+                android:textSize="11sp"
+                tools:text="2 members" />
+
+        </LinearLayout>
+
+        <!-- Active indicator -->
+        <TextView
+            android:id="@+id/tvActiveIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_label_chip"
+            android:fontFamily="@font/jetbrains_mono"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="Active"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!-- Arrow for inactive homes -->
+        <ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_next"
+            android:visibility="visible"
+            app:tint="@color/colorTextTertiary" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

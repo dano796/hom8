@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@color/colorSurface"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing4">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/jetbrains_mono"
+            android:text="Expenses"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvBalances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing3"
+            android:fontFamily="@font/jetbrains_mono"
+            android:text="Balances →"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/btnExpensesSettings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Expenses settings"
+            android:padding="6dp"
+            android:src="@drawable/ic_more"
+            app:tint="@color/colorTextSecondary" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/expensesScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/topBarHeight"
+        android:overScrollMode="never"
+        android:paddingBottom="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/spacing3">
+
+            <!-- Balance summary: 2 cards (visible in SPLIT mode only) -->
+            <LinearLayout
+                android:id="@+id/layoutBalanceSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing4"
+                android:layout_marginBottom="@dimen/spacing4"
+                android:orientation="horizontal">
+
+                <!-- They owe you -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTheyOwe"
+                    style="@style/Widget.HomeFlow.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing2"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="@string/expenses_they_owe_you"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvTheyOweAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/balancePositive"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="$85.00" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- You owe -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardYouOwe"
+                    style="@style/Widget.HomeFlow.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing2"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="@string/expenses_you_owe"
+                            android:textColor="@color/colorTextTertiary"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvYouOweAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:textColor="@color/balanceNegative"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="$45.00" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Filter chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing3"
+                android:paddingHorizontal="@dimen/spacing4"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAllExpenses"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="All" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFood"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍔 Food" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSupermarket"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🛒 Supermarket" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipServices"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💡 Services" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTransport"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚗 Transport" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipEntertainment"
+                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎬 Entertainment" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <!-- Expense count -->
+            <TextView
+                android:id="@+id/tvExpenseCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing4"
+                android:layout_marginBottom="@dimen/spacing2"
+                android:fontFamily="@font/jetbrains_mono"
+                android:textColor="@color/colorTextTertiary"
+                android:textSize="11sp"
+                tools:text="5 expenses · total $325.70" />
+
+            <!-- Expenses list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing4"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_expense" />
+
+            <!-- Empty state -->
+            <LinearLayout
+                android:id="@+id/layoutExpensesEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing8"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:text="💸"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing3"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:gravity="center"
+                    android:text="@string/empty_expenses_title"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing2"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:gravity="center"
+                    android:text="@string/empty_expenses_subtitle"
+                    android:textColor="@color/colorTextTertiary"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddExpense"
+        style="@style/Widget.HomeFlow.FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fabMargin"
+        android:contentDescription="Add expense"
+        android:src="@drawable/ic_add"
+        app:tint="@color/fabIcon" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

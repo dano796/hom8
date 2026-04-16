@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/spacing2">
+
+    <!-- Avatar with activity dot -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing3">
+
+        <com.homeflow.app.presentation.common.WireAvatar
+            android:id="@+id/avatarActor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:wireAvatarSize="sm"
+            app:wireInitials="?" />
+
+        <!-- Activity type dot -->
+        <View
+            android:id="@+id/viewActivityDot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_activity_dot"
+            tools:background="@color/colorPrimary" />
+
+    </FrameLayout>
+
+    <!-- Activity text -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvActivityText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jetbrains_mono"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp"
+            tools:text="Ana completed Clean the kitchen" />
+
+        <TextView
+            android:id="@+id/tvActivityTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jetbrains_mono"
+            android:textColor="@color/colorTextTertiary"
+            android:textSize="10sp"
+            tools:text="2h ago" />
+
+    </LinearLayout>
+
+</LinearLayout>

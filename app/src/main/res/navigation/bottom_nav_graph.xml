@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <!-- Home / Dashboard -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.homeflow.app.presentation.dashboard.DashboardFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_dashboard_to_createTask"
+            app:destination="@id/createTaskFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_dashboard_to_taskDetail"
+            app:destination="@id/taskDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Tasks List -->
+    <fragment
+        android:id="@+id/tasksListFragment"
+        android:name="com.homeflow.app.presentation.tasks.list.TasksListFragment"
+        android:label="Tasks">
+        <action
+            android:id="@+id/action_tasksList_to_createTask"
+            app:destination="@id/createTaskFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_tasksList_to_taskDetail"
+            app:destination="@id/taskDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Create / Edit Task -->
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.homeflow.app.presentation.tasks.create.CreateTaskFragment"
+        android:label="New Task">
+        <argument
+            android:name="taskId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <!-- Task Detail -->
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.homeflow.app.presentation.tasks.detail.TaskDetailFragment"
+        android:label="Task Detail">
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_taskDetail_to_createTask"
+            app:destination="@id/createTaskFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+    </fragment>
+
+    <!-- Calendar -->
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.homeflow.app.presentation.calendar.CalendarFragment"
+        android:label="Calendar">
+        <action
+            android:id="@+id/action_calendar_to_taskDetail"
+            app:destination="@id/taskDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Expenses List -->
+    <fragment
+        android:id="@+id/expensesListFragment"
+        android:name="com.homeflow.app.presentation.expenses.list.ExpensesListFragment"
+        android:label="Expenses">
+        <action
+            android:id="@+id/action_expensesList_to_createExpense"
+            app:destination="@id/createExpenseFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_expensesList_to_balances"
+            app:destination="@id/balancesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Create / Edit Expense -->
+    <fragment
+        android:id="@+id/createExpenseFragment"
+        android:name="com.homeflow.app.presentation.expenses.create.CreateExpenseFragment"
+        android:label="New Expense">
+        <argument
+            android:name="expenseId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <!-- Balances -->
+    <fragment
+        android:id="@+id/balancesFragment"
+        android:name="com.homeflow.app.presentation.expenses.balances.BalancesFragment"
+        android:label="Balances" />
+
+    <!-- Profile -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.homeflow.app.presentation.profile.ProfileFragment"
+        android:label="Profile">
+        <action
+            android:id="@+id/action_profile_to_houseMembers"
+            app:destination="@id/houseMembersFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profile_to_manageHomes"
+            app:destination="@id/manageHomesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- House Members -->
+    <fragment
+        android:id="@+id/houseMembersFragment"
+        android:name="com.homeflow.app.presentation.members.HouseMembersFragment"
+        android:label="Members" />
+
+    <!-- Manage Homes -->
+    <fragment
+        android:id="@+id/manageHomesFragment"
+        android:name="com.homeflow.app.presentation.homes.ManageHomesFragment"
+        android:label="My Homes">
+        <action
+            android:id="@+id/action_manageHomes_to_addHome"
+            app:destination="@id/addHomeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Add Home (create or join) -->
+    <fragment
+        android:id="@+id/addHomeFragment"
+        android:name="com.homeflow.app.presentation.homes.AddHomeFragment"
+        android:label="Add Home" />
+
+</navigation>

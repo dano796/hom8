@@ -1,0 +1,197 @@
+<resources>
+    <string name="app_name">HomeFlow</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_expenses">Expenses</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Common Actions -->
+    <string name="action_save">SAVE</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_ok">OK</string>
+    <string name="action_create_account">CREATE ACCOUNT</string>
+    <string name="action_sign_in">SIGN IN</string>
+    <string name="action_log_out">LOG OUT</string>
+    <string name="action_continue">CONTINUE</string>
+    <string name="action_mark_all">Mark all</string>
+    <string name="action_see_all">See all →</string>
+    <string name="action_see_details">See details →</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_tagline">Your home, organized.</string>
+    <string name="onboarding_quote">No more forgotten tasks, unfair splits, or missed reminders</string>
+    <string name="onboarding_feature_tasks">Manage tasks together</string>
+    <string name="onboarding_feature_expenses">Split expenses fairly</string>
+    <string name="onboarding_feature_sync">Stay in sync as a home</string>
+    <string name="onboarding_have_account">I ALREADY HAVE AN ACCOUNT</string>
+    <string name="onboarding_sign_in_title">Sign in</string>
+    <string name="onboarding_sign_in_subtitle">Enter your credentials to continue</string>
+    <string name="onboarding_google_sso">Continue with Google</string>
+    <string name="onboarding_or_email">or sign in with email</string>
+    <string name="onboarding_email_hint">ana@email.com</string>
+    <string name="onboarding_password_hint">••••••••</string>
+    <string name="onboarding_forgot_password">Forgot my password</string>
+    <string name="onboarding_setup_title">Set up your home</string>
+    <string name="onboarding_setup_subtitle">Choose how you want to get started</string>
+    <string name="onboarding_create_home">Create a new home</string>
+    <string name="onboarding_create_home_desc">Start fresh and invite your household members</string>
+    <string name="onboarding_join_home">Join an existing home</string>
+    <string name="onboarding_join_home_desc">Enter the invite code or link from your household</string>
+    <string name="onboarding_home_name_hint">Home name</string>
+    <string name="onboarding_invite_code_hint">Invite code or link</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_greeting">Good morning,</string>
+    <string name="dashboard_task_equilibrium">TASK EQUILIBRIUM</string>
+    <string name="dashboard_my_tasks_today">My Tasks Today</string>
+    <string name="dashboard_upcoming">Upcoming</string>
+    <string name="dashboard_expenses_month">Expenses This Month</string>
+    <string name="dashboard_recent_activity">Recent Activity</string>
+    <string name="dashboard_balance">Balance</string>
+    <string name="dashboard_you_owe">You Owe</string>
+
+    <!-- Tasks -->
+    <string name="tasks_search_hint">Search by title or label…</string>
+    <string name="tasks_filter_all">All</string>
+    <string name="tasks_filter_my">My tasks</string>
+    <string name="tasks_found">%d tasks found</string>
+    <string name="tasks_new_task">New Task</string>
+    <string name="tasks_save_task">SAVE TASK</string>
+    <string name="tasks_title_hint">e.g. Clean the kitchen</string>
+    <string name="tasks_description_hint">Add details (optional)</string>
+    <string name="tasks_assigned_to">Assigned to</string>
+    <string name="tasks_created_by">Created by</string>
+    <string name="tasks_due_date">Due date</string>
+    <string name="tasks_select_date">Select date…</string>
+    <string name="tasks_priority">Priority</string>
+    <string name="tasks_recurrence">Recurrence</string>
+    <string name="tasks_labels">Labels</string>
+    <string name="tasks_checklist">Checklist</string>
+    <string name="tasks_add_subtask">+ Add subtask</string>
+    <string name="tasks_attachments">Attachments</string>
+    <string name="tasks_attach_hint">Attach image or document</string>
+    <string name="tasks_initial_comment">Initial comment</string>
+    <string name="tasks_comment_hint">Leave a note for the assignee…</string>
+    <string name="tasks_mark_complete">✓ MARK AS COMPLETE</string>
+    <string name="tasks_task_detail">Task Detail</string>
+    <string name="tasks_details">DETAILS</string>
+    <string name="tasks_description">DESCRIPTION</string>
+    <string name="tasks_comments">COMMENTS</string>
+    <string name="tasks_activity">ACTIVITY</string>
+    <string name="tasks_swipe_hint">← Swipe left to delete · Swipe right to complete</string>
+    <string name="tasks_created_message">Task created!</string>
+    <string name="tasks_deleted_message">Task deleted</string>
+    <string name="tasks_new_label">+ New label</string>
+
+    <!-- Priority -->
+    <string name="priority_high">High</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_low">Low</string>
+
+    <!-- Recurrence -->
+    <string name="recurrence_daily">Daily</string>
+    <string name="recurrence_weekly">Weekly</string>
+    <string name="recurrence_monthly">Monthly</string>
+    <string name="recurrence_repeat_on">Repeat on</string>
+    <string name="recurrence_end_date">End date (optional)</string>
+
+    <!-- Expenses -->
+    <string name="expenses_new_expense">New Expense</string>
+    <string name="expenses_save_expense">SAVE EXPENSE</string>
+    <string name="expenses_description_hint">e.g. Weekly supermarket</string>
+    <string name="expenses_amount_hint">0.00</string>
+    <string name="expenses_category">Category</string>
+    <string name="expenses_paid_by">Paid by</string>
+    <string name="expenses_participants">Participants</string>
+    <string name="expenses_division">Division</string>
+    <string name="expenses_equal">Equal</string>
+    <string name="expenses_custom">Custom</string>
+    <string name="expenses_date">Date</string>
+    <string name="expenses_note_hint">Add a note…</string>
+    <string name="expenses_they_owe_you">They owe you</string>
+    <string name="expenses_you_owe">You owe</string>
+    <string name="expenses_your_share">Your share:</string>
+    <string name="expenses_pending_settlements">PENDING SETTLEMENTS</string>
+    <string name="expenses_settled_payments">SETTLED PAYMENTS</string>
+    <string name="expenses_net_position">NET POSITION</string>
+    <string name="expenses_pay">Pay</string>
+    <string name="expenses_settled">✓ Settled</string>
+    <string name="expenses_all_settled">Everyone is up to date!</string>
+    <string name="expenses_balance">Balances</string>
+
+    <!-- Profile -->
+    <string name="profile_my_stats">My Stats</string>
+    <string name="profile_tasks_done">Tasks done</string>
+    <string name="profile_streak">Streak</string>
+    <string name="profile_score">Score</string>
+    <string name="profile_my_home">My Home</string>
+    <string name="profile_invite_code">Invite code (expires in 48h)</string>
+    <string name="profile_copy">Copy</string>
+    <string name="profile_notifications">Notifications</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_theme">Theme</string>
+    <string name="profile_theme_light">Light</string>
+    <string name="profile_theme_dark">Dark</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_currency">Currency</string>
+    <string name="profile_logout_hint">You will be redirected to the login screen</string>
+    <string name="profile_member_since">Member since</string>
+    <string name="profile_admin">Admin</string>
+    <string name="profile_member">Member</string>
+
+    <!-- Notifications -->
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_unread">%d unread notifications</string>
+    <string name="notifications_today">TODAY</string>
+    <string name="notifications_yesterday">YESTERDAY</string>
+    <string name="notifications_this_week">THIS WEEK</string>
+
+    <!-- Notification Toggle Labels -->
+    <string name="notif_toggle_task_assigned">New task assigned to me</string>
+    <string name="notif_toggle_due_reminders">Task due reminders (24h)</string>
+    <string name="notif_toggle_overdue">Overdue task alerts</string>
+    <string name="notif_toggle_comments">New comment in my tasks</string>
+    <string name="notif_toggle_expenses">Expense that includes me</string>
+    <string name="notif_toggle_digest">Daily morning digest</string>
+
+    <!-- Calendar -->
+    <string name="calendar_monthly">Monthly</string>
+    <string name="calendar_weekly">Weekly</string>
+
+    <!-- Empty States -->
+    <string name="empty_tasks_title">No tasks yet</string>
+    <string name="empty_tasks_subtitle">Create your first task to get started!</string>
+    <string name="empty_tasks_filter">No tasks match this filter</string>
+    <string name="empty_expenses_title">No expenses yet</string>
+    <string name="empty_expenses_subtitle">Record the first expense of your home</string>
+    <string name="empty_notifications_title">No notifications</string>
+    <string name="empty_notifications_subtitle">You\'re all caught up!</string>
+    <string name="empty_home_title">Your home is ready</string>
+    <string name="empty_home_subtitle">Start by creating a task!</string>
+
+    <!-- Error States -->
+    <string name="error_generic">Something went wrong</string>
+    <string name="error_network">No internet connection</string>
+    <string name="error_offline_banner">You are offline. Changes will sync when connected.</string>
+
+    <!-- Members -->
+    <string name="members_title">House Members</string>
+    <string name="members_section_header">MEMBERS</string>
+    <string name="members_count">%d members</string>
+    <string name="members_you">you</string>
+    <string name="members_empty">No members found</string>
+    <string name="members_view_button">VIEW MEMBERS</string>
+    <string name="members_code_copied">Invite code copied!</string>
+
+    <!-- Delete Confirmation -->
+    <string name="delete_task_title">Delete task?</string>
+    <string name="delete_task_message">Do you really want to delete</string>
+    <string name="delete_expense_title">Delete expense?</string>
+</resources>
+

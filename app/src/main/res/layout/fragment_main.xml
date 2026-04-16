@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!--
+        Status bar scrim — colored to match the top bar surface.
+        Height is set programmatically in MainFragment to statusBars inset height.
+    -->
+    <View
+        android:id="@+id/statusBarScrim"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorSurface" />
+
+    <!-- Fragment content -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_bottom"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:defaultNavHost="false"
+        app:navGraph="@navigation/bottom_nav_graph" />
+
+    <!--
+        Bottom navigation — wrap_content so icon + label never overlap.
+        Bottom padding for gesture nav bar is applied programmatically.
+    -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottomNavBackground"
+        android:elevation="@dimen/elevationBottomNav"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>

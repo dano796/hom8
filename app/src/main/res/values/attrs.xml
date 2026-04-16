@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- WireTopBar attributes -->
+    <declare-styleable name="WireTopBar">
+        <attr name="wireTitle" format="string" />
+        <attr name="wireShowBack" format="boolean" />
+        <attr name="wireShowAction" format="boolean" />
+        <attr name="wireActionIcon" format="reference" />
+    </declare-styleable>
+
+    <!-- WireAvatar attributes -->
+    <declare-styleable name="WireAvatar">
+        <attr name="wireInitials" format="string" />
+        <attr name="wireAvatarSize" format="enum">
+            <enum name="xs" value="0" />
+            <enum name="sm" value="1" />
+            <enum name="md" value="2" />
+            <enum name="lg" value="3" />
+        </attr>
+        <attr name="wireShowRing" format="boolean" />
+        <attr name="wireAvatarColor" format="color" />
+    </declare-styleable>
+
+    <!-- PriorityBadge attributes -->
+    <declare-styleable name="PriorityBadge">
+        <attr name="priorityLevel" format="enum">
+            <enum name="high" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="low" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!-- StatusChip attributes -->
+    <declare-styleable name="StatusChip">
+        <attr name="taskStatus" format="enum">
+            <enum name="pending" value="0" />
+            <enum name="in_progress" value="1" />
+            <enum name="done" value="2" />
+            <enum name="overdue" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <!-- CategoryIcon attributes -->
+    <declare-styleable name="CategoryIcon">
+        <attr name="expenseCategory" format="enum">
+            <enum name="food" value="0" />
+            <enum name="supermarket" value="1" />
+            <enum name="services" value="2" />
+            <enum name="cleaning" value="3" />
+            <enum name="transport" value="4" />
+            <enum name="entertainment" value="5" />
+            <enum name="health" value="6" />
+            <enum name="other" value="7" />
+        </attr>
+        <attr name="categorySize" format="dimension" />
+    </declare-styleable>
+
+</resources>

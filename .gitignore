@@ -1,0 +1,32 @@
+# Build outputs
+*.iml
+.gradle
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Kotlin compiler cache
+.kotlin/
+
+# Local environment
+local.properties
+.DS_Store
+
+# IDE — IntelliJ / Android Studio
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/deviceManager.xml
+
+# IDE — VS Code
+.vscode/
+
+# Signing keys
+*.keystore
+*.jks
+keystore.properties
