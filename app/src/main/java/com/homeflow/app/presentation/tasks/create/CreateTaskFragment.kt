@@ -204,7 +204,7 @@ class CreateTaskFragment : Fragment() {
         val btnRemove = itemView.findViewById<ImageButton>(R.id.btnRemoveItem)
 
         etItem.setText(text)
-        etItem.hint = "Descripción de la subtarea"
+        etItem.hint = getString(R.string.tasks_subtask_hint)
 
         btnRemove.setOnClickListener {
             layoutChecklist.removeView(itemView)
@@ -217,7 +217,7 @@ class CreateTaskFragment : Fragment() {
     private fun saveTask() {
         val title = etTitle.text?.toString()?.trim() ?: ""
         if (title.isEmpty()) {
-            tilTitle.error = "El título es requerido"
+            tilTitle.error = getString(R.string.tasks_title_required)
             return
         }
         tilTitle.error = null

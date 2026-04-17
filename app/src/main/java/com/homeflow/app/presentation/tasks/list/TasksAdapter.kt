@@ -97,7 +97,7 @@ class TasksAdapter(
                 if (isOverdue(task)) R.color.colorError else R.color.colorTextTertiary
             ))
         } else {
-            holder.tvDueDate.text = "Sin fecha de vencimiento"
+            holder.tvDueDate.text = ctx.getString(R.string.tasks_no_due_date)
             holder.tvDueDate.setTextColor(ContextCompat.getColor(ctx, R.color.colorTextTertiary))
         }
 

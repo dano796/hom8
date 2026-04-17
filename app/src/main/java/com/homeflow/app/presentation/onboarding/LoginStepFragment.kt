@@ -60,9 +60,9 @@ class LoginStepFragment : Fragment() {
         // Google (placeholder)
         view.findViewById<MaterialButton>(R.id.btnGoogleSignIn).setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Iniciar sesión con Google")
-                .setMessage("Habilite Google como proveedor de inicio de sesión en su Consola de Firebase para usar esta función.")
-                .setPositiveButton("Aceptar", null)
+                .setTitle(getString(R.string.dialog_google_signin_title))
+                .setMessage(getString(R.string.dialog_google_signin_message))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
         }
 
@@ -70,19 +70,19 @@ class LoginStepFragment : Fragment() {
         view.findViewById<TextView>(R.id.tvForgotPassword).setOnClickListener {
             val email = etEmail.text?.toString()?.trim() ?: ""
             if (email.isEmpty()) {
-                tilEmail.error = "Ingresa tu correo electrónico primero"
+                tilEmail.error = getString(R.string.validation_email_required)
                 return@setOnClickListener
             }
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                tilEmail.error = "Ingresa un correo electrónico válido"
+                tilEmail.error = getString(R.string.validation_email_invalid)
                 return@setOnClickListener
             }
             tilEmail.error = null
             viewModel.resetPassword(email)
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Restablecer contraseña")
-                .setMessage("Si existe una cuenta para $email, se ha enviado un enlace de recuperación.")
-                .setPositiveButton("Aceptar", null)
+                .setTitle(getString(R.string.dialog_reset_password_title))
+                .setMessage(getString(R.string.dialog_reset_password_message, email))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
         }
 
@@ -115,11 +115,11 @@ class LoginStepFragment : Fragment() {
     ): Boolean {
         var valid = true
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            tilEmail.error = "Ingresa un correo electrónico válido"
+            tilEmail.error = getString(R.string.validation_email_invalid)
             valid = false
         } else tilEmail.error = null
         if (password.length < 6) {
-            tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
+            tilPassword.error = getString(R.string.validation_password_short)
             valid = false
         } else tilPassword.error = null
         return valid

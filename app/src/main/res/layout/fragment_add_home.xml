@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Añadir hogar"
+            android:text="@string/add_home_title"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -88,7 +88,7 @@
                             android:layout_marginBottom="@dimen/spacing3"
                             android:fontFamily="@font/jetbrains_mono"
                             android:letterSpacing="0.05"
-                            android:text="NOMBRE DEL HOGAR"
+                            android:text="@string/add_home_name_label"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="11sp" />
 
@@ -97,7 +97,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="e.g. Garcia Family Home"
+                            android:hint="@string/add_home_name_hint"
                             app:boxStrokeColor="@color/colorPrimary">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="Crear hogar"
+                    android:text="@string/add_home_create_button"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/colorPrimary"
@@ -155,7 +155,7 @@
                             android:layout_marginBottom="@dimen/spacing3"
                             android:fontFamily="@font/jetbrains_mono"
                             android:letterSpacing="0.05"
-                            android:text="CÓDIGO DE INVITACIÓN"
+                            android:text="@string/add_home_invite_label"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="11sp" />
 
@@ -164,7 +164,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="e.g. HF-ABCD12"
+                            android:hint="@string/add_home_invite_hint"
                             app:boxStrokeColor="@color/colorPrimary">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -188,7 +188,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="Unirse al hogar"
+                    android:text="@string/add_home_join_button"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/colorPrimary"

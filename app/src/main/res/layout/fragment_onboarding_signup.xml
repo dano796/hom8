@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Únete a HomeFlow y gestionen su hogar juntos"
+            android:text="@string/onboarding_signup_subtitle"
             android:textColor="@color/colorTextSecondary"
             android:textSize="13sp" />
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="16dp"
-            android:hint="Nombre completo"
+            android:hint="@string/field_full_name"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="Ana García"
+                android:hint="@string/field_full_name_hint"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Correo electrónico"
+            android:hint="@string/field_email"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
-            android:hint="Contraseña"
+            android:hint="@string/field_password"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:text="¿Ya tienes una cuenta? "
+                android:text="@string/onboarding_already_account"
                 android:textColor="@color/colorTextTertiary"
                 android:textSize="12sp" />
 

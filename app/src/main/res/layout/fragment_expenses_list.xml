@@ -176,35 +176,35 @@
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Comida" />
+                        android:text="@string/expense_category_food" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSupermarket"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Supermercado" />
+                        android:text="@string/expense_category_grocery" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipServices"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Servicios" />
+                        android:text="@string/expense_category_utilities" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipTransport"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Transporte" />
+                        android:text="@string/expense_category_transport" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipEntertainment"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ocio" />
+                        android:text="@string/expense_category_leisure" />
 
                 </com.google.android.material.chip.ChipGroup>
 

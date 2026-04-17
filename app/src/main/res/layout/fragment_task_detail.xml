@@ -221,7 +221,7 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Vence"
+                            android:text="@string/tasks_due_label"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
@@ -307,7 +307,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/jetbrains_mono"
                             android:letterSpacing="0.05"
-                            android:text="LISTA DE VERIFICACIÓN"
+                            android:text="@string/tasks_checklist_section"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="11sp" />
 

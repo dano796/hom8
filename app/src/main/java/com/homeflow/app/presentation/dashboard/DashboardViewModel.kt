@@ -1,4 +1,4 @@
-﻿package com.homeflow.app.presentation.dashboard
+package com.homeflow.app.presentation.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import java.util.TimeZone
 import java.util.UUID
 import javax.inject.Inject
 
@@ -118,11 +119,12 @@ class DashboardViewModel @Inject constructor(
     }
 
     private fun buildGreeting(): String {
-        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val bogota = TimeZone.getTimeZone("America/Bogota")
+        val hour = Calendar.getInstance(bogota).get(Calendar.HOUR_OF_DAY)
         return when {
             hour < 12 -> "Buenos días,"
-            hour < 17 -> "Buenas tardes,"
-            else -> "Buenas noches,"
+            hour < 18 -> "Buenas tardes,"
+            else      -> "Buenas noches,"
         }
     }
 

@@ -190,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Total del mes"
+                            android:text="@string/dashboard_month_total"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="10sp" />
 

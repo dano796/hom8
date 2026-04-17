@@ -133,7 +133,7 @@
     <string name="profile_my_home">Mi Hogar</string>
     <string name="profile_invite_code">Código de invitación (expira en 48h)</string>
     <string name="profile_copy">Copiar</string>
-    <string name="profile_manage_homes">Administrar Hogares</string>
+    <string name="profile_manage_homes">ADMINISTRAR HOGARES</string>
     <string name="profile_notifications">Notificaciones</string>
     <string name="profile_settings">Configuración</string>
     <string name="profile_theme">Tema</string>
@@ -194,4 +194,101 @@
     <string name="delete_task_title">¿Eliminar tarea?</string>
     <string name="delete_task_message">¿Realmente quieres eliminar</string>
     <string name="delete_expense_title">¿Eliminar gasto?</string>
+
+    <!-- Add / Manage Homes -->
+    <string name="add_home_title">Añadir hogar</string>
+    <string name="add_home_name_label">NOMBRE DEL HOGAR</string>
+    <string name="add_home_name_hint">ej. Casa García</string>
+    <string name="add_home_invite_label">CÓDIGO DE INVITACIÓN</string>
+    <string name="add_home_invite_hint">ej. HF-ABCD12</string>
+    <string name="add_home_create_button">Crear hogar</string>
+    <string name="add_home_join_button">Unirse al hogar</string>
+    <string name="manage_homes_section">TUS HOGARES</string>
+
+    <!-- Onboarding — textos no extraídos -->
+    <string name="onboarding_feature_tasks_desc">Asigna, haz seguimiento y completa tareas en conjunto</string>
+    <string name="onboarding_feature_expenses_desc">Registra y divide los gastos del hogar</string>
+    <string name="onboarding_feature_sync_desc">Sincronización en tiempo real con tu hogar</string>
+    <string name="onboarding_signup_subtitle">Únete a HomeFlow y gestionen su hogar juntos</string>
+    <string name="onboarding_already_account">¿Ya tienes una cuenta?\u0020</string>
+    <string name="onboarding_no_account">¿No tienes una cuenta?\u0020</string>
+
+    <!-- Formularios — etiquetas de campos -->
+    <string name="field_full_name">Nombre completo</string>
+    <string name="field_full_name_hint">Ana García</string>
+    <string name="field_email">Correo electrónico</string>
+    <string name="field_password">Contraseña</string>
+    <string name="field_password_register_hint">Contraseña (mín. 6 caracteres)</string>
+
+    <!-- Gastos — campos de formulario -->
+    <string name="expenses_description_label">Descripción *</string>
+    <string name="expenses_amount_label">Cantidad *</string>
+    <string name="expenses_note_label">Nota (opcional)</string>
+    <string name="expenses_date_today">Hoy</string>
+
+    <!-- Categorías de gastos -->
+    <string name="expense_category_food">Comida</string>
+    <string name="expense_category_grocery">Supermercado</string>
+    <string name="expense_category_utilities">Servicios</string>
+    <string name="expense_category_transport">Transporte</string>
+    <string name="expense_category_leisure">Ocio</string>
+    <string name="expense_category_other">Otros</string>
+    <string name="expense_category_market">Mercado</string>
+
+    <!-- Filtros de tareas -->
+    <string name="tasks_filter_any_priority">Cualquier prioridad</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_month_total">Total del mes</string>
+
+    <!-- Detalle de tarea -->
+    <string name="tasks_due_label">Vence</string>
+    <string name="tasks_no_due_date">Sin fecha de vencimiento</string>
+    <string name="tasks_unassigned">Sin asignar</string>
+    <string name="tasks_subtask_hint">Descripción de la subtarea</string>
+    <string name="tasks_title_required">El título es requerido</string>
+    <string name="tasks_checklist_section">LISTA DE VERIFICACIÓN</string>
+
+    <!-- Hogares activos -->
+    <string name="home_status_active">Activo</string>
+
+    <!-- Perfil — fallbacks en código -->
+    <string name="profile_default_home_name">Mi Hogar</string>
+    <string name="profile_member_since_prefix">Miembro desde </string>
+    <string name="profile_member_since_recent">Miembro desde hace poco</string>
+
+    <!-- Miembros / Usuarios — fallbacks -->
+    <string name="user_fallback_name">Usuario</string>
+    <string name="user_fallback_member">Miembro</string>
+    <string name="user_fallback_someone">Alguien</string>
+
+    <!-- Validación de formularios -->
+    <string name="validation_name_required">El nombre es obligatorio</string>
+    <string name="validation_email_invalid">Ingresa un correo electrónico válido</string>
+    <string name="validation_email_required">Ingresa tu correo electrónico primero</string>
+    <string name="validation_password_short">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="validation_home_name_required">El nombre del hogar es requerido</string>
+    <string name="validation_invite_code_required">El código de invitación es requerido</string>
+
+    <!-- Diálogos de autenticación -->
+    <string name="dialog_google_signin_title">Iniciar sesión con Google</string>
+    <string name="dialog_google_signin_message">Habilite Google como proveedor de inicio de sesión en su Consola de Firebase para usar esta función.</string>
+    <string name="dialog_reset_password_title">Restablecer contraseña</string>
+    <string name="dialog_reset_password_message">Si existe una cuenta para %s, se ha enviado un enlace de recuperación.</string>
+    <string name="dialog_ok">Aceptar</string>
+
+    <!-- Errores de autenticación -->
+    <string name="error_not_authenticated">No autenticado</string>
+    <string name="error_sign_in">Error al iniciar sesión</string>
+    <string name="error_sign_up">Error al registrarse</string>
+    <string name="error_google_sign_in">Error al iniciar sesión con Google</string>
+    <string name="error_create_home">Error al crear el hogar</string>
+    <string name="error_join_home">Error al unirse al hogar</string>
+    <string name="error_save_task">Error al guardar la tarea</string>
+    <string name="error_no_account">No se encontró cuenta para este correo. Usa \"Crear una\" para registrarte.</string>
+    <string name="error_wrong_password">Contraseña incorrecta.</string>
+    <string name="error_email_in_use">Ya existe una cuenta con este correo. Intenta iniciar sesión.</string>
+
+
 </resources>
+
