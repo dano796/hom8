@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.homes
+﻿package com.homeflow.app.presentation.homes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +45,7 @@ class HomeCardAdapter(
             tvName.text = home.nombre
             tvCode.text = home.codigoInvitacion
             val memberCount = parseMemberCount(home.miembros)
-            tvMembers.text = "$memberCount member${if (memberCount != 1) "s" else ""}"
+            tvMembers.text = "$memberCount miembro${if (memberCount != 1) "s" else ""}"
 
             val isActive = home.id == activeHomeId
             tvActive.visibility = if (isActive) View.VISIBLE else View.GONE

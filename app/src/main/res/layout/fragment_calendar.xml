@@ -116,13 +116,13 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/spacing2">
 
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Mo" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Tu" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="We" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Th" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Fr" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Lu" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Ma" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Mi" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Ju" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Vi" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
                 <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Sa" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
-                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Su" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
+                <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:fontFamily="@font/jetbrains_mono" android:text="Do" android:textColor="@color/colorTextTertiary" android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -196,16 +196,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📅"
-                        android:textSize="32sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing2"
                         android:fontFamily="@font/jetbrains_mono"
                         android:gravity="center"
-                        android:text="No tasks this day"
+                        android:text="No hay tareas en este día"
                         android:textColor="@color/colorTextTertiary"
                         android:textSize="13sp" />
 

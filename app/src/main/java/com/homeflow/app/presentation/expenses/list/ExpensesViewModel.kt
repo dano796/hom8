@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.homeflow.app.data.local.dao.ActivityLogDao
 import com.homeflow.app.data.local.dao.ExpenseDao
 import com.homeflow.app.data.local.dao.HomeDao
-import com.homeflow.app.data.local.dao.PaymentDao
 import com.homeflow.app.data.local.dao.UserDao
 import com.homeflow.app.data.local.entity.ActivityLogEntity
 import com.homeflow.app.data.local.entity.ExpenseEntity
@@ -27,11 +26,11 @@ import javax.inject.Inject
 
 enum class ExpenseCategoryFilter(val key: String) {
     ALL(""),
-    FOOD("FOOD"),
-    SUPERMARKET("SUPERMARKET"),
-    SERVICES("SERVICES"),
-    TRANSPORT("TRANSPORT"),
-    ENTERTAINMENT("ENTERTAINMENT")
+    COMIDA("COMIDA"),
+    SUPERMERCADO("SUPERMERCADO"),
+    SERVICIOS("SERVICIOS"),
+    TRANSPORTE("TRANSPORTE"),
+    OCIO("OCIO")
 }
 
 data class ExpensesUiState(
@@ -52,7 +51,6 @@ data class ExpensesUiState(
 @HiltViewModel
 class ExpensesViewModel @Inject constructor(
     private val expenseDao: ExpenseDao,
-    private val paymentDao: PaymentDao,
     private val homeDao: HomeDao,
     private val userDao: UserDao,
     private val activityLogDao: ActivityLogDao,
@@ -127,7 +125,7 @@ class ExpensesViewModel @Inject constructor(
                 val users = userDao.getUsersByIds(memberIds)
                 val map = users.associate { it.id to it.nombre }.toMutableMap()
                 if (currentUserId.isNotEmpty()) {
-                    map[currentUserId] = session.userName.ifEmpty { "You" }
+                    map[currentUserId] = session.userName.ifEmpty { "Tú" }
                 }
                 _membersMap.value = map
             }
@@ -185,7 +183,7 @@ class ExpensesViewModel @Inject constructor(
                 id = UUID.randomUUID().toString(),
                 hogarId = expense.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = "EXPENSE_DELETED",
                 targetTitle = expense.descripcion,
                 timestamp = System.currentTimeMillis()
@@ -200,7 +198,7 @@ class ExpensesViewModel @Inject constructor(
             // Simple count of items in JSON array "["a","b"]" → 2
             if (participantesJson == "[]") 1
             else participantesJson.split(",").size
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             1
         }
     }

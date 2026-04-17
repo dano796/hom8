@@ -28,10 +28,10 @@ data class TaskEntity(
     val fechaLimite: Long? = null,
 
     @ColumnInfo(name = "prioridad")
-    val prioridad: String = "MEDIUM",
+    val prioridad: String = "MEDIA",
 
     @ColumnInfo(name = "estado")
-    val estado: String = "PENDING",
+    val estado: String = "PENDIENTE",
 
     @ColumnInfo(name = "recurrencia")
     val recurrencia: String? = null,

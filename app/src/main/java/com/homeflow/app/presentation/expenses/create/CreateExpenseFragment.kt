@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.expenses.create
+﻿package com.homeflow.app.presentation.expenses.create
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -35,16 +36,16 @@ class CreateExpenseFragment : Fragment() {
     private val viewModel: CreateExpenseViewModel by viewModels()
     private val args: CreateExpenseFragmentArgs by navArgs()
 
-    private val dateFmt = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
+    private val dateFmt = SimpleDateFormat("MMMM d, yyyy", Locale("es", "ES"))
 
-    // Category → card view id mapping
+    // Category -> card view id mapping
     private val categoryCardMap = mapOf(
-        "FOOD" to R.id.catFood,
-        "SUPERMARKET" to R.id.catSupermarket,
-        "SERVICES" to R.id.catServices,
-        "TRANSPORT" to R.id.catTransport,
-        "ENTERTAINMENT" to R.id.catEntertainment,
-        "OTHER" to R.id.catOther
+        "COMIDA" to R.id.catFood,
+        "SUPERMERCADO" to R.id.catSupermarket,
+        "SERVICIOS" to R.id.catServices,
+        "TRANSPORTE" to R.id.catTransport,
+        "OCIO" to R.id.catEntertainment,
+        "OTROS" to R.id.catOther
     )
 
     private var lastMembersRendered: List<ExpenseMemberOption> = emptyList()
@@ -127,7 +128,7 @@ class CreateExpenseFragment : Fragment() {
                 viewModel.uiState.collect { state ->
                     // Title changes for edit mode
                     state.existingExpense?.let { expense ->
-                        tvTitle.text = "Edit Expense"
+                        tvTitle.text = "Editar gasto"
                         if (etDescription.text.isNullOrEmpty()) {
                             etDescription.setText(expense.descripcion)
                             etAmount.setText(expense.monto.toString())
@@ -156,10 +157,10 @@ class CreateExpenseFragment : Fragment() {
                     categoryCardMap.forEach { (category, cardId) ->
                         val card = view.findViewById<MaterialCardView>(cardId)
                         if (category == state.selectedCategory) {
-                            card.strokeColor = resources.getColor(R.color.colorPrimary, null)
+                            card.strokeColor = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
                             card.strokeWidth = 3
                         } else {
-                            card.strokeColor = resources.getColor(R.color.colorOutline, null)
+                            card.strokeColor = ContextCompat.getColor(requireContext(), R.color.colorOutline)
                             card.strokeWidth = 1
                         }
                     }
@@ -169,11 +170,11 @@ class CreateExpenseFragment : Fragment() {
 
                     // Errors
                     when {
-                        state.error?.contains("Description") == true -> {
+                        state.error?.contains("Descripción") == true -> {
                             tilDescription.error = state.error
                             tilAmount.error = null
                         }
-                        state.error?.contains("amount") == true -> {
+                        state.error?.contains("monto") == true -> {
                             tilAmount.error = state.error
                             tilDescription.error = null
                         }
@@ -189,7 +190,7 @@ class CreateExpenseFragment : Fragment() {
 
                     // Navigate back on save
                     if (state.isSaved) {
-                        Snackbar.make(requireView(), "Expense saved!", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), "¡Gasto guardado!", Snackbar.LENGTH_SHORT).show()
                         findNavController().popBackStack()
                     }
                 }

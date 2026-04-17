@@ -57,17 +57,17 @@ class SignUpStepFragment : Fragment() {
 
             var valid = true
             if (name.isBlank()) {
-                tilName.error = "Name is required"
+                tilName.error = "El nombre es obligatorio"
                 valid = false
             } else tilName.error = null
 
             if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                tilEmail.error = "Enter a valid email address"
+                tilEmail.error = "Ingresa un correo electrónico válido"
                 valid = false
             } else tilEmail.error = null
 
             if (password.length < 6) {
-                tilPassword.error = "At least 6 characters"
+                tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
                 valid = false
             } else tilPassword.error = null
 

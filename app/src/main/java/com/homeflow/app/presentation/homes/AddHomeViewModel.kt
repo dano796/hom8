@@ -34,7 +34,7 @@ class AddHomeViewModel @Inject constructor(
     fun createHome(homeName: String) {
         val userId = session.userId
         if (homeName.isBlank()) {
-            _uiState.update { it.copy(error = "Home name is required") }
+            _uiState.update { it.copy(error = "El nombre del hogar es requerido") }
             return
         }
         _uiState.update { it.copy(isLoading = true, error = null) }
@@ -54,14 +54,14 @@ class AddHomeViewModel @Inject constructor(
                 session.hogarId = homeId
                 _uiState.update { it.copy(isLoading = false, isSaved = true) }
             } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Failed to create home") }
+                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al crear el hogar") }
             }
         }
     }
 
     fun joinHome(inviteCode: String) {
         if (inviteCode.isBlank()) {
-            _uiState.update { it.copy(error = "Invite code is required") }
+            _uiState.update { it.copy(error = "El código de invitación es requerido") }
             return
         }
         _uiState.update { it.copy(isLoading = true, error = null) }
@@ -69,7 +69,7 @@ class AddHomeViewModel @Inject constructor(
             try {
                 val home = homeDao.getHomeByInviteCode(inviteCode.trim().uppercase())
                 if (home == null) {
-                    _uiState.update { it.copy(isLoading = false, error = "Invalid invite code") }
+                    _uiState.update { it.copy(isLoading = false, error = "Código de invitación inválido") }
                     return@launch
                 }
                 val userId = session.userId
@@ -82,7 +82,7 @@ class AddHomeViewModel @Inject constructor(
                 session.hogarId = home.id
                 _uiState.update { it.copy(isLoading = false, isSaved = true) }
             } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Failed to join home") }
+                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al unirse al hogar") }
             }
         }
     }

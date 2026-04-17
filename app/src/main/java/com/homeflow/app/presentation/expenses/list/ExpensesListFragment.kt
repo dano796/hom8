@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.expenses.list
+﻿package com.homeflow.app.presentation.expenses.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,7 +37,7 @@ class ExpensesListFragment : Fragment() {
 
     private lateinit var adapter: ExpensesAdapter
 
-    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale.getDefault())
+    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale("es", "CO"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,11 +65,11 @@ class ExpensesListFragment : Fragment() {
             },
             onDeleteClick = { expense ->
                 MaterialAlertDialogBuilder(requireContext())
-                    .setTitle(R.string.delete_expense_title)
-                    .setMessage("Delete \"${expense.descripcion}\"?")
+                    .setTitle("Eliminar gasto")
+                    .setMessage("¿Eliminar \"${expense.descripcion}\"?")
                     .setPositiveButton(R.string.action_delete) { _, _ ->
                         viewModel.deleteExpense(expense)
-                        Snackbar.make(requireView(), "Expense deleted", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), "Gasto eliminado", Snackbar.LENGTH_SHORT).show()
                     }
                     .setNegativeButton(R.string.action_cancel, null)
                     .show()
@@ -87,11 +87,11 @@ class ExpensesListFragment : Fragment() {
         val chipGroup = view.findViewById<ChipGroup>(R.id.chipGroupCategory)
         chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
             val filter = when {
-                checkedIds.contains(R.id.chipFood) -> ExpenseCategoryFilter.FOOD
-                checkedIds.contains(R.id.chipSupermarket) -> ExpenseCategoryFilter.SUPERMARKET
-                checkedIds.contains(R.id.chipServices) -> ExpenseCategoryFilter.SERVICES
-                checkedIds.contains(R.id.chipTransport) -> ExpenseCategoryFilter.TRANSPORT
-                checkedIds.contains(R.id.chipEntertainment) -> ExpenseCategoryFilter.ENTERTAINMENT
+                checkedIds.contains(R.id.chipFood) -> ExpenseCategoryFilter.COMIDA
+                checkedIds.contains(R.id.chipSupermarket) -> ExpenseCategoryFilter.SUPERMERCADO
+                checkedIds.contains(R.id.chipServices) -> ExpenseCategoryFilter.SERVICIOS
+                checkedIds.contains(R.id.chipTransport) -> ExpenseCategoryFilter.TRANSPORTE
+                checkedIds.contains(R.id.chipEntertainment) -> ExpenseCategoryFilter.OCIO
                 else -> ExpenseCategoryFilter.ALL
             }
             viewModel.setCategoryFilter(filter)
@@ -118,18 +118,18 @@ class ExpensesListFragment : Fragment() {
     private fun showModeDialog() {
         val currentMode = viewModel.uiState.value.isSplitMode
         val options = arrayOf(
-            "Split expenses — divide costs and track balances",
-            "Track only — log expenses without splitting"
+            "Dividir gastos — compartir costos y saldos",
+            "Solo seguimiento — registrar gastos sin dividir"
         )
         val checkedItem = if (currentMode) 0 else 1
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Expenses mode")
+            .setTitle("Modo de gastos")
             .setSingleChoiceItems(options, checkedItem) { dialog, which ->
                 viewModel.setExpensesMode(which == 0)
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Cancelar", null)
             .show()
     }
 
@@ -160,9 +160,9 @@ class ExpensesListFragment : Fragment() {
                     val count = state.expenses.size
                     val total = currencyFmt.format(state.totalAmount)
                     tvExpenseCount.text = if (count == 0) {
-                        "No expenses"
+                        "Sin gastos"
                     } else {
-                        "$count expense${if (count != 1) "s" else ""} · total $total"
+                        "$count gasto${if (count != 1) "s" else ""} · total $total"
                     }
 
                     adapter.updateMembersMap(state.membersMap)

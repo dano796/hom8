@@ -168,7 +168,7 @@ function LoginStep({
         <div className="w-5 h-5 rounded bg-[#E8E8E8] border border-[#D0D0D0] flex items-center justify-center">
           <span className="text-[8px] font-mono text-[#888]">G</span>
         </div>
-        <span className="text-[12px] font-mono text-[#444]">Continue with Google</span>
+        <span className="text-[12px] font-mono text-[#444]">Continuar con Google</span>
         <WireAnnotation label="google-sso" />
       </button>
 

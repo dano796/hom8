@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/jetbrains_mono"
             android:gravity="center"
-            android:text="New Task"
+            android:text="@string/tasks_new_task"
             android:textColor="@color/colorTextPrimary"
             android:textSize="15sp"
             android:textStyle="bold"

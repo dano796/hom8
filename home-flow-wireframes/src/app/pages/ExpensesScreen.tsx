@@ -14,7 +14,7 @@ const EXPENSES = [
   {
     id: 1,
     emoji: "🍕",
-    category: "Food",
+    category: "Comida",
     description: "Dinner at restaurant",
     payer: "AG",
     payerName: "Ana",
@@ -26,7 +26,7 @@ const EXPENSES = [
   {
     id: 2,
     emoji: "🛒",
-    category: "Supermarket",
+    category: "Supermercado",
     description: "Weekly groceries",
     payer: "CG",
     payerName: "Carlos",
@@ -38,8 +38,8 @@ const EXPENSES = [
   {
     id: 3,
     emoji: "💡",
-    category: "Services",
-    description: "Electric bill — March",
+    category: "Servicios",
+    description: "Electric bill - March",
     payer: "AG",
     payerName: "Ana",
     amount: "$120.00",
@@ -50,7 +50,7 @@ const EXPENSES = [
   {
     id: 4,
     emoji: "🧹",
-    category: "Cleaning",
+    category: "Limpieza",
     description: "Cleaning supplies",
     payer: "LG",
     payerName: "Luis",
@@ -80,7 +80,7 @@ export function ExpensesScreen() {
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2] relative">
       {/* Top bar */}
       <WireTopBar
-        title="Expenses"
+        title="Gastos"
         rightAction={
           <div className="flex items-center gap-2">
             <WireAnnotation label="menu" />
@@ -134,7 +134,7 @@ export function ExpensesScreen() {
       {/* Filter chips */}
       <div className="bg-white px-4 py-2 border-b border-[#E8E8E8]">
         <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
-          {["All", "Food", "Services", "Cleaning", "Entertainment", "April ▼"].map((chip, i) => (
+          {["All", "Comida", "Servicios", "Limpieza", "Entertainment", "April ▼"].map((chip, i) => (
             <WireChip key={chip} label={chip} active={i === 0} />
           ))}
         </div>

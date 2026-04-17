@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router";
 
 const NAV_ITEMS = [
   {
-    label: "Home",
+    label: "Inicio",
     path: "/",
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill={active ? "#222" : "none"} stroke={active ? "#222" : "#888"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -12,7 +12,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Tasks",
+    label: "Tareas",
     path: "/tasks",
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#222" : "#888"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -22,7 +22,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Calendar",
+    label: "Calendario",
     path: "/calendar",
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#222" : "#888"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -34,7 +34,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Expenses",
+    label: "Gastos",
     path: "/expenses",
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#222" : "#888"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -44,7 +44,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Profile",
+    label: "Perfil",
     path: "/profile",
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#222" : "#888"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

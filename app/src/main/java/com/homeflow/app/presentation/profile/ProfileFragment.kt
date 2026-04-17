@@ -46,12 +46,12 @@ class ProfileFragment : Fragment() {
 
         view.findViewById<MaterialButton>(R.id.btnLogOut).setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Log Out")
-                .setMessage("Are you sure you want to log out?")
-                .setPositiveButton("Log Out") { _, _ ->
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Estás seguro de que quieres cerrar sesión?")
+                .setPositiveButton("Cerrar sesión") { _, _ ->
                     viewModel.logOut()
                 }
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("Cancelar", null)
                 .show()
         }
 
@@ -59,8 +59,8 @@ class ProfileFragment : Fragment() {
             val code = view.findViewById<TextView>(R.id.tvInviteCode).text.toString()
             if (code.isNotEmpty() && code != "-") {
                 val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                clipboard.setPrimaryClip(ClipData.newPlainText("Invite Code", code))
-                Snackbar.make(requireView(), "Invite code copied!", Snackbar.LENGTH_SHORT).show()
+                clipboard.setPrimaryClip(ClipData.newPlainText("Código de invitación", code))
+                Snackbar.make(requireView(), "¡Código de invitación copiado!", Snackbar.LENGTH_SHORT).show()
             }
         }
 

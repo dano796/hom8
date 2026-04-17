@@ -113,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Assign, track and complete tasks together"
+                            android:text="Asigna, haz seguimiento y completa tareas en conjunto"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
@@ -170,7 +170,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Track and split household expenses"
+                            android:text="Registra y divide los gastos del hogar"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
@@ -227,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Real-time sync with your household"
+                            android:text="Sincronización en tiempo real con tu hogar"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 

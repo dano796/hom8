@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.dashboard.adapters
+﻿package com.homeflow.app.presentation.dashboard.adapters
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -37,7 +37,7 @@ class TodayTasksAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = getItem(position)
         val ctx = holder.itemView.context
-        val isDone = task.estado == "DONE"
+        val isDone = task.estado == "TERMINADO"
 
         holder.tvTitle.text = task.titulo
         holder.cbDone.isChecked = isDone
@@ -53,8 +53,8 @@ class TodayTasksAdapter(
 
         // Due time
         if (task.fechaLimite != null) {
-            val fmt = SimpleDateFormat("h:mm a", Locale.getDefault())
-            holder.tvDueTime.text = "By ${fmt.format(Date(task.fechaLimite))}"
+            val fmt = SimpleDateFormat("h:mm a", Locale("es", "ES"))
+            holder.tvDueTime.text = "Para ${fmt.format(Date(task.fechaLimite))}"
             holder.tvDueTime.visibility = View.VISIBLE
             val ivDue = holder.itemView.findViewById<View>(R.id.ivDueIcon)
             ivDue?.visibility = View.VISIBLE
@@ -66,18 +66,18 @@ class TodayTasksAdapter(
 
         // Priority badge
         when (task.prioridad) {
-            "HIGH" -> {
-                holder.tvPriority.text = "HIGH"
+            "ALTA" -> {
+                holder.tvPriority.text = "ALTA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_high)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityHighText))
             }
-            "LOW" -> {
-                holder.tvPriority.text = "LOW"
+            "BAJA" -> {
+                holder.tvPriority.text = "BAJA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_low)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityLowText))
             }
             else -> {
-                holder.tvPriority.text = "MED"
+                holder.tvPriority.text = "MEDIA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_medium)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityMediumText))
             }

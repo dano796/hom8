@@ -117,8 +117,8 @@ class CreateTaskFragment : Fragment() {
                         if (etDescription.text.isNullOrEmpty()) etDescription.setText(task.descripcion)
 
                         val chipId = when (task.prioridad) {
-                            "HIGH" -> R.id.chipHigh
-                            "LOW" -> R.id.chipLow
+                            "ALTA" -> R.id.chipHigh
+                            "BAJA" -> R.id.chipLow
                             else -> R.id.chipMedium
                         }
                         chipGroupPriority.check(chipId)
@@ -190,7 +190,7 @@ class CreateTaskFragment : Fragment() {
 
     private fun updateDueDateDisplay() {
         selectedDueDate?.let { cal ->
-            val fmt = SimpleDateFormat("MMM d, yyyy · h:mm a", Locale.getDefault())
+            val fmt = SimpleDateFormat("MMM d, yyyy · h:mm a", Locale("es", "ES"))
             tvDueDate.text = fmt.format(cal.time)
             tvDueDate.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorTextPrimary))
         }
@@ -204,7 +204,7 @@ class CreateTaskFragment : Fragment() {
         val btnRemove = itemView.findViewById<ImageButton>(R.id.btnRemoveItem)
 
         etItem.setText(text)
-        etItem.hint = "Subtask description"
+        etItem.hint = "Descripción de la subtarea"
 
         btnRemove.setOnClickListener {
             layoutChecklist.removeView(itemView)
@@ -217,16 +217,16 @@ class CreateTaskFragment : Fragment() {
     private fun saveTask() {
         val title = etTitle.text?.toString()?.trim() ?: ""
         if (title.isEmpty()) {
-            tilTitle.error = "Title is required"
+            tilTitle.error = "El título es requerido"
             return
         }
         tilTitle.error = null
 
         val description = etDescription.text?.toString()?.trim() ?: ""
         val priority = when (chipGroupPriority.checkedChipId) {
-            R.id.chipHigh -> "HIGH"
-            R.id.chipLow -> "LOW"
-            else -> "MEDIUM"
+            R.id.chipHigh -> "ALTA"
+            R.id.chipLow -> "BAJA"
+            else -> "MEDIA"
         }
         val dueDate = selectedDueDate?.timeInMillis
 

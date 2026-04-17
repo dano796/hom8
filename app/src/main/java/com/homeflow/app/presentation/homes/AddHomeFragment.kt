@@ -37,8 +37,8 @@ class AddHomeFragment : Fragment() {
         val panelCreate = view.findViewById<LinearLayout>(R.id.panelCreate)
         val panelJoin = view.findViewById<LinearLayout>(R.id.panelJoin)
 
-        tabs.addTab(tabs.newTab().setText("Create"))
-        tabs.addTab(tabs.newTab().setText("Join"))
+        tabs.addTab(tabs.newTab().setText("Crear"))
+        tabs.addTab(tabs.newTab().setText("Unirse"))
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

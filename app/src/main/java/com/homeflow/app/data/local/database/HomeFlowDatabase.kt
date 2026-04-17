@@ -30,7 +30,7 @@ import com.homeflow.app.data.local.entity.UserEntity
         NotificationEntity::class,
         ActivityLogEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class HomeFlowDatabase : RoomDatabase() {

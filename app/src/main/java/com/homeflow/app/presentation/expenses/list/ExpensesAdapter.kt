@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.expenses.list
+﻿package com.homeflow.app.presentation.expenses.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -34,8 +34,8 @@ class ExpensesAdapter(
         }
     }
 
-    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale.getDefault())
-    private val dateFmt = SimpleDateFormat("MMM d", Locale.getDefault())
+    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale("es", "CO"))
+    private val dateFmt = SimpleDateFormat("MMM d", Locale("es", "ES"))
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvEmoji: TextView = view.findViewById(R.id.tvCategoryEmoji)
@@ -59,17 +59,17 @@ class ExpensesAdapter(
         holder.tvAmount.text = currencyFmt.format(expense.monto)
 
         val paidByName = if (expense.pagadorId == currentUserId) {
-            "You"
+            "Tú"
         } else {
-            membersMap[expense.pagadorId] ?: expense.pagadorId.take(8).ifEmpty { "Member" }
+            membersMap[expense.pagadorId] ?: expense.pagadorId.take(8).ifEmpty { "Miembro" }
         }
         val dateStr = dateFmt.format(Date(expense.fecha))
-        holder.tvPaidBy.text = "Paid by $paidByName · $dateStr"
+        holder.tvPaidBy.text = "Pagado por $paidByName · $dateStr"
 
         if (isSplitMode) {
             val participantCount = parseParticipantCount(expense.participantes)
             val share = expense.monto / participantCount.coerceAtLeast(1)
-            holder.tvYourShare.text = "Your share: ${currencyFmt.format(share)}"
+            holder.tvYourShare.text = "Tu parte: ${currencyFmt.format(share)}"
             holder.tvYourShare.visibility = View.VISIBLE
         } else {
             holder.tvYourShare.visibility = View.GONE
@@ -83,13 +83,13 @@ class ExpensesAdapter(
     }
 
     private fun categoryEmoji(categoria: String): String = when (categoria) {
-        "FOOD" -> "🍔"
-        "SUPERMARKET" -> "🛒"
-        "SERVICES" -> "💡"
-        "TRANSPORT" -> "🚗"
-        "ENTERTAINMENT" -> "🎬"
-        "CLEANING" -> "🧹"
-        "HEALTH" -> "💊"
+        "COMIDA" -> "🍕"
+        "SUPERMERCADO" -> "🛒"
+        "SERVICIOS" -> "💡"
+        "TRANSPORTE" -> "🚗"
+        "OCIO" -> "🎬"
+        "LIMPIEZA" -> "🧹"
+        "SALUD" -> "💊"
         else -> "💸"
     }
 

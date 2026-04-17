@@ -69,7 +69,7 @@ class CreateTaskViewModel @Inject constructor(
                 val knownUsers = userDao.getUsersByIds(memberIds).associateBy { it.id }
                 val members = memberIds.map { uid ->
                     val user = knownUsers[uid]
-                    val name = user?.nombre ?: if (uid == currentUserId) session.userName else "Member"
+                    val name = user?.nombre ?: if (uid == currentUserId) session.userName else "Miembro"
                     MemberOption(id = uid, name = name, initials = buildInitials(name))
                 }
                 val defaultAssignee = if (members.any { it.id == currentUserId }) currentUserId
@@ -123,8 +123,8 @@ class CreateTaskViewModel @Inject constructor(
                     fechaLimite = fechaLimite,
                     prioridad = prioridad,
                     estado = if (taskId != null) {
-                        _uiState.value.task?.estado ?: "PENDING"
-                    } else "PENDING",
+                        _uiState.value.task?.estado ?: "PENDIENTE"
+                    } else "PENDIENTE",
                     checklist = checklistJson,
                     creadoEn = if (taskId != null) _uiState.value.task?.creadoEn ?: now else now,
                     actualizadoEn = now,
@@ -153,7 +153,7 @@ class CreateTaskViewModel @Inject constructor(
                     id = UUID.randomUUID().toString(),
                     hogarId = hogarId,
                     actorId = userId,
-                    actorName = session.userName.ifEmpty { "Someone" },
+                    actorName = session.userName.ifEmpty { "Alguien" },
                     tipo = tipo,
                     targetTitle = titulo,
                     timestamp = now
@@ -165,7 +165,7 @@ class CreateTaskViewModel @Inject constructor(
                 _uiState.update { it.copy(saved = true) }
             } catch (e: Exception) {
                 Log.e(TAG, "❌ Failed to save task: ${e.message}", e)
-                _uiState.update { it.copy(error = e.message ?: "Failed to save task") }
+                _uiState.update { it.copy(error = e.message ?: "Error al guardar la tarea") }
             }
         }
     }

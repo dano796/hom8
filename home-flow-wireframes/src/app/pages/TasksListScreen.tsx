@@ -19,7 +19,7 @@ const TASKS = [
     dueLabel: "Today",
     dueStatus: "overdue",
     priority: "high" as const,
-    tags: ["Cleaning"],
+    tags: ["Limpieza"],
     done: false,
   },
   {
@@ -29,7 +29,7 @@ const TASKS = [
     dueLabel: "Yesterday ⚠",
     dueStatus: "overdue",
     priority: "medium" as const,
-    tags: ["Shopping", "Food"],
+    tags: ["Shopping", "Comida"],
     done: false,
   },
   {
@@ -49,7 +49,7 @@ const TASKS = [
     dueLabel: "Apr 9",
     dueStatus: "pending",
     priority: "low" as const,
-    tags: ["Cleaning"],
+    tags: ["Limpieza"],
     done: false,
   },
   {
@@ -74,7 +74,7 @@ export function TasksListScreen() {
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2] relative">
       {/* Top bar */}
       <WireTopBar
-        title="Tasks"
+        title="Tareas"
         rightAction={
           <div className="flex items-center gap-2">
             <WireAnnotation label="sort ↕" />
@@ -121,7 +121,7 @@ export function TasksListScreen() {
 
       {/* Results count */}
       <div className="px-4 py-1.5 flex items-center justify-between">
-        <span className="text-[9px] font-mono text-[#999]">5 tasks found</span>
+        <span className="text-[9px] font-mono text-[#999]"> tareas encontradas</span>
         <WireAnnotation label="task-list" />
       </div>
 

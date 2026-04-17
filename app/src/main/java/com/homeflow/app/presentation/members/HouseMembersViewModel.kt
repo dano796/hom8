@@ -19,7 +19,7 @@ data class MemberItem(
     val name: String,
     val initials: String,
     val email: String,
-    val role: String,          // "Admin" | "Member"
+    val role: String,          // "Admin" | "Miembro"
     val isCurrentUser: Boolean,
     val colorIndex: Int        // for avatar color
 )
@@ -53,7 +53,7 @@ class HouseMembersViewModel @Inject constructor(
         viewModelScope.launch {
             homeDao.getHomeById(hogarId).collect { home ->
                 if (home == null) {
-                    _uiState.update { it.copy(isLoading = false, error = "Home not found") }
+                    _uiState.update { it.copy(isLoading = false, error = "Hogar no encontrado") }
                     return@collect
                 }
 
@@ -62,14 +62,14 @@ class HouseMembersViewModel @Inject constructor(
 
                 val memberItems = memberIds.mapIndexed { index, userId ->
                     val user: UserEntity? = knownUsers[userId]
-                    val name = user?.nombre ?: if (userId == currentUserId) session.userName else "Member"
+                    val name = user?.nombre ?: if (userId == currentUserId) session.userName else "Miembro"
                     val initials = buildInitials(name)
                     MemberItem(
                         id = userId,
                         name = name,
                         initials = initials,
                         email = user?.email ?: "",
-                        role = if (index == 0) "Admin" else "Member",
+                        role = if (index == 0) "Administrador" else "Miembro",
                         isCurrentUser = userId == currentUserId,
                         colorIndex = index % 5
                     )

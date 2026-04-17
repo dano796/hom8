@@ -28,7 +28,7 @@ data class ExpenseMemberOption(
 
 data class CreateExpenseUiState(
     val existingExpense: ExpenseEntity? = null,
-    val selectedCategory: String = "OTHER",
+    val selectedCategory: String = "OTROS",
     val selectedDate: Long = System.currentTimeMillis(),
     val members: List<ExpenseMemberOption> = emptyList(),
     val selectedPayerId: String = "",
@@ -68,7 +68,7 @@ class CreateExpenseViewModel @Inject constructor(
                 val users = userDao.getUsersByIds(memberIds)
                 val memberMap = users.associate { it.id to it.nombre }.toMutableMap()
                 if (currentUserId.isNotEmpty()) {
-                    memberMap[currentUserId] = session.userName.ifEmpty { "You" }
+                    memberMap[currentUserId] = session.userName.ifEmpty { "Tú" }
                 }
                 val options = memberIds.mapNotNull { id ->
                     val name = memberMap[id] ?: return@mapNotNull null
@@ -86,7 +86,7 @@ class CreateExpenseViewModel @Inject constructor(
                     if (currentUserId.isNotEmpty()) listOf(
                         ExpenseMemberOption(
                             id = currentUserId,
-                            name = session.userName.ifEmpty { "Me" },
+                            name = session.userName.ifEmpty { "Yo" },
                             initials = session.userInitials.ifEmpty { "M" }
                         )
                     ) else emptyList()
@@ -141,11 +141,11 @@ class CreateExpenseViewModel @Inject constructor(
     fun saveExpense(description: String, amount: String, note: String) {
         val parsedAmount = amount.toDoubleOrNull()
         if (description.isBlank()) {
-            _uiState.update { it.copy(error = "Description is required") }
+            _uiState.update { it.copy(error = "La descripción es requerida") }
             return
         }
         if (parsedAmount == null || parsedAmount <= 0) {
-            _uiState.update { it.copy(error = "Enter a valid amount") }
+            _uiState.update { it.copy(error = "Ingresa un monto válido") }
             return
         }
 
@@ -196,7 +196,7 @@ class CreateExpenseViewModel @Inject constructor(
                     id = UUID.randomUUID().toString(),
                     hogarId = hogarId,
                     actorId = session.userId,
-                    actorName = session.userName.ifEmpty { "Someone" },
+                    actorName = session.userName.ifEmpty { "Alguien" },
                     tipo = tipo,
                     targetTitle = description,
                     timestamp = System.currentTimeMillis()
@@ -208,7 +208,7 @@ class CreateExpenseViewModel @Inject constructor(
                 _uiState.update { it.copy(isSaved = true, error = null) }
             } catch (e: Exception) {
                 Log.e(TAG, "❌ Failed to save expense: ${e.message}", e)
-                _uiState.update { it.copy(error = e.message ?: "Failed to save expense") }
+                _uiState.update { it.copy(error = e.message ?: "Error al guardar el gasto") }
             }
         }
     }

@@ -22,6 +22,8 @@ local.properties
 /.idea/assetWizardSettings.xml
 /.idea/deploymentTargetSelector.xml
 /.idea/deviceManager.xml
+/.idea/misc.xml
+/.idea/copilot*.xml
 
 # IDE — VS Code
 .vscode/
@@ -30,3 +32,6 @@ local.properties
 *.keystore
 *.jks
 keystore.properties
+
+# Firebase config (contains API keys)
+google-services.json

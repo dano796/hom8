@@ -32,7 +32,7 @@ export function ProfileScreen() {
   return (
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2]">
       <WireTopBar
-        title="Profile"
+        title="Perfil"
         rightAction={
           <div className="flex items-center gap-2">
             <WireAnnotation label="settings" />
@@ -79,9 +79,9 @@ export function ProfileScreen() {
           </div>
           <div className="grid grid-cols-3 gap-2">
             {[
-              { label: "Tasks done", value: "23" },
-              { label: "Streak", value: "7 days 🔥" },
-              { label: "Score", value: "450 pts" },
+              { label: "Tareas completadas", value: "23" },
+              { label: "Racha", value: "7 days 🔥" },
+              { label: "Puntos", value: "450 pts" },
             ].map((stat) => (
               <WireCard key={stat.label} className="text-center">
                 <div className="text-[15px] font-mono font-medium text-[#333]">{stat.value}</div>

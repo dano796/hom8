@@ -52,7 +52,7 @@ class TasksAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = getItem(position)
         val ctx = holder.itemView.context
-        val isDone = task.estado == "DONE"
+        val isDone = task.estado == "TERMINADO"
 
         // Title with strikethrough when done
         holder.tvTitle.text = task.titulo
@@ -69,18 +69,18 @@ class TasksAdapter(
 
         // Priority badge
         when (task.prioridad) {
-            "HIGH" -> {
-                holder.tvPriority.text = "HIGH"
+            "ALTA" -> {
+                holder.tvPriority.text = "ALTA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_high)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityHighText))
             }
-            "LOW" -> {
-                holder.tvPriority.text = "LOW"
+            "BAJA" -> {
+                holder.tvPriority.text = "BAJA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_low)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityLowText))
             }
             else -> {
-                holder.tvPriority.text = "MED"
+                holder.tvPriority.text = "MEDIA"
                 holder.tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_medium)
                 holder.tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityMediumText))
             }
@@ -97,7 +97,7 @@ class TasksAdapter(
                 if (isOverdue(task)) R.color.colorError else R.color.colorTextTertiary
             ))
         } else {
-            holder.tvDueDate.text = "No due date"
+            holder.tvDueDate.text = "Sin fecha de vencimiento"
             holder.tvDueDate.setTextColor(ContextCompat.getColor(ctx, R.color.colorTextTertiary))
         }
 
@@ -145,29 +145,29 @@ class TasksAdapter(
 
     private fun bindStatus(tv: TextView, task: TaskEntity, ctx: android.content.Context) {
         when (task.estado) {
-            "DONE" -> {
-                tv.text = "DONE"
+            "TERMINADO" -> {
+                tv.text = "TERMINADO"
                 tv.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_done)
                 tv.setTextColor(ContextCompat.getColor(ctx, R.color.statusDoneText))
             }
-            "OVERDUE" -> {
-                tv.text = "OVERDUE"
+            "ATRASADO" -> {
+                tv.text = "ATRASADO"
                 tv.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_overdue)
                 tv.setTextColor(ContextCompat.getColor(ctx, R.color.statusOverdueText))
             }
-            "IN_PROGRESS" -> {
-                tv.text = "IN PROGRESS"
+            "EN_CURSO" -> {
+                tv.text = "EN CURSO"
                 tv.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_pending)
                 tv.setTextColor(ContextCompat.getColor(ctx, R.color.statusInProgressText))
             }
             else -> {
                 // Check if actually overdue
-                if (task.fechaLimite != null && task.fechaLimite < System.currentTimeMillis() && task.estado != "DONE") {
-                    tv.text = "OVERDUE"
+                if (task.fechaLimite != null && task.fechaLimite < System.currentTimeMillis() && task.estado != "TERMINADO") {
+                    tv.text = "ATRASADO"
                     tv.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_overdue)
                     tv.setTextColor(ContextCompat.getColor(ctx, R.color.statusOverdueText))
                 } else {
-                    tv.text = "PENDING"
+                    tv.text = "PENDIENTE"
                     tv.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_pending)
                     tv.setTextColor(ContextCompat.getColor(ctx, R.color.statusPendingText))
                 }
@@ -179,19 +179,19 @@ class TasksAdapter(
         val taskDate = Calendar.getInstance().apply { timeInMillis = timestamp }
         val today = Calendar.getInstance()
         val tomorrow = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 1) }
-        val timeFmt = SimpleDateFormat("h:mm a", Locale.getDefault())
+        val timeFmt = SimpleDateFormat("h:mm a", Locale("es", "ES"))
         val time = timeFmt.format(Date(timestamp))
         return when {
-            isSameDay(taskDate, today) -> "Today, $time"
-            isSameDay(taskDate, tomorrow) -> "Tomorrow, $time"
-            else -> SimpleDateFormat("MMM d, h:mm a", Locale.getDefault()).format(Date(timestamp))
+            isSameDay(taskDate, today) -> "Hoy, $time"
+            isSameDay(taskDate, tomorrow) -> "Mañana, $time"
+            else -> SimpleDateFormat("MMM d, h:mm a", Locale("es", "ES")).format(Date(timestamp))
         }
     }
 
     private fun isOverdue(task: TaskEntity): Boolean =
         task.fechaLimite != null &&
                 task.fechaLimite < System.currentTimeMillis() &&
-                task.estado != "DONE"
+                task.estado != "TERMINADO"
 
     private fun isSameDay(a: Calendar, b: Calendar) =
         a.get(Calendar.YEAR) == b.get(Calendar.YEAR) &&

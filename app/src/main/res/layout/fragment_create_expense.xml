@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3"
-                android:hint="Description *"
+                android:hint="Descripción *"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
@@ -104,14 +104,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing2"
                     android:layout_weight="1"
-                    android:hint="Amount *"
+                    android:hint="Cantidad *"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxStrokeColor="@color/colorOutline"
                     app:hintTextColor="@color/colorTextTertiary"
-                    app:prefixText="$"
+                    app:prefixText="COP "
                     app:prefixTextColor="@color/colorTextSecondary">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -176,7 +176,7 @@
                 android:columnCount="3"
                 android:rowCount="3">
 
-                <!-- FOOD -->
+                <!-- Comida -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catFood"
                     style="@style/Widget.HomeFlow.Card"
@@ -190,12 +190,11 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🍔" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Food" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Comida" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- SUPERMARKET -->
+                <!-- SUPERMercado -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catSupermarket"
                     style="@style/Widget.HomeFlow.Card"
@@ -209,12 +208,11 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Market" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Mercado" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- SERVICES -->
+                <!-- Servicios -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catServices"
                     style="@style/Widget.HomeFlow.Card"
@@ -228,12 +226,11 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💡" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Services" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Servicios" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- TRANSPORT -->
+                <!-- Transporte -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catTransport"
                     style="@style/Widget.HomeFlow.Card"
@@ -247,8 +244,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚗" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Transport" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Transporte" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -266,12 +262,11 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎬" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Fun" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Ocio" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- OTHER -->
+                <!-- Otros -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catOther"
                     style="@style/Widget.HomeFlow.Card"
@@ -285,8 +280,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing2">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💸" android:textSize="22sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Other" android:textColor="@color/colorTextSecondary" android:textSize="10sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/jetbrains_mono" android:text="Otros" android:textColor="@color/colorTextPrimary" android:textSize="13sp" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -325,7 +319,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="Today"
+                    android:text="Hoy"
                     android:textColor="@color/colorTextSecondary"
                     android:textSize="13sp" />
 
@@ -338,7 +332,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing4"
-                android:hint="Note (optional)"
+                android:hint="Nota (opcional)"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
@@ -382,3 +376,6 @@
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

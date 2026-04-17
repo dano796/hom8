@@ -19,7 +19,7 @@ export function TaskDetailScreen() {
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2]">
       {/* Top bar */}
       <WireTopBar
-        title="Task Detail"
+        title="Detalle de Tarea"
         showBack
         onBack={() => navigate("/tasks")}
         rightAction={
@@ -93,7 +93,7 @@ export function TaskDetailScreen() {
                 </svg>
                 <span className="text-[10px] font-mono text-[#888] shrink-0">Labels</span>
                 <div className="flex gap-1 flex-wrap">
-                  <WireChip label="Cleaning" active />
+                  <WireChip label="Limpieza" active />
                   <WireChip label="Kitchen" active />
                 </div>
               </div>
@@ -109,7 +109,7 @@ export function TaskDetailScreen() {
 
           {/* Description */}
           <WireCard>
-            <WireSectionHeaderSimple label="Description" />
+            <WireSectionHeaderSimple label="Descripción" />
             <p className="text-[11px] font-mono text-[#666] leading-relaxed mt-2">
               Please clean the bathroom completely: toilet, sink, shower, and floor.
               Use the cleaning supplies under the sink. Don't forget to replace the

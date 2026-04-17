@@ -14,14 +14,14 @@ import {
 } from "../components/WireComponents";
 
 const CATEGORIES = [
-  { emoji: "🍕", label: "Food" },
-  { emoji: "🛒", label: "Supermarket" },
-  { emoji: "💡", label: "Services" },
-  { emoji: "🧹", label: "Cleaning" },
-  { emoji: "🚗", label: "Transport" },
-  { emoji: "🎬", label: "Entertain." },
-  { emoji: "💊", label: "Health" },
-  { emoji: "📦", label: "Other" },
+  { emoji: "🍕", label: "Comida" },
+  { emoji: "🛒", label: "Supermercado" },
+  { emoji: "💡", label: "Servicios" },
+  { emoji: "🧹", label: "Limpieza" },
+  { emoji: "🚗", label: "Transporte" },
+  { emoji: "🎬", label: "Entretenim." },
+  { emoji: "💊", label: "Salud" },
+  { emoji: "📦", label: "Otro" },
 ];
 
 const MEMBERS = [
@@ -35,7 +35,7 @@ export function CreateExpenseScreen() {
   const [category, setCategory] = useState(0);
   const [payer, setPayer] = useState(0);
   const [participants, setParticipants] = useState([true, true, false]);
-  const [division, setDivision] = useState("Equal");
+  const [division, setDivision] = useState("Igual");
 
   const toggleParticipant = (i: number) =>
     setParticipants((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
@@ -46,7 +46,7 @@ export function CreateExpenseScreen() {
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2]">
       {/* Top bar */}
       <WireTopBar
-        title="New Expense"
+        title="Nuevo Gasto"
         showBack
         onBack={() => navigate("/expenses")}
         rightAction={
@@ -62,8 +62,8 @@ export function CreateExpenseScreen() {
       <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-6">
         {/* Description */}
         <WireInput
-          label="Description"
-          placeholder="e.g. Weekly supermarket"
+          label="Descripción"
+          placeholder="ej. Supermercado semanal"
           required
         />
 
@@ -73,7 +73,7 @@ export function CreateExpenseScreen() {
             <span className="text-[11px] font-mono font-medium text-[#555] uppercase tracking-wider">
               Total amount
             </span>
-            <span className="text-[10px] font-mono text-[#888]">*required</span>
+            <span className="text-[10px] font-mono text-[#888]">*requerido</span>
             <WireAnnotation label="numeric-input" />
           </div>
           <div className="flex h-12 bg-white border border-[#C8C8C8] rounded overflow-hidden">
@@ -190,12 +190,12 @@ export function CreateExpenseScreen() {
             <WireAnnotation label="toggle: equal / custom" />
           </div>
           <WireSegmented
-            options={["Equal", "Custom"]}
+            options={["Igual", "Personalizado"]}
             selected={division}
             onSelect={setDivision}
           />
 
-          {division === "Equal" ? (
+          {division === "Igual" ? (
             <div className="flex items-center gap-2 px-3 py-2 bg-[#F5F5F5] border border-[#E8E8E8] rounded-xl">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ABABAB" strokeWidth="2" strokeLinecap="round">
                 <circle cx="12" cy="12" r="9" />
@@ -232,7 +232,7 @@ export function CreateExpenseScreen() {
         {/* Date */}
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono font-medium text-[#555] uppercase tracking-wider">Date</span>
+            <span className="text-[11px] font-mono font-medium text-[#555] uppercase tracking-wider">Fecha</span>
             <WireAnnotation label="date-picker" />
           </div>
           <div className="h-10 bg-white border border-[#C8C8C8] rounded flex items-center px-3 gap-2">

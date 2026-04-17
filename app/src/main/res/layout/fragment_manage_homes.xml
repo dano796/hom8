@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="My Homes"
+            android:text="@string/profile_my_home"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -57,7 +57,7 @@
                 android:layout_marginBottom="@dimen/spacing3"
                 android:fontFamily="@font/jetbrains_mono"
                 android:letterSpacing="0.05"
-                android:text="YOUR HOMES"
+                android:text="TUS HOGARES"
                 android:textColor="@color/colorTextTertiary"
                 android:textSize="11sp" />
 

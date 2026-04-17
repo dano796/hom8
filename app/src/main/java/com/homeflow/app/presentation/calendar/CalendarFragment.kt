@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.calendar
+﻿package com.homeflow.app.presentation.calendar
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -40,8 +40,8 @@ class CalendarFragment : Fragment() {
     lateinit var session: SessionManager
 
     private lateinit var dayTasksAdapter: UpcomingTasksAdapter
-    private val monthFmt = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-    private val dayFmt = SimpleDateFormat("MMMM d", Locale.getDefault())
+    private val monthFmt = SimpleDateFormat("MMMM yyyy", Locale("es", "ES"))
+    private val dayFmt = SimpleDateFormat("MMMM d", Locale("es", "ES"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -120,7 +120,7 @@ class CalendarFragment : Fragment() {
                         set(state.displayedYear, state.displayedMonth, 1)
                     }
                     tvMonthYear.text = if (isWeekly) {
-                        // Show week range: "Apr 7 – Apr 13"
+                        // Show week range: "Abr 7 - Abr 13"
                         val weekCal = Calendar.getInstance().apply {
                             set(state.displayedYear, state.displayedMonth, state.selectedDay)
                         }
@@ -129,8 +129,8 @@ class CalendarFragment : Fragment() {
                         weekStart.add(Calendar.DAY_OF_MONTH, -dow)
                         val weekEnd = weekStart.clone() as Calendar
                         weekEnd.add(Calendar.DAY_OF_MONTH, 6)
-                        val rangeFmt = SimpleDateFormat("MMM d", Locale.getDefault())
-                        "${rangeFmt.format(weekStart.time)} – ${rangeFmt.format(weekEnd.time)}"
+                        val rangeFmt = SimpleDateFormat("MMM d", Locale("es", "ES"))
+                        "${rangeFmt.format(weekStart.time)} - ${rangeFmt.format(weekEnd.time)}"
                     } else {
                         monthFmt.format(cal.time)
                     }
@@ -161,9 +161,9 @@ class CalendarFragment : Fragment() {
                     val selectedCal = Calendar.getInstance().apply {
                         set(state.displayedYear, state.displayedMonth, state.selectedDay)
                     }
-                    tvSelectedDay.text = "Tasks for ${dayFmt.format(selectedCal.time)}"
+                    tvSelectedDay.text = "Tareas para ${dayFmt.format(selectedCal.time)}"
                     val taskCount = state.tasksForSelectedDay.size
-                    tvDayTaskCount.text = if (taskCount == 0) "" else "$taskCount task${if (taskCount != 1) "s" else ""}"
+                    tvDayTaskCount.text = if (taskCount == 0) "" else "$taskCount tarea${if (taskCount != 1) "s" else ""}"
 
                     // Day tasks list
                     dayTasksAdapter.submitList(state.tasksForSelectedDay)

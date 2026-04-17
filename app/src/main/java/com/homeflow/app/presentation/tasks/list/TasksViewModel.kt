@@ -36,9 +36,9 @@ data class TasksUiState(
                 // Filtered by userId in the query, shown here for UI state clarity
             }
             result = when (priorityFilter) {
-                PriorityFilter.HIGH -> result.filter { it.prioridad == "HIGH" }
-                PriorityFilter.MEDIUM -> result.filter { it.prioridad == "MEDIUM" }
-                PriorityFilter.LOW -> result.filter { it.prioridad == "LOW" }
+                PriorityFilter.HIGH -> result.filter { it.prioridad == "ALTA" }
+                PriorityFilter.MEDIUM -> result.filter { it.prioridad == "MEDIA" }
+                PriorityFilter.LOW -> result.filter { it.prioridad == "BAJA" }
                 else -> result
             }
             return result
@@ -112,17 +112,17 @@ class TasksViewModel @Inject constructor(
 
     fun toggleTaskDone(task: TaskEntity) {
         viewModelScope.launch {
-            val newStatus = if (task.estado == "DONE") "PENDING" else "DONE"
+            val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()
             val updated = task.copy(estado = newStatus, actualizadoEn = now)
             taskDao.updateTask(updated)
             firestoreRepo.syncTask(updated)
-            val tipo = if (newStatus == "DONE") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
+            val tipo = if (newStatus == "TERMINADO") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
             val log = ActivityLogEntity(
                 id = UUID.randomUUID().toString(),
                 hogarId = task.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = tipo,
                 targetTitle = task.titulo,
                 timestamp = now
@@ -140,7 +140,7 @@ class TasksViewModel @Inject constructor(
                 id = UUID.randomUUID().toString(),
                 hogarId = task.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = "TASK_DELETED",
                 targetTitle = task.titulo,
                 timestamp = System.currentTimeMillis()

@@ -134,7 +134,7 @@
                         android:layout_marginBottom="@dimen/spacing3"
                         android:fontFamily="@font/jetbrains_mono"
                         android:letterSpacing="0.05"
-                        android:text="DETAILS"
+                        android:text="@string/tasks_details"
                         android:textColor="@color/colorTextTertiary"
                         android:textSize="11sp" />
 
@@ -171,7 +171,7 @@
                             android:fontFamily="@font/jetbrains_mono"
                             android:textColor="@color/colorTextSecondary"
                             android:textSize="13sp"
-                            tools:text="Ana García" />
+                            tools:text="Ana GarcÃ­a" />
 
                     </LinearLayout>
 
@@ -206,7 +206,7 @@
                             android:fontFamily="@font/jetbrains_mono"
                             android:textColor="@color/colorTextSecondary"
                             android:textSize="13sp"
-                            tools:text="Ana García" />
+                            tools:text="Ana GarcÃ­a" />
 
                     </LinearLayout>
 
@@ -221,7 +221,7 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Due"
+                            android:text="Vence"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
@@ -232,7 +232,7 @@
                             android:fontFamily="@font/jetbrains_mono"
                             android:textColor="@color/colorTextSecondary"
                             android:textSize="13sp"
-                            tools:text="Apr 15, 2025 · 6:00 PM" />
+                            tools:text="Apr 15, 2025 Â· 6:00 PM" />
 
                     </LinearLayout>
 
@@ -261,7 +261,7 @@
                         android:layout_marginBottom="@dimen/spacing3"
                         android:fontFamily="@font/jetbrains_mono"
                         android:letterSpacing="0.05"
-                        android:text="DESCRIPTION"
+                        android:text="@string/tasks_description"
                         android:textColor="@color/colorTextTertiary"
                         android:textSize="11sp" />
 
@@ -307,7 +307,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/jetbrains_mono"
                             android:letterSpacing="0.05"
-                            android:text="CHECKLIST"
+                            android:text="LISTA DE VERIFICACIÓN"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="11sp" />
 

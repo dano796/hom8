@@ -83,18 +83,18 @@ class TaskDetailFragment : Fragment() {
         // Priority badge
         val tvPriority = view.findViewById<TextView>(R.id.tvDetailPriority)
         when (task.prioridad) {
-            "HIGH" -> {
-                tvPriority.text = "HIGH"
+            "ALTA" -> {
+                tvPriority.text = "ALTA"
                 tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_high)
                 tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityHighText))
             }
-            "LOW" -> {
-                tvPriority.text = "LOW"
+            "BAJA" -> {
+                tvPriority.text = "BAJA"
                 tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_low)
                 tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityLowText))
             }
             else -> {
-                tvPriority.text = "MEDIUM"
+                tvPriority.text = "MEDIA"
                 tvPriority.background = ContextCompat.getDrawable(ctx, R.drawable.bg_priority_medium)
                 tvPriority.setTextColor(ContextCompat.getColor(ctx, R.color.priorityMediumText))
             }
@@ -103,25 +103,25 @@ class TaskDetailFragment : Fragment() {
         // Status badge
         val tvStatus = view.findViewById<TextView>(R.id.tvDetailStatus)
         when (task.estado) {
-            "DONE" -> {
-                tvStatus.text = "DONE"
+            "TERMINADO" -> {
+                tvStatus.text = "TERMINADO"
                 tvStatus.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_done)
                 tvStatus.setTextColor(ContextCompat.getColor(ctx, R.color.statusDoneText))
             }
-            "OVERDUE" -> {
-                tvStatus.text = "OVERDUE"
+            "ATRASADO" -> {
+                tvStatus.text = "ATRASADO"
                 tvStatus.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_overdue)
                 tvStatus.setTextColor(ContextCompat.getColor(ctx, R.color.statusOverdueText))
             }
             else -> {
-                tvStatus.text = "PENDING"
+                tvStatus.text = "PENDIENTE"
                 tvStatus.background = ContextCompat.getDrawable(ctx, R.drawable.bg_status_pending)
                 tvStatus.setTextColor(ContextCompat.getColor(ctx, R.color.statusPendingText))
             }
         }
 
         // Mark complete button
-        val isDone = task.estado == "DONE"
+        val isDone = task.estado == "TERMINADO"
         view.findViewById<MaterialButton>(R.id.btnMarkComplete).apply {
             text = if (isDone) "✓ MARKED AS COMPLETE" else getString(R.string.tasks_mark_complete)
             isEnabled = true
@@ -149,8 +149,8 @@ class TaskDetailFragment : Fragment() {
 
         // Due date
         view.findViewById<TextView>(R.id.tvDetailDueDate).text = task.fechaLimite?.let { ts ->
-            SimpleDateFormat("MMM d, yyyy · h:mm a", Locale.getDefault()).format(Date(ts))
-        } ?: "No due date"
+            SimpleDateFormat("MMM d, yyyy · h:mm a", Locale("es", "ES")).format(Date(ts))
+        } ?: "Sin fecha de vencimiento"
 
         // Description
         val cardDescription = view.findViewById<View>(R.id.cardDescription)
@@ -175,7 +175,7 @@ class TaskDetailFragment : Fragment() {
         val items: List<Map<String, Any>> = try {
             val type = object : TypeToken<List<Map<String, Any>>>() {}.type
             gson.fromJson(task.checklist, type) ?: emptyList()
-        } catch (e: Exception) { emptyList() }
+        } catch (_: Exception) { emptyList() }
 
         if (items.isEmpty()) {
             cardChecklist.visibility = View.GONE
@@ -202,6 +202,9 @@ class TaskDetailFragment : Fragment() {
             if (done) {
                 tv.alpha = 0.5f
                 tv.paintFlags = tv.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                tv.alpha = 1.0f
+                tv.paintFlags = tv.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
             cb.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.toggleChecklistItem(index, isChecked)

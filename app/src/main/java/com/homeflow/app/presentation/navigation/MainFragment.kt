@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
             if (session.userId.isEmpty()) {
                 session.userId = firebaseUser.uid
                 session.userName = firebaseUser.displayName
-                    ?: firebaseUser.email?.substringBefore("@") ?: "User"
+                    ?: firebaseUser.email?.substringBefore("@") ?: "Usuario"
                 session.userInitials = session.userName
                     .split(" ")
                     .mapNotNull { it.firstOrNull()?.uppercase() }

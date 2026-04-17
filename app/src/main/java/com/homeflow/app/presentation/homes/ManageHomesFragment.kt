@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.homes
+﻿package com.homeflow.app.presentation.homes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,10 +41,10 @@ class ManageHomesFragment : Fragment() {
 
         adapter = HomeCardAdapter(onSwitchClick = { home ->
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Switch to \"${home.nombre}\"?")
-                .setMessage("The app will reload with this home's data.")
-                .setPositiveButton("Switch") { _, _ -> viewModel.switchHome(home.id) }
-                .setNegativeButton("Cancel", null)
+                .setTitle("¿Cambiar a \"${home.nombre}\"?")
+                .setMessage("La app se recargará con los datos de este hogar.")
+                .setPositiveButton("Cambiar") { _, _ -> viewModel.switchHome(home.id) }
+                .setNegativeButton("Cancelar", null)
                 .show()
         })
 

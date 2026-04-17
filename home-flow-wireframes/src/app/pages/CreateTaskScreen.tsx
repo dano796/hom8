@@ -20,7 +20,7 @@ export function CreateTaskScreen() {
   const [recurrence, setRecurrence] = useState(false);
   const [freqSel, setFreqSel] = useState("Weekly");
   const [selectedAssignee, setSelectedAssignee] = useState(0);
-  const [activeLabels, setActiveLabels] = useState<string[]>(["Cleaning"]);
+  const [activeLabels, setActiveLabels] = useState<string[]>(["Limpieza"]);
 
   const members = [
     { label: "AG", name: "Ana" },
@@ -28,7 +28,7 @@ export function CreateTaskScreen() {
     { label: "LG", name: "Luis" },
   ];
 
-  const labelOptions = ["Cleaning", "Kitchen", "Shopping", "Bills", "Garden"];
+  const labelOptions = ["Limpieza", "Kitchen", "Shopping", "Bills", "Garden"];
 
   const toggleLabel = (l: string) =>
     setActiveLabels((prev) =>
@@ -39,7 +39,7 @@ export function CreateTaskScreen() {
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2]">
       {/* Top bar */}
       <WireTopBar
-        title="New Task"
+        title="Nueva Tarea"
         showBack
         onBack={() => navigate("/tasks")}
         rightAction={
@@ -55,13 +55,13 @@ export function CreateTaskScreen() {
       <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-6">
         {/* Title */}
         <WireInput
-          label="Title"
-          placeholder="e.g. Clean the kitchen"
+          label="Título"
+          placeholder="ej. Limpiar la cocina"
           required
         />
 
         {/* Description */}
-        <WireTextarea label="Description" placeholder="Add details (optional)" rows={3} />
+        <WireTextarea label="Descripción" placeholder="Add details (optional)" rows={3} />
 
         <WireDivider />
 
@@ -71,7 +71,7 @@ export function CreateTaskScreen() {
             <span className="text-[11px] font-mono font-medium text-[#555] uppercase tracking-wider">
               Assigned to
             </span>
-            <span className="text-[10px] font-mono text-[#888]">*required</span>
+            <span className="text-[10px] font-mono text-[#888]">*requerido</span>
             <WireAnnotation label="member-selector" />
           </div>
           <div className="flex gap-3">
@@ -123,7 +123,7 @@ export function CreateTaskScreen() {
             <span className="text-[11px] font-mono font-medium text-[#555] uppercase tracking-wider">
               Due date
             </span>
-            <span className="text-[10px] font-mono text-[#888]">*required</span>
+            <span className="text-[10px] font-mono text-[#888]">*requerido</span>
             <WireAnnotation label="date-picker" />
           </div>
           <div className="h-10 bg-white border border-[#C8C8C8] rounded flex items-center px-3 gap-2">

@@ -57,8 +57,8 @@ export function DashboardScreen() {
           </div>
           <WireProgressBar
             value={62}
-            label="Ana García — 62%"
-            sublabel="Carlos — 38%"
+            label="Ana García - 62%"
+            sublabel="Carlos - 38%"
           />
           <div className="flex mt-2 gap-1">
             <WireAvatar size="xs" label="AG" />
@@ -73,7 +73,7 @@ export function DashboardScreen() {
 
         {/* My tasks today */}
         <div>
-          <WireSectionHeader title="My tasks today" action="See all →" onAction={() => navigate("/tasks")} />
+          <WireSectionHeader title="Mis tareas hoy" action="See all →" onAction={() => navigate("/tasks")} />
           <div className="space-y-2">
             {[
               { title: "Clean bathroom", priority: "high" as const, time: "Before 10am", done: false },
@@ -105,7 +105,7 @@ export function DashboardScreen() {
 
         {/* Upcoming tasks */}
         <div>
-          <WireSectionHeader title="Upcoming" action="See all →" onAction={() => navigate("/tasks")} />
+          <WireSectionHeader title="Próximas" action="See all →" onAction={() => navigate("/tasks")} />
           <div className="space-y-1.5">
             {[
               { title: "Pay electric bill", date: "Mon · Apr 7", who: "CG" },

@@ -4,7 +4,7 @@ data class Gasto(
     val id: String,
     val descripcion: String,
     val monto: Double,
-    val categoria: CategoriaGasto = CategoriaGasto.OTHER,
+    val categoria: CategoriaGasto = CategoriaGasto.OTROS,
     val pagadorId: String,
     val hogarId: String,
     val fecha: Long = System.currentTimeMillis(),

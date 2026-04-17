@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Tasks"
+            android:text="@string/nav_tasks"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -106,14 +106,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="All" />
+                        android:text="@string/tasks_filter_all" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipMyTasks"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="My Tasks" />
+                        android:text="@string/tasks_filter_my" />
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -140,28 +140,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="All Priority" />
+                        android:text="Cualquier prioridad" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityHigh"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="High" />
+                        android:text="@string/priority_high" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityMedium"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Medium" />
+                        android:text="@string/priority_medium" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityLow"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Low" />
+                        android:text="@string/priority_low" />
 
                 </com.google.android.material.chip.ChipGroup>
 

@@ -24,7 +24,7 @@ import javax.inject.Inject
 data class TaskDetailUiState(
     val task: TaskEntity? = null,
     val createdByName: String = "",
-    val assigneeName: String = "Unassigned",
+    val assigneeName: String = "Sin asignar",
     val isLoading: Boolean = true,
     val deleted: Boolean = false
 )
@@ -59,7 +59,7 @@ class TaskDetailViewModel @Inject constructor(
                 val memberIds = parseMembersJson(home.miembros)
                 val users = userDao.getUsersByIds(memberIds)
                 membersMap = users.associate { it.id to it.nombre } +
-                    mapOf(session.userId to session.userName.ifEmpty { "You" })
+                    mapOf(session.userId to session.userName.ifEmpty { "Tú" })
                 // Re-resolve names on the current task if already loaded
                 _uiState.value.task?.let { resolveNames(it) }
             }
@@ -81,16 +81,16 @@ class TaskDetailViewModel @Inject constructor(
     private fun resolveNames(task: TaskEntity) {
         val currentUserId = session.userId
         val assigneeName = when {
-            task.responsableId.isEmpty() -> "Unassigned"
+            task.responsableId.isEmpty() -> "Sin asignar"
             task.responsableId == currentUserId ->
-                session.userName.ifEmpty { "You" }
+                session.userName.ifEmpty { "Tú" }
             else ->
                 membersMap[task.responsableId] ?: task.responsableId.take(8)
         }
         val createdByName = when {
             task.creadoPor.isEmpty() -> ""
             task.creadoPor == currentUserId ->
-                session.userName.ifEmpty { "You" }
+                session.userName.ifEmpty { "Tú" }
             else ->
                 membersMap[task.creadoPor] ?: task.creadoPor.take(8)
         }
@@ -100,17 +100,17 @@ class TaskDetailViewModel @Inject constructor(
     fun toggleComplete() {
         val task = _uiState.value.task ?: return
         viewModelScope.launch {
-            val newStatus = if (task.estado == "DONE") "PENDING" else "DONE"
+            val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()
             val updated = task.copy(estado = newStatus, actualizadoEn = now)
             taskDao.updateTask(updated)
             firestoreRepo.syncTask(updated)
-            val tipo = if (newStatus == "DONE") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
+            val tipo = if (newStatus == "TERMINADO") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
             val log = ActivityLogEntity(
                 id = UUID.randomUUID().toString(),
                 hogarId = task.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = tipo,
                 targetTitle = task.titulo,
                 timestamp = now
@@ -147,7 +147,7 @@ class TaskDetailViewModel @Inject constructor(
                 id = UUID.randomUUID().toString(),
                 hogarId = task.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = "TASK_DELETED",
                 targetTitle = task.titulo,
                 timestamp = System.currentTimeMillis()

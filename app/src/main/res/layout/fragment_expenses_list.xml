@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Expenses"
+            android:text="@string/nav_expenses"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -169,42 +169,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="All" />
+                        android:text="@string/tasks_filter_all" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFood"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🍔 Food" />
+                        android:text="Comida" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSupermarket"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🛒 Supermarket" />
+                        android:text="Supermercado" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipServices"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="💡 Services" />
+                        android:text="Servicios" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipTransport"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🚗 Transport" />
+                        android:text="Transporte" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipEntertainment"
                         style="@style/Widget.HomeFlow.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🎬 Entertainment" />
+                        android:text="Ocio" />
 
                 </com.google.android.material.chip.ChipGroup>
 
@@ -220,7 +220,7 @@
                 android:fontFamily="@font/jetbrains_mono"
                 android:textColor="@color/colorTextTertiary"
                 android:textSize="11sp"
-                tools:text="5 expenses · total $325.70" />
+                tools:text="5 expenses Ãƒâ€šÃ‚Â· total $325.70" />
 
             <!-- Expenses list -->
             <androidx.recyclerview.widget.RecyclerView
@@ -242,12 +242,7 @@
                 android:padding="@dimen/spacing8"
                 android:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/jetbrains_mono"
-                    android:text="💸"
-                    android:textSize="48sp" />
+                
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -289,3 +284,5 @@
         app:tint="@color/fabIcon" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

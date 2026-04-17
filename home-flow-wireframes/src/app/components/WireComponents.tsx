@@ -166,7 +166,7 @@ export function WireInput({
           <span className="text-[11px] text-[#555] font-mono font-medium uppercase tracking-wider">
             {label}
           </span>
-          {required && <span className="text-[10px] text-[#888] font-mono">*required</span>}
+          {required && <span className="text-[10px] text-[#888] font-mono">*requerido</span>}
         </div>
       )}
       <div className="h-10 bg-white border border-[#C8C8C8] rounded px-3 flex items-center text-[#ABABAB] text-[12px] font-mono">

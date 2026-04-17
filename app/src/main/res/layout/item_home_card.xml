@@ -41,7 +41,7 @@
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                tools:text="García Family Home" />
+                tools:text="GarcÃ­a Family Home" />
 
             <TextView
                 android:id="@+id/tvHomeCardCode"
@@ -72,7 +72,7 @@
             android:fontFamily="@font/jetbrains_mono"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
-            android:text="Active"
+            android:text="Activo"
             android:textColor="@color/colorPrimary"
             android:textSize="10sp"
             android:textStyle="bold"

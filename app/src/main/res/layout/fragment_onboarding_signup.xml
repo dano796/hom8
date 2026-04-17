@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Create account"
+            android:text="@string/action_create_account"
             android:textColor="@color/colorTextPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Join HomeFlow and manage your home together"
+            android:text="Únete a HomeFlow y gestionen su hogar juntos"
             android:textColor="@color/colorTextSecondary"
             android:textSize="13sp" />
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="16dp"
-            android:hint="Full name"
+            android:hint="Nombre completo"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Email"
+            android:hint="Correo electrónico"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
-            android:hint="Password"
+            android:hint="Contraseña"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -127,7 +127,7 @@
             app:boxStrokeColor="@color/inputBorder"
             app:errorEnabled="true"
             app:endIconMode="password_toggle"
-            app:helperText="Minimum 6 characters">
+            app:helperText="Mínimo 6 caracteres">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPasswordSignUp"
@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:text="Already have an account? "
+                android:text="¿Ya tienes una cuenta? "
                 android:textColor="@color/colorTextTertiary"
                 android:textSize="12sp" />
 
@@ -182,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:text="Sign in"
+                android:text="@string/action_sign_in"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:textStyle="bold" />

@@ -199,7 +199,7 @@ export function NotificationsScreen() {
   return (
     <div className="flex flex-col flex-1 min-h-0 bg-[#F2F2F2]">
       <WireTopBar
-        title="Notifications"
+        title="Notificaciones"
         showBack
         onBack={() => navigate("/")}
         rightAction={

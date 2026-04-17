@@ -41,7 +41,7 @@
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                tools:text="Ana García 👋" />
+                tools:text="Ana GarcÃ­a ðŸ‘‹" />
 
         </LinearLayout>
 
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="My Tasks Today"
+                    android:text="@string/dashboard_my_tasks_today"
                     android:textColor="@color/colorTextPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="See all"
+                    android:text="@string/action_see_all"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="Upcoming"
+                    android:text="@string/dashboard_upcoming"
                     android:textColor="@color/colorTextPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="See all"
+                    android:text="@string/action_see_all"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
 
@@ -160,7 +160,7 @@
                 android:layout_marginHorizontal="@dimen/spacing4"
                 android:layout_marginBottom="@dimen/spacing2"
                 android:fontFamily="@font/jetbrains_mono"
-                android:text="Expenses This Month"
+                android:text="@string/dashboard_expenses_month"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -190,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Month total"
+                            android:text="Total del mes"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="10sp" />
 
@@ -208,7 +208,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="Balance"
+                            android:text="@string/dashboard_balance"
                             android:textColor="@color/colorTextSecondary"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -238,7 +238,7 @@
                             android:fontFamily="@font/jetbrains_mono"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="10sp"
-                            tools:text="→ Carlos" />
+                            tools:text="â†’ Carlos" />
 
                         <TextView
                             android:id="@+id/tvOweAmount"
@@ -254,7 +254,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/jetbrains_mono"
-                            android:text="You Owe"
+                            android:text="@string/dashboard_you_owe"
                             android:textColor="@color/colorTextSecondary"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -279,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/jetbrains_mono"
-                    android:text="Recent Activity"
+                    android:text="@string/dashboard_recent_activity"
                     android:textColor="@color/colorTextPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />

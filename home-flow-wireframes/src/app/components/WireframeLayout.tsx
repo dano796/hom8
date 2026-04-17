@@ -31,7 +31,7 @@ function StatusBar() {
 
 const SCREEN_GROUPS = [
   {
-    group: "Onboarding",
+    group: "Inicio",
     items: [
       { label: "Welcome & Login", path: "/onboarding", badge: "OB-1" },
     ],
@@ -40,15 +40,15 @@ const SCREEN_GROUPS = [
     group: "Main Flow",
     items: [
       { label: "Dashboard", path: "/", badge: "HM" },
-      { label: "Tasks List", path: "/tasks", badge: "TL" },
-      { label: "Create Task", path: "/tasks/create", badge: "CT", indent: true },
-      { label: "Task Detail", path: "/tasks/detail", badge: "TD", indent: true },
-      { label: "Calendar", path: "/calendar", badge: "CA" },
-      { label: "Expenses", path: "/expenses", badge: "EX" },
-      { label: "Create Expense", path: "/expenses/create", badge: "CE", indent: true },
+      { label: "Lista de Tareas", path: "/tasks", badge: "TL" },
+      { label: "Crear Tarea", path: "/tasks/create", badge: "CT", indent: true },
+      { label: "Detalle de Tarea", path: "/tasks/detail", badge: "TD", indent: true },
+      { label: "Calendario", path: "/calendar", badge: "CA" },
+      { label: "Gastos", path: "/expenses", badge: "EX" },
+      { label: "Crear Gasto", path: "/expenses/create", badge: "CE", indent: true },
       { label: "Balances", path: "/expenses/balances", badge: "BA", indent: true },
-      { label: "Profile", path: "/profile", badge: "PR" },
-      { label: "Notifications", path: "/notifications", badge: "NT" },
+      { label: "Perfil", path: "/profile", badge: "PR" },
+      { label: "Notificaciones", path: "/notifications", badge: "NT" },
     ],
   },
 ];
@@ -171,7 +171,7 @@ export function WireframeLayout() {
               <span className="text-[9px] bg-[#333] text-white px-1.5 py-0.5 rounded">
                 {currentScreen?.badge || "??"}
               </span>
-              <span>{currentScreen?.label || "—"}</span>
+              <span>{currentScreen?.label || "-"}</span>
             </div>
           </div>
 

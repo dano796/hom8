@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.dashboard.adapters
+﻿package com.homeflow.app.presentation.dashboard.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -41,12 +41,12 @@ class UpcomingTasksAdapter(
         holder.tvTitle.text = task.titulo
 
         // Date label
-        holder.tvDate.text = task.fechaLimite?.let { formatDate(it) } ?: "No due date"
+        holder.tvDate.text = task.fechaLimite?.let { formatDate(it) } ?: "Sin fecha"
 
         // Priority bar color
         val barColor = when (task.prioridad) {
-            "HIGH" -> ContextCompat.getColor(ctx, R.color.priorityHighText)
-            "LOW" -> ContextCompat.getColor(ctx, R.color.priorityLowText)
+            "ALTA" -> ContextCompat.getColor(ctx, R.color.priorityHighText)
+            "BAJA" -> ContextCompat.getColor(ctx, R.color.priorityLowText)
             else -> ContextCompat.getColor(ctx, R.color.colorPrimary)
         }
         holder.viewBar.setBackgroundColor(barColor)
@@ -63,14 +63,14 @@ class UpcomingTasksAdapter(
         val today = Calendar.getInstance()
         val tomorrow = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 1) }
 
-        val fmt = SimpleDateFormat("h:mm a", Locale.getDefault())
+        val fmt = SimpleDateFormat("h:mm a", Locale("es", "ES"))
         val time = fmt.format(Date(timestamp))
 
         return when {
-            isSameDay(taskDate, today) -> "Today · $time"
-            isSameDay(taskDate, tomorrow) -> "Tomorrow · $time"
+            isSameDay(taskDate, today) -> "Hoy · $time"
+            isSameDay(taskDate, tomorrow) -> "Mañana · $time"
             else -> {
-                val dateFmt = SimpleDateFormat("MMM d", Locale.getDefault())
+                val dateFmt = SimpleDateFormat("MMM d", Locale("es", "ES"))
                 "${dateFmt.format(Date(timestamp))} · $time"
             }
         }

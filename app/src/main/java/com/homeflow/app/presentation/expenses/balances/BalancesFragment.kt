@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.expenses.balances
+﻿package com.homeflow.app.presentation.expenses.balances
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,8 +35,8 @@ class BalancesFragment : Fragment() {
 
     @Inject
     lateinit var session: SessionManager
-    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale.getDefault())
-    private val dateFmt = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
+    private val currencyFmt = NumberFormat.getCurrencyInstance(Locale("es", "CO"))
+    private val dateFmt = SimpleDateFormat("MMM d, yyyy", Locale("es", "ES"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,9 +71,9 @@ class BalancesFragment : Fragment() {
 
         // Net position
         val netColor = if (state.netAmount >= 0) {
-            resources.getColor(R.color.balancePositive, null)
+            ContextCompat.getColor(requireContext(), R.color.balancePositive)
         } else {
-            resources.getColor(R.color.balanceNegative, null)
+            ContextCompat.getColor(requireContext(), R.color.balanceNegative)
         }
         tvNet.text = if (state.netAmount >= 0) {
             "+${currencyFmt.format(state.netAmount)}"
@@ -81,9 +82,9 @@ class BalancesFragment : Fragment() {
         }
         tvNet.setTextColor(netColor)
         tvNetLabel.text = when {
-            state.netAmount > 0 -> "Overall you are owed money"
-            state.netAmount < 0 -> "Overall you owe money"
-            else -> "You are all settled up"
+            state.netAmount > 0 -> "En general, te deben dinero"
+            state.netAmount < 0 -> "En general, debes dinero"
+            else -> "Estás al día"
         }
 
         tvTheyOwe.text = currencyFmt.format(state.theyOweAmount)
@@ -105,8 +106,8 @@ class BalancesFragment : Fragment() {
         if (state.settledPayments.isEmpty()) {
             val emptyTv = TextView(requireContext()).apply {
                 typeface = ResourcesCompat.getFont(requireContext(), R.font.jetbrains_mono)
-                text = "No payments recorded yet"
-                setTextColor(resources.getColor(R.color.colorTextTertiary, null))
+                text = "Aún no hay pagos registrados"
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorTextTertiary))
                 textSize = 12f
                 setPadding(0, 16, 0, 16)
             }
@@ -128,7 +129,7 @@ class BalancesFragment : Fragment() {
             lp.bottomMargin = resources.getDimensionPixelSize(R.dimen.spacing2)
             layoutParams = lp
             radius = resources.getDimension(R.dimen.cardCorner)
-            strokeColor = resources.getColor(R.color.colorOutlineVariant, null)
+            strokeColor = ContextCompat.getColor(context, R.color.colorOutlineVariant)
             strokeWidth = 1
             cardElevation = 2f
         }
@@ -148,7 +149,7 @@ class BalancesFragment : Fragment() {
             typeface = ResourcesCompat.getFont(context, R.font.jetbrains_mono)
             val arrow = if (debt.isYouDebtor) "→" else "←"
             text = "${debt.fromName} $arrow ${debt.toName}: ${currencyFmt.format(debt.amount)}"
-            setTextColor(resources.getColor(R.color.colorTextPrimary, null))
+            setTextColor(ContextCompat.getColor(context, R.color.colorTextPrimary))
             textSize = 13f
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         }
@@ -157,9 +158,9 @@ class BalancesFragment : Fragment() {
         if (debt.isYouDebtor) {
             val btnPay = MaterialButton(context, null, com.google.android.material.R.attr.materialButtonStyle).apply {
                 text = getString(R.string.expenses_pay)
-                setTextColor(resources.getColor(R.color.colorOnPrimary, null))
+                setTextColor(ContextCompat.getColor(context, R.color.colorOnPrimary))
                 backgroundTintList = android.content.res.ColorStateList.valueOf(
-                    resources.getColor(R.color.colorPrimary, null)
+                    ContextCompat.getColor(context, R.color.colorPrimary)
                 )
                 textSize = 11f
                 cornerRadius = 8
@@ -199,9 +200,9 @@ class BalancesFragment : Fragment() {
 
         val tvSettledDesc = TextView(context).apply {
             typeface = ResourcesCompat.getFont(context, R.font.jetbrains_mono)
-            val dir = if (payment.fromUserId == session.userId) "You paid" else "Received"
+            val dir = if (payment.fromUserId == session.userId) "Pagaste" else "Recibiste"
             text = "$dir ${currencyFmt.format(payment.monto)} · ${dateFmt.format(Date(payment.fecha))}"
-            setTextColor(resources.getColor(R.color.colorTextSecondary, null))
+            setTextColor(ContextCompat.getColor(context, R.color.colorTextSecondary))
             textSize = 12f
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         }
@@ -210,7 +211,7 @@ class BalancesFragment : Fragment() {
         val tvSettledBadge = TextView(context).apply {
             typeface = ResourcesCompat.getFont(context, R.font.jetbrains_mono)
             text = getString(R.string.expenses_settled)
-            setTextColor(resources.getColor(R.color.colorTertiary, null))
+            setTextColor(ContextCompat.getColor(context, R.color.colorTertiary))
             textSize = 10f
             setTypeface(typeface, Typeface.BOLD)
         }

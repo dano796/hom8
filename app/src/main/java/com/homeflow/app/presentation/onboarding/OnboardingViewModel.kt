@@ -74,7 +74,7 @@ class OnboardingViewModel @Inject constructor(
             try {
                 // Try Firebase first
                 val result = auth.signInWithEmailAndPassword(email, password).await()
-                val user = result.user ?: throw Exception("Sign in failed")
+                val user = result.user ?: throw Exception("Error al iniciar sesión")
                 saveUserSession(user.uid, user.displayName ?: email.substringBefore("@"), email)
                 nextStepAfterAuth()
             } catch (e: Exception) {
@@ -94,7 +94,7 @@ class OnboardingViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
-                val user = result.user ?: throw Exception("Sign up failed")
+                val user = result.user ?: throw Exception("Error al registrarse")
                 val profileUpdates = com.google.firebase.auth.UserProfileChangeRequest.Builder()
                     .setDisplayName(name).build()
                 user.updateProfile(profileUpdates).await()
@@ -117,8 +117,8 @@ class OnboardingViewModel @Inject constructor(
             try {
                 val credential = GoogleAuthProvider.getCredential(idToken, null)
                 val result = auth.signInWithCredential(credential).await()
-                val user = result.user ?: throw Exception("Google sign in failed")
-                saveUserSession(user.uid, user.displayName ?: "User", user.email ?: "")
+                val user = result.user ?: throw Exception("Error al iniciar sesión con Google")
+                saveUserSession(user.uid, user.displayName ?: "Usuario", user.email ?: "")
                 nextStepAfterAuth()
             } catch (e: Exception) {
                 _uiState.update { it.copy(isLoading = false, error = friendlyError(e)) }
@@ -129,7 +129,7 @@ class OnboardingViewModel @Inject constructor(
     fun createHome(homeName: String) {
         val userId = session.userId
         if (userId.isEmpty()) {
-            _uiState.update { it.copy(error = "Not authenticated") }
+            _uiState.update { it.copy(error = "No autenticado") }
             return
         }
         _uiState.update { it.copy(isLoading = true, error = null) }
@@ -149,7 +149,7 @@ class OnboardingViewModel @Inject constructor(
                 session.hogarId = homeId
                 _uiState.update { it.copy(isLoading = false, isSetupComplete = true) }
             } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Failed to create home") }
+                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al crear el hogar") }
             }
         }
     }
@@ -177,11 +177,11 @@ class OnboardingViewModel @Inject constructor(
                     _uiState.update { it.copy(isLoading = false, isSetupComplete = true) }
                 } else {
                     _uiState.update {
-                        it.copy(isLoading = false, error = "Invalid invite code. Make sure to enter it exactly as shared.")
+                        it.copy(isLoading = false, error = "Código de invitación inválido. Asegúrate de ingresarlo tal como fue compartido.")
                     }
                 }
             } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Failed to join home") }
+                _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al unirse al hogar") }
             }
         }
     }
@@ -202,7 +202,7 @@ class OnboardingViewModel @Inject constructor(
             try {
                 auth.sendPasswordResetEmail(email).await()
             } catch (e: Exception) {
-                _uiState.update { it.copy(error = e.message) }
+                _uiState.update { it.copy(error = friendlyError(e)) }
             }
         }
     }
@@ -217,13 +217,13 @@ class OnboardingViewModel @Inject constructor(
         val existing = userDao.getUserByEmail(email)
         if (existing == null) {
             _uiState.update {
-                it.copy(isLoading = false, error = "No account found for this email. Use \"Create one\" to register.")
+                it.copy(isLoading = false, error = "No se encontró cuenta para este correo. Usa \"Crear una\" para registrarte.")
             }
             return
         }
         val storedHash = session.getLocalPasswordHash(email)
         if (storedHash == null || storedHash != hashPassword(password)) {
-            _uiState.update { it.copy(isLoading = false, error = "Incorrect password.") }
+            _uiState.update { it.copy(isLoading = false, error = "Contraseña incorrecta.") }
             return
         }
         saveUserSession(existing.id, existing.nombre, existing.email)
@@ -234,7 +234,7 @@ class OnboardingViewModel @Inject constructor(
         val existing = userDao.getUserByEmail(email)
         if (existing != null) {
             _uiState.update {
-                it.copy(isLoading = false, error = "An account with this email already exists. Try signing in.")
+                it.copy(isLoading = false, error = "Ya existe una cuenta con este correo. Intenta iniciar sesión.")
             }
             return
         }
@@ -296,20 +296,20 @@ class OnboardingViewModel @Inject constructor(
         return when {
             msg.contains("no user record", ignoreCase = true) ||
             msg.contains("user-not-found", ignoreCase = true) ->
-                "No account found for this email."
+                "No se encontró una cuenta con este correo."
             msg.contains("password is invalid", ignoreCase = true) ||
             msg.contains("wrong-password", ignoreCase = true) ->
-                "Incorrect password."
+                "Contraseña incorrecta."
             msg.contains("email address is already in use", ignoreCase = true) ||
             msg.contains("email-already-in-use", ignoreCase = true) ->
-                "An account with this email already exists."
+                "Ya existe una cuenta con este correo."
             msg.contains("badly formatted", ignoreCase = true) ->
-                "Invalid email format."
+                "El formato del correo es incorrecto."
             msg.contains("network", ignoreCase = true) ->
-                "No internet connection. Check your network and try again."
+                "Sin conexión a internet. Revisa tu red e intenta de nuevo."
             msg.contains("too many requests", ignoreCase = true) ->
-                "Too many attempts. Please wait a moment and try again."
-            else -> msg.ifEmpty { "An error occurred. Please try again." }
+                "Demasiados intentos. Por favor, espera un momento e intenta de nuevo."
+            else -> msg.ifEmpty { "Ocurrió un error. Por favor, intenta de nuevo." }
         }
     }
 }

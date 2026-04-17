@@ -25,7 +25,7 @@ data class ProfileUiState(
     val tasksDone: Int = 0,
     val streakDays: Int = 0,
     val score: Int = 0,
-    val homeName: String = "My Home",
+    val homeName: String = "Mi Hogar",
     val inviteCode: String = "-",
     val loggedOut: Boolean = false
 )
@@ -49,16 +49,16 @@ class ProfileViewModel @Inject constructor(
         val firebaseUser = auth.currentUser
 
         // Base info from session / Firebase
-        val userName = session.userName.ifEmpty { firebaseUser?.displayName ?: "User" }
+        val userName = session.userName.ifEmpty { firebaseUser?.displayName ?: "Usuario" }
         val email = firebaseUser?.email ?: ""
         val uid = session.userId.ifEmpty { firebaseUser?.uid ?: "" }
         val initials = session.userInitials.ifEmpty { "U" }
 
         val createdAt = firebaseUser?.metadata?.creationTimestamp
         val memberSince = if (createdAt != null) {
-            "Member since " + SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(Date(createdAt))
+            "Miembro desde " + SimpleDateFormat("MMMM yyyy", Locale("es", "ES")).format(Date(createdAt))
         } else {
-            "Member since recently"
+            "Miembro desde hace poco"
         }
 
         _uiState.update {

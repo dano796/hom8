@@ -50,7 +50,7 @@ class HouseMembersFragment : Fragment() {
             val code = view.findViewById<TextView>(R.id.tvMembersInviteCode).text.toString()
             if (code.isNotEmpty() && code != "-") {
                 val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                clipboard.setPrimaryClip(ClipData.newPlainText("Invite Code", code))
+                clipboard.setPrimaryClip(ClipData.newPlainText("Código de invitación", code))
                 Snackbar.make(requireView(), getString(R.string.members_code_copied), Snackbar.LENGTH_SHORT).show()
             }
         }

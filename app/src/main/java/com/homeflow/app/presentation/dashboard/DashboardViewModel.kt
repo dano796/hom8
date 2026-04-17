@@ -1,4 +1,4 @@
-package com.homeflow.app.presentation.dashboard
+﻿package com.homeflow.app.presentation.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -74,7 +74,7 @@ class DashboardViewModel @Inject constructor(
                 val partnerExpenses = expenses.filter { it.pagadorId != userId }.sumOf { it.monto }
                 val youOwe = (partnerExpenses / 2).coerceAtLeast(0.0)
                 val oweLabel = if (session.partnerName.isNotEmpty())
-                    "→ ${session.partnerName}" else "→ Partner"
+                    "→ ${session.partnerName}" else "→ Compañero"
 
                 DashboardUiState(
                     greeting = buildGreeting(),
@@ -97,17 +97,17 @@ class DashboardViewModel @Inject constructor(
 
     fun toggleTaskDone(task: TaskEntity) {
         viewModelScope.launch {
-            val newStatus = if (task.estado == "DONE") "PENDING" else "DONE"
+            val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()
             val updated = task.copy(estado = newStatus, actualizadoEn = now)
             taskDao.updateTask(updated)
             firestoreRepo.syncTask(updated)
-            val tipo = if (newStatus == "DONE") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
+            val tipo = if (newStatus == "TERMINADO") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
             val log = ActivityLogEntity(
                 id = UUID.randomUUID().toString(),
                 hogarId = task.hogarId,
                 actorId = session.userId,
-                actorName = session.userName.ifEmpty { "Someone" },
+                actorName = session.userName.ifEmpty { "Alguien" },
                 tipo = tipo,
                 targetTitle = task.titulo,
                 timestamp = now
@@ -120,9 +120,9 @@ class DashboardViewModel @Inject constructor(
     private fun buildGreeting(): String {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         return when {
-            hour < 12 -> "Good morning,"
-            hour < 17 -> "Good afternoon,"
-            else -> "Good evening,"
+            hour < 12 -> "Buenos días,"
+            hour < 17 -> "Buenas tardes,"
+            else -> "Buenas noches,"
         }
     }
 
@@ -134,15 +134,15 @@ class DashboardViewModel @Inject constructor(
                 .take(2).joinToString("").ifEmpty { "?" }
 
             val text = when (entry.tipo) {
-                "TASK_CREATED"     -> "${entry.actorName} created task \"${entry.targetTitle}\""
-                "TASK_UPDATED"     -> "${entry.actorName} updated task \"${entry.targetTitle}\""
-                "TASK_COMPLETED"   -> "${entry.actorName} completed \"${entry.targetTitle}\""
-                "TASK_UNCOMPLETED" -> "${entry.actorName} reopened \"${entry.targetTitle}\""
-                "TASK_DELETED"     -> "${entry.actorName} deleted task \"${entry.targetTitle}\""
-                "EXPENSE_CREATED"  -> "${entry.actorName} added expense \"${entry.targetTitle}\""
-                "EXPENSE_UPDATED"  -> "${entry.actorName} updated expense \"${entry.targetTitle}\""
-                "EXPENSE_DELETED"  -> "${entry.actorName} deleted expense \"${entry.targetTitle}\""
-                else               -> "${entry.actorName} did something with \"${entry.targetTitle}\""
+                "TASK_CREATED"     -> "${entry.actorName} creó la tarea \"${entry.targetTitle}\""
+                "TASK_UPDATED"     -> "${entry.actorName} actualizó la tarea \"${entry.targetTitle}\""
+                "TASK_COMPLETED"   -> "${entry.actorName} completó la tarea \"${entry.targetTitle}\""
+                "TASK_UNCOMPLETED" -> "${entry.actorName} reabrió \"${entry.targetTitle}\""
+                "TASK_DELETED"     -> "${entry.actorName} eliminó la tarea \"${entry.targetTitle}\""
+                "EXPENSE_CREATED"  -> "${entry.actorName} añadió el gasto \"${entry.targetTitle}\""
+                "EXPENSE_UPDATED"  -> "${entry.actorName} actualizó el gasto \"${entry.targetTitle}\""
+                "EXPENSE_DELETED"  -> "${entry.actorName} eliminó el gasto \"${entry.targetTitle}\""
+                else               -> "${entry.actorName} hizo algo con \"${entry.targetTitle}\""
             }
 
             val dotColor = when (entry.tipo) {
@@ -170,11 +170,11 @@ class DashboardViewModel @Inject constructor(
         val hours = minutes / 60
         val days = hours / 24
         return when {
-            minutes < 1 -> "just now"
-            minutes < 60 -> "${minutes}m ago"
-            hours < 24 -> "${hours}h ago"
-            days == 1L -> "Yesterday"
-            else -> "${days}d ago"
+            minutes < 1 -> "justo ahora"
+            minutes < 60 -> "${minutes}m"
+            hours < 24 -> "${hours}h"
+            days == 1L -> "Ayer"
+            else -> "${days}d"
         }
     }
 

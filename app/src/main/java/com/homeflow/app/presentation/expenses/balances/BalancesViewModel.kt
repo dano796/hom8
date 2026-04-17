@@ -54,7 +54,7 @@ class BalancesViewModel @Inject constructor(
     private fun loadBalances() {
         val hogarId = session.hogarId.ifEmpty { "default" }
         val userId = session.userId
-        val userName = session.userName.ifEmpty { "You" }
+        val userName = session.userName.ifEmpty { "Tú" }
 
         viewModelScope.launch {
             // Load members once — home members rarely change mid-session
@@ -107,7 +107,7 @@ class BalancesViewModel @Inject constructor(
                     val debts = mutableListOf<DebtItem>()
 
                     net.forEach { (otherId, amount) ->
-                        val otherName = membersMap[otherId] ?: otherId.take(8).ifEmpty { "Member" }
+                        val otherName = membersMap[otherId] ?: otherId.take(8).ifEmpty { "Miembro" }
                         when {
                             amount > 0.01 -> {
                                 // They owe me
@@ -162,7 +162,7 @@ class BalancesViewModel @Inject constructor(
                 toUserId = debt.toUserId,
                 monto = debt.amount,
                 fecha = System.currentTimeMillis(),
-                nota = "Settled balance",
+                nota = "Saldo liquidado",
                 hogarId = hogarId,
                 synced = 0
             )

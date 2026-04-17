@@ -104,7 +104,7 @@ class SetupHomeStepFragment : Fragment() {
                 SetupMode.CREATE -> {
                     val name = etHomeName.text?.toString()?.trim() ?: ""
                     if (name.isEmpty()) {
-                        tilHomeName.error = "Home name is required"
+                        tilHomeName.error = "El nombre del hogar es requerido"
                         return@setOnClickListener
                     }
                     viewModel.createHome(name)
@@ -112,7 +112,7 @@ class SetupHomeStepFragment : Fragment() {
                 SetupMode.JOIN -> {
                     val code = etInviteCode.text?.toString()?.trim()?.uppercase() ?: ""
                     if (code.isEmpty()) {
-                        tilInviteCode.error = "Invite code is required"
+                        tilInviteCode.error = "El código de invitación es requerido"
                         return@setOnClickListener
                     }
                     viewModel.joinHome(code)

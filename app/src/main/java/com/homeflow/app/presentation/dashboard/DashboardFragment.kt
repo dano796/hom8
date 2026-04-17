@@ -177,7 +177,7 @@ class DashboardFragment : Fragment() {
         upcomingAdapter.submitList(state.upcomingTasks)
 
         // Expenses
-        val fmt = NumberFormat.getCurrencyInstance(Locale.US)
+        val fmt = NumberFormat.getCurrencyInstance(Locale("es", "CO"))
         tvMonthTotal.text = fmt.format(state.monthTotal)
         tvOweAmount.text = fmt.format(state.youOweAmount)
         tvOweLabel.text = state.oweLabel
@@ -188,7 +188,7 @@ class DashboardFragment : Fragment() {
 
         // Notification badge (simple approach: update content description)
         if (state.unreadNotifications > 0) {
-            btnNotifications.contentDescription = "${state.unreadNotifications} unread notifications"
+            btnNotifications.contentDescription = "${state.unreadNotifications} notificaciones sin leer"
         }
     }
 }
