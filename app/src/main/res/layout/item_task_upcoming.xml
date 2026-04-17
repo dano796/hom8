@@ -54,7 +54,7 @@
     </LinearLayout>
 
     <!-- Assignee avatar -->
-    <com.homeflow.app.presentation.common.WireAvatar
+    <com.hom8.app.presentation.common.WireAvatar
         android:id="@+id/avatarAssignee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

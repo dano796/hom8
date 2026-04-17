@@ -48,7 +48,7 @@
         <!-- Create Home Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardCreateHome"
-            style="@style/Widget.HomeFlow.Card"
+            style="@style/Widget.Hom8.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -151,7 +151,7 @@
         <!-- Join Home Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardJoinHome"
-            style="@style/Widget.HomeFlow.Card"
+            style="@style/Widget.Hom8.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

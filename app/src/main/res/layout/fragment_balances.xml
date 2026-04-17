@@ -54,7 +54,7 @@
 
             <!-- Net Position card -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3">
@@ -189,7 +189,7 @@
             <!-- All settled empty state -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAllSettled"
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing4"

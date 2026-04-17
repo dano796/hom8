@@ -13,6 +13,7 @@
 
     <!-- Secondary (Utility/Accents) -->
     <color name="colorSecondary">#334155</color>
+    <color name="colorSecondaryVariant">#475569</color>
     <color name="colorOnSecondary">#FFFFFF</color>
     <color name="colorSecondaryContainer">#E2E8F0</color>
     <color name="colorOnSecondaryContainer">#0F172A</color>
@@ -32,6 +33,9 @@
     <color name="colorWarning">#D97706</color>
     <color name="colorOnWarning">#FFFFFF</color>
     <color name="colorWarningContainer">#FEF3C7</color>
+    
+    <color name="colorSuccess">#059669</color>
+    <color name="colorInfo">#0284C7</color>
 
     <!-- Backgrounds & Surfaces -->
     <color name="colorBackground">#F1F5F9</color>
@@ -161,4 +165,42 @@
     <color name="accentBlue">#3B82F6</color>
     <color name="accentPurple">#8B5CF6</color>
     <color name="accentOrange">#F59E0B</color>
+    <color name="accentPink">#EC4899</color>
+    <color name="accentRed">#EF4444</color>
+    
+    <!-- Gradient Accents -->
+    <color name="gradientAccent1">#0369A1</color>
+    <color name="gradientAccent2">#059669</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlayDark">#80000000</color>
+    <color name="overlayLight">#1AFFFFFF</color>
+    
+    <!-- Divider & Border -->
+    <color name="dividerColor">#E2E8F0</color>
+    <color name="borderColor">#CBD5E1</color>
+    
+    <!-- FAB -->
+    <color name="fabIconTint">#FFFFFF</color>
+    
+    <!-- Card -->
+    <color name="cardStroke">#E2E8F0</color>
+    
+    <!-- Priority Colors -->
+    <color name="priorityHigh">#DC2626</color>
+    <color name="priorityMedium">#D97706</color>
+    <color name="priorityLow">#0284C7</color>
+    
+    <!-- Category Utilities -->
+    <color name="categoryUtilities">#D97706</color>
+    
+    <!-- State Colors -->
+    <color name="stateActive">#059669</color>
+    <color name="stateInactive">#94A3B8</color>
+    <color name="statePending">#D97706</color>
+    <color name="stateCompleted">#0284C7</color>
+    
+    <!-- Shimmer Effect -->
+    <color name="shimmerBase">#E2E8F0</color>
+    <color name="shimmerHighlight">#F8FAFC</color>
 </resources>

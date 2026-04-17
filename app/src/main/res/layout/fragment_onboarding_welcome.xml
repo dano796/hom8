@@ -71,7 +71,7 @@
 
             <!-- Feature 1 -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
@@ -131,7 +131,7 @@
 
             <!-- Feature 2 -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
@@ -191,7 +191,7 @@
 
             <!-- Feature 3 -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">

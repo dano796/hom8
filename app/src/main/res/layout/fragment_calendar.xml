@@ -37,7 +37,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipMonthly"
-                style="@style/Widget.HomeFlow.Chip.Filter"
+                style="@style/Widget.Hom8.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -45,7 +45,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipWeekly"
-                style="@style/Widget.HomeFlow.Chip.Filter"
+                style="@style/Widget.Hom8.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/calendar_weekly" />

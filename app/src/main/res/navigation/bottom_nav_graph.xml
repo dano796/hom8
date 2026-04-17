@@ -8,7 +8,7 @@
     <!-- Home / Dashboard -->
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.homeflow.app.presentation.dashboard.DashboardFragment"
+        android:name="com.hom8.app.presentation.dashboard.DashboardFragment"
         android:label="Home">
         <action
             android:id="@+id/action_dashboard_to_createTask"
@@ -29,7 +29,7 @@
     <!-- Tasks List -->
     <fragment
         android:id="@+id/tasksListFragment"
-        android:name="com.homeflow.app.presentation.tasks.list.TasksListFragment"
+        android:name="com.hom8.app.presentation.tasks.list.TasksListFragment"
         android:label="Tasks">
         <action
             android:id="@+id/action_tasksList_to_createTask"
@@ -50,7 +50,7 @@
     <!-- Create / Edit Task -->
     <fragment
         android:id="@+id/createTaskFragment"
-        android:name="com.homeflow.app.presentation.tasks.create.CreateTaskFragment"
+        android:name="com.hom8.app.presentation.tasks.create.CreateTaskFragment"
         android:label="New Task">
         <argument
             android:name="taskId"
@@ -62,7 +62,7 @@
     <!-- Task Detail -->
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.homeflow.app.presentation.tasks.detail.TaskDetailFragment"
+        android:name="com.hom8.app.presentation.tasks.detail.TaskDetailFragment"
         android:label="Task Detail">
         <argument
             android:name="taskId"
@@ -79,7 +79,7 @@
     <!-- Calendar -->
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.homeflow.app.presentation.calendar.CalendarFragment"
+        android:name="com.hom8.app.presentation.calendar.CalendarFragment"
         android:label="Calendar">
         <action
             android:id="@+id/action_calendar_to_taskDetail"
@@ -93,7 +93,7 @@
     <!-- Expenses List -->
     <fragment
         android:id="@+id/expensesListFragment"
-        android:name="com.homeflow.app.presentation.expenses.list.ExpensesListFragment"
+        android:name="com.hom8.app.presentation.expenses.list.ExpensesListFragment"
         android:label="Expenses">
         <action
             android:id="@+id/action_expensesList_to_createExpense"
@@ -114,7 +114,7 @@
     <!-- Create / Edit Expense -->
     <fragment
         android:id="@+id/createExpenseFragment"
-        android:name="com.homeflow.app.presentation.expenses.create.CreateExpenseFragment"
+        android:name="com.hom8.app.presentation.expenses.create.CreateExpenseFragment"
         android:label="New Expense">
         <argument
             android:name="expenseId"
@@ -126,13 +126,13 @@
     <!-- Balances -->
     <fragment
         android:id="@+id/balancesFragment"
-        android:name="com.homeflow.app.presentation.expenses.balances.BalancesFragment"
+        android:name="com.hom8.app.presentation.expenses.balances.BalancesFragment"
         android:label="Balances" />
 
     <!-- Profile -->
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.homeflow.app.presentation.profile.ProfileFragment"
+        android:name="com.hom8.app.presentation.profile.ProfileFragment"
         android:label="Profile">
         <action
             android:id="@+id/action_profile_to_houseMembers"
@@ -153,13 +153,13 @@
     <!-- House Members -->
     <fragment
         android:id="@+id/houseMembersFragment"
-        android:name="com.homeflow.app.presentation.members.HouseMembersFragment"
+        android:name="com.hom8.app.presentation.members.HouseMembersFragment"
         android:label="Members" />
 
     <!-- Manage Homes -->
     <fragment
         android:id="@+id/manageHomesFragment"
-        android:name="com.homeflow.app.presentation.homes.ManageHomesFragment"
+        android:name="com.hom8.app.presentation.homes.ManageHomesFragment"
         android:label="My Homes">
         <action
             android:id="@+id/action_manageHomes_to_addHome"
@@ -173,7 +173,7 @@
     <!-- Add Home (create or join) -->
     <fragment
         android:id="@+id/addHomeFragment"
-        android:name="com.homeflow.app.presentation.homes.AddHomeFragment"
+        android:name="com.hom8.app.presentation.homes.AddHomeFragment"
         android:label="Add Home" />
 
 </navigation>

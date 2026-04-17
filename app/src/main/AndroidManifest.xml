@@ -11,15 +11,15 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
-        android:name=".HomeFlowApplication"
+        android:name=".Hom8Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HomeFlow"
+        android:theme="@style/Theme.Hom8"
         tools:targetApi="34">
 
         <activity
@@ -34,7 +34,7 @@
 
         <!-- FCM Service (Phase 6) -->
         <!-- <service
-            android:name=".data.remote.fcm.HomeFlowMessagingService"
+            android:name=".data.remote.fcm.Hom8MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

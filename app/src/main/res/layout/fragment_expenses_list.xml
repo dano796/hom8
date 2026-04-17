@@ -75,7 +75,7 @@
                 <!-- They owe you -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardTheyOwe"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing2"
@@ -112,7 +112,7 @@
                 <!-- You owe -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardYouOwe"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing2"
@@ -165,7 +165,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipAllExpenses"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -173,35 +173,35 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipFood"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expense_category_food" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSupermarket"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expense_category_grocery" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipServices"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expense_category_utilities" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipTransport"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expense_category_transport" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipEntertainment"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expense_category_leisure" />
@@ -274,7 +274,7 @@
     <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddExpense"
-        style="@style/Widget.HomeFlow.FAB"
+        style="@style/Widget.Hom8.FAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
