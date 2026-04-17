@@ -102,7 +102,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipAll"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -110,7 +110,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipMyTasks"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tasks_filter_my" />
@@ -136,7 +136,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityAll"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -144,21 +144,21 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityHigh"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/priority_high" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityMedium"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/priority_medium" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipPriorityLow"
-                        style="@style/Widget.HomeFlow.Chip.Filter"
+                        style="@style/Widget.Hom8.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/priority_low" />
@@ -236,7 +236,7 @@
     <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddTask"
-        style="@style/Widget.HomeFlow.FAB"
+        style="@style/Widget.Hom8.FAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

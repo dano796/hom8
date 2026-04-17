@@ -175,7 +175,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardTotalBalance"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -223,7 +223,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardYouOwe"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -310,7 +310,7 @@
     <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDashboard"
-        style="@style/Widget.HomeFlow.FAB"
+        style="@style/Widget.Hom8.FAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

@@ -117,7 +117,7 @@
 
             <!-- Details card -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3">
@@ -156,7 +156,7 @@
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
-                        <com.homeflow.app.presentation.common.WireAvatar
+                        <com.hom8.app.presentation.common.WireAvatar
                             android:id="@+id/avatarDetailCreator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
 
-                        <com.homeflow.app.presentation.common.WireAvatar
+                        <com.hom8.app.presentation.common.WireAvatar
                             android:id="@+id/avatarDetailAssignee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -243,7 +243,7 @@
             <!-- Description card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDescription"
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3"
@@ -282,7 +282,7 @@
             <!-- Checklist card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardChecklist"
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3"

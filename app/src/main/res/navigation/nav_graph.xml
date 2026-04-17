@@ -4,10 +4,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
-    <!-- Main app shell (bottom nav) -->
+    <!-- Main hom8 shell (bottom nav) -->
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.homeflow.app.presentation.navigation.MainFragment"
+        android:name="com.hom8.app.presentation.navigation.MainFragment"
         android:label="Hom8">
         <action
             android:id="@+id/action_main_to_onboarding"
@@ -21,7 +21,7 @@
     <!-- Onboarding flow -->
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.homeflow.app.presentation.onboarding.OnboardingFragment"
+        android:name="com.hom8.app.presentation.onboarding.OnboardingFragment"
         android:label="Welcome">
         <action
             android:id="@+id/action_onboarding_to_main"

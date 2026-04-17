@@ -176,7 +176,7 @@
                 <!-- Comida -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catFood"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -194,7 +194,7 @@
                 <!-- SUPERMercado -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catSupermarket"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -212,7 +212,7 @@
                 <!-- Servicios -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catServices"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -230,7 +230,7 @@
                 <!-- Transporte -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catTransport"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -248,7 +248,7 @@
                 <!-- ENTERTAINMENT -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catEntertainment"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -266,7 +266,7 @@
                 <!-- Otros -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/catOther"
-                    style="@style/Widget.HomeFlow.Card"
+                    style="@style/Widget.Hom8.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -352,7 +352,7 @@
             <!-- Save button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveExpense"
-                style="@style/Widget.HomeFlow.Button.Primary"
+                style="@style/Widget.Hom8.Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:text="@string/expenses_save_expense" />

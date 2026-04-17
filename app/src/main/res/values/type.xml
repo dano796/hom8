@@ -8,7 +8,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:fontWeight">600</item>
     </style>
 
     <style name="Wire.TextAppearance.DisplaySmall" parent="Wire.TextAppearance.Display">
@@ -21,7 +20,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:fontWeight">600</item>
     </style>
 
     <style name="Wire.TextAppearance.HeadingSmall" parent="Wire.TextAppearance.Heading">
@@ -34,7 +32,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:fontWeight">600</item>
     </style>
 
     <!-- Subtitle -->
@@ -43,7 +40,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
-        <item name="android:fontWeight">500</item>
     </style>
 
     <!-- Body -->
@@ -52,7 +48,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:fontWeight">400</item>
     </style>
 
     <style name="Wire.TextAppearance.BodySmall" parent="Wire.TextAppearance.Body">
@@ -65,7 +60,6 @@
         <item name="android:fontFamily">@font/jetbrains_mono</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/colorTextTertiary</item>
-        <item name="android:fontWeight">400</item>
     </style>
 
     <!-- Label (uppercase, tracking) -->
@@ -76,7 +70,6 @@
         <item name="android:textColor">@color/colorTextTertiary</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.05</item>
-        <item name="android:fontWeight">500</item>
     </style>
 
     <!-- Small (annotations, timestamps) -->

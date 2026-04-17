@@ -53,7 +53,7 @@
 
             <!-- Home name card -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing3">
@@ -121,7 +121,7 @@
 
             <!-- Members list card -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.HomeFlow.Card"
+                style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

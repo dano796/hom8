@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HomeFlow"
+rootProject.name = "Hom8"
 include(":app")
