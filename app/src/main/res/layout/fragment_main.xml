@@ -27,17 +27,17 @@
         app:navGraph="@navigation/bottom_nav_graph" />
 
     <!--
-        Bottom navigation — wrap_content so icon + label never overlap.
-        Bottom padding for gesture nav bar is applied programmatically.
+        Bottom navigation with rounded top corners and border
     -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bottomNavBackground"
-        android:elevation="@dimen/elevationBottomNav"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextColor="@color/bottom_nav_color"
+        android:background="@drawable/bg_bottom_nav_rounded"
+        android:elevation="8dp"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@color/bottom_nav_color_premium"
+        app:itemTextColor="@color/bottom_nav_color_premium"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 

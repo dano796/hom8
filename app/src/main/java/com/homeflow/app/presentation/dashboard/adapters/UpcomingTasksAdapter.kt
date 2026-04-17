@@ -1,4 +1,4 @@
-﻿package com.homeflow.app.presentation.dashboard.adapters
+package com.homeflow.app.presentation.dashboard.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +53,7 @@ class UpcomingTasksAdapter(
 
         // Assignee avatar
         holder.avatarAssignee.initials = userInitials
-        holder.avatarAssignee.setColorForIndex(position % 6)
+        holder.avatarAssignee.setColorForIndex(Math.abs(task.responsableId.hashCode()) % 6)
 
         holder.itemView.setOnClickListener { onItemClick(task) }
     }

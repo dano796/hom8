@@ -38,13 +38,14 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Touch target size: min 48dp x 48dp -->
     <ImageButton
         android:id="@+id/btnRemoveItem"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Remove subtask"
-        android:padding="8dp"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_delete"
         app:tint="@color/colorTextTertiary" />
 

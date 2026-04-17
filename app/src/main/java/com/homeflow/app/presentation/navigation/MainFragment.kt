@@ -76,6 +76,9 @@ class MainFragment : Fragment() {
 
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNav.setupWithNavController(navController)
+        
+        // Add premium bottom nav animations
+        setupBottomNavAnimations(bottomNav)
 
         // Apply window insets
         val statusBarScrim = view.findViewById<View>(R.id.statusBarScrim)
@@ -91,6 +94,69 @@ class MainFragment : Fragment() {
             bottomNav.updatePadding(bottom = navBars.bottom)
 
             insets
+        }
+    }
+    
+    private fun setupBottomNavAnimations(bottomNav: BottomNavigationView) {
+        bottomNav.setOnItemSelectedListener { item ->
+            // Scale animation on tab change
+            bottomNav.animate()
+                .scaleX(0.95f)
+                .scaleY(0.95f)
+                .setDuration(75)
+                .withEndAction {
+                    bottomNav.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(75)
+                        .setInterpolator(android.view.animation.OvershootInterpolator())
+                        .start()
+                }
+                .start()
+            
+            // Haptic feedback
+            bottomNav.performHapticFeedback(android.view.HapticFeedbackConstants.CONTEXT_CLICK)
+            
+            // Let the navigation component handle the actual navigation
+            val navHostFragment = childFragmentManager
+                .findFragmentById(R.id.nav_host_bottom) as? NavHostFragment
+            val navController = navHostFragment?.navController
+            
+            navController?.let { controller ->
+                when (item.itemId) {
+                    R.id.dashboardFragment -> {
+                        if (controller.currentDestination?.id != R.id.dashboardFragment) {
+                            controller.navigate(R.id.dashboardFragment)
+                        }
+                        true
+                    }
+                    R.id.tasksListFragment -> {
+                        if (controller.currentDestination?.id != R.id.tasksListFragment) {
+                            controller.navigate(R.id.tasksListFragment)
+                        }
+                        true
+                    }
+                    R.id.calendarFragment -> {
+                        if (controller.currentDestination?.id != R.id.calendarFragment) {
+                            controller.navigate(R.id.calendarFragment)
+                        }
+                        true
+                    }
+                    R.id.expensesListFragment -> {
+                        if (controller.currentDestination?.id != R.id.expensesListFragment) {
+                            controller.navigate(R.id.expensesListFragment)
+                        }
+                        true
+                    }
+                    R.id.profileFragment -> {
+                        if (controller.currentDestination?.id != R.id.profileFragment) {
+                            controller.navigate(R.id.profileFragment)
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            } ?: false
         }
     }
 }

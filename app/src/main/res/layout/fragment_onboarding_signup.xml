@@ -78,7 +78,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="@string/field_full_name_hint"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -105,7 +104,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="@string/onboarding_email_hint"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -134,7 +132,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="@string/onboarding_password_hint"
                 android:inputType="textPassword"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -181,6 +178,7 @@
                 android:id="@+id/tvGoToSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/jetbrains_mono"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/colorPrimary"

@@ -6,6 +6,9 @@
     style="@style/Widget.HomeFlow.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_marginBottom="@dimen/spacing2">
 
     <LinearLayout
@@ -21,13 +24,16 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <!-- Touch target size: min 48dp x 48dp -->
             <CheckBox
                 android:id="@+id/cbTaskDone"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="@dimen/spacing3"
+                android:layout_marginEnd="8dp"
                 android:button="@null"
-                android:background="@drawable/ic_checkbox" />
+                android:background="@drawable/ic_checkbox"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -56,13 +62,14 @@
                 tools:text="MED"
                 tools:textColor="@color/priorityMediumText" />
 
+            <!-- Touch target size: min 48dp x 48dp -->
             <ImageButton
                 android:id="@+id/btnTaskMenu"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Task menu"
-                android:padding="4dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_more"
                 app:tint="@color/colorTextTertiary" />
 

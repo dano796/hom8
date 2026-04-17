@@ -12,7 +12,7 @@
         android:id="@+id/taskDetailTopBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/topBarHeight"
-        android:background="@color/colorSurface"
+        android:background="@drawable/bg_top_bar_rounded"
         android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -20,8 +20,8 @@
 
         <ImageButton
             android:id="@+id/btnDetailBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Back"
             android:padding="8dp"
@@ -41,8 +41,8 @@
 
         <ImageButton
             android:id="@+id/btnDetailMenu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="More options"
             android:padding="8dp"

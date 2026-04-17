@@ -12,7 +12,7 @@
         android:id="@+id/dashboardTopBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/topBarHeight"
-        android:background="@color/colorSurface"
+        android:background="@drawable/bg_top_bar_rounded"
         android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -45,10 +45,11 @@
 
         </LinearLayout>
 
+        <!-- Touch target size: min 48dp x 48dp -->
         <ImageButton
             android:id="@+id/btnNotifications"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Notifications"
             android:padding="8dp"
@@ -177,6 +178,9 @@
                     style="@style/Widget.HomeFlow.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_marginEnd="@dimen/spacing2"
                     android:layout_weight="1">
 
@@ -222,6 +226,9 @@
                     style="@style/Widget.HomeFlow.Card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_marginStart="@dimen/spacing2"
                     android:layout_weight="1">
 

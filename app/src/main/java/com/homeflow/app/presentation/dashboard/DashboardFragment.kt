@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.homeflow.app.R
+import com.homeflow.app.presentation.common.addPressAnimation
 import com.homeflow.app.presentation.dashboard.adapters.ActivityFeedAdapter
 import com.homeflow.app.presentation.dashboard.adapters.TodayTasksAdapter
 import com.homeflow.app.presentation.dashboard.adapters.UpcomingTasksAdapter
@@ -46,16 +47,19 @@ class DashboardFragment : Fragment() {
     private lateinit var tvMonthTotal: TextView
     private lateinit var tvOweLabel: TextView
     private lateinit var tvOweAmount: TextView
-    private lateinit var cardYouOwe: MaterialCardView
     private lateinit var tvSeeAllTasks: TextView
     private lateinit var tvSeeAllUpcoming: TextView
     private lateinit var fabDashboard: FloatingActionButton
+    // Premium layout only
+    // private lateinit var cardTotalBalance: MaterialCardView
+    private lateinit var cardYouOwe: MaterialCardView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Temporarily using original layout to debug crash
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
@@ -65,6 +69,12 @@ class DashboardFragment : Fragment() {
         setupAdapters()
         setupClickListeners()
         observeState()
+        
+        // Animate after a short delay to ensure views are ready
+        // Commented out temporarily to debug crash
+        // view.postDelayed({
+        //     animateCardsEntry()
+        // }, 100)
     }
 
     private fun bindViews(view: View) {
@@ -78,6 +88,8 @@ class DashboardFragment : Fragment() {
         tvOweLabel = view.findViewById(R.id.tvOweLabel)
         tvOweAmount = view.findViewById(R.id.tvOweAmount)
         cardYouOwe = view.findViewById(R.id.cardYouOwe)
+        // cardTotalBalance only exists in premium layout
+        // cardTotalBalance = view.findViewById(R.id.cardTotalBalance)
         tvSeeAllTasks = view.findViewById(R.id.tvSeeAllTasks)
         tvSeeAllUpcoming = view.findViewById(R.id.tvSeeAllUpcoming)
         fabDashboard = view.findViewById(R.id.fabDashboard)
@@ -120,6 +132,9 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        // Add premium press animation to FAB
+        fabDashboard.addPressAnimation()
+        
         fabDashboard.setOnClickListener {
             val action = DashboardFragmentDirections
                 .actionDashboardToCreateTask(null)
@@ -142,6 +157,10 @@ class DashboardFragment : Fragment() {
                 R.id.bottom_nav
             )?.selectedItemId = R.id.calendarFragment
         }
+        
+        // Add press animation to cards (only if using premium layout)
+        // cardTotalBalance.addPressAnimation()
+        // cardYouOwe.addPressAnimation()
     }
 
     private fun observeState() {
@@ -189,6 +208,105 @@ class DashboardFragment : Fragment() {
         // Notification badge (simple approach: update content description)
         if (state.unreadNotifications > 0) {
             btnNotifications.contentDescription = "${state.unreadNotifications} notificaciones sin leer"
+        }
+    }
+
+    private fun animateCardsEntry() {
+        try {
+            // Post to ensure views are fully laid out
+            view?.post {
+                try {
+                    val contentContainer = view?.findViewById<ViewGroup>(R.id.contentContainer)
+                    
+                    if (contentContainer == null) {
+                        // Fallback: animate individual views if container not found
+                        animateIndividualViews()
+                        return@post
+                    }
+                    
+                    // Get all child views to animate
+                    val childCount = contentContainer.childCount
+                    for (i in 0 until childCount) {
+                        val child = contentContainer.getChildAt(i) ?: continue
+                        
+                        // Initial state
+                        child.alpha = 0f
+                        child.translationY = 50f
+                        
+                        // Animate with stagger
+                        child.animate()
+                            .alpha(1f)
+                            .translationY(0f)
+                            .setDuration(300)
+                            .setStartDelay((i * 60).toLong())
+                            .setInterpolator(android.view.animation.DecelerateInterpolator())
+                            .start()
+                    }
+                    
+                    // Animate FAB separately with bounce
+                    if (::fabDashboard.isInitialized) {
+                        fabDashboard.alpha = 0f
+                        fabDashboard.scaleX = 0.8f
+                        fabDashboard.scaleY = 0.8f
+                        fabDashboard.animate()
+                            .alpha(1f)
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setDuration(400)
+                            .setStartDelay(200)
+                            .setInterpolator(android.view.animation.OvershootInterpolator())
+                            .start()
+                    }
+                } catch (e: Exception) {
+                    // Silently fail animations - better than crashing
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    
+    private fun animateIndividualViews() {
+        try {
+            // Fallback animation for individual views
+            val views = mutableListOf<View>()
+            
+            if (::rvTodayTasks.isInitialized) views.add(rvTodayTasks)
+            if (::rvUpcomingTasks.isInitialized) views.add(rvUpcomingTasks)
+            // cardTotalBalance only in premium layout
+            // if (::cardTotalBalance.isInitialized) views.add(cardTotalBalance)
+            if (::cardYouOwe.isInitialized) views.add(cardYouOwe)
+            if (::rvActivity.isInitialized) views.add(rvActivity)
+            
+            views.forEachIndexed { index, view ->
+                view.alpha = 0f
+                view.translationY = 50f
+                view.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(300)
+                    .setStartDelay((index * 60).toLong())
+                    .setInterpolator(android.view.animation.DecelerateInterpolator())
+                    .start()
+            }
+            
+            // Animate FAB
+            if (::fabDashboard.isInitialized) {
+                fabDashboard.alpha = 0f
+                fabDashboard.scaleX = 0.8f
+                fabDashboard.scaleY = 0.8f
+                fabDashboard.animate()
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(400)
+                    .setStartDelay(200)
+                    .setInterpolator(android.view.animation.OvershootInterpolator())
+                    .start()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

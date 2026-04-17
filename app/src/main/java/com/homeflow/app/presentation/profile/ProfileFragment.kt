@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.homeflow.app.R
 import com.homeflow.app.presentation.common.WireAvatar
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,21 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Dark mode toggle
+        val switchDarkMode = view.findViewById<SwitchMaterial>(R.id.switchDarkMode)
+        val prefs = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val isDarkMode = prefs.getBoolean("dark_mode", false)
+        switchDarkMode.isChecked = isDarkMode
+
+        switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean("dark_mode", isChecked).apply()
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         view.findViewById<MaterialButton>(R.id.btnManageHomes).setOnClickListener {
             findNavController().navigate(R.id.action_profile_to_manageHomes)
@@ -74,7 +91,6 @@ class ProfileFragment : Fragment() {
                     }
                     view.findViewById<TextView>(R.id.tvProfileName).text = state.userName
                     view.findViewById<TextView>(R.id.tvProfileEmail).text = state.userEmail
-                    view.findViewById<TextView>(R.id.tvMemberSince).text = state.memberSince
 
                     // Stats
                     view.findViewById<TextView>(R.id.tvTasksDone).text = state.tasksDone.toString()

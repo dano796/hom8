@@ -88,7 +88,7 @@ class TasksAdapter(
 
         // Assignee avatar
         holder.avatarAssignee.initials = task.responsableId.take(1).uppercase().ifEmpty { "?" }
-        holder.avatarAssignee.setColorForIndex(position % 6)
+        holder.avatarAssignee.setColorForIndex(Math.abs(task.responsableId.hashCode()) % 6)
 
         // Due date
         if (task.fechaLimite != null) {

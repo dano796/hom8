@@ -122,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="@string/onboarding_email_hint"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -150,7 +149,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jetbrains_mono"
-                android:hint="@string/onboarding_password_hint"
                 android:inputType="textPassword"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="13sp" />
@@ -165,6 +163,7 @@
             android:layout_gravity="end"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/jetbrains_mono"
+            android:padding="8dp"
             android:text="@string/onboarding_forgot_password"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
@@ -209,6 +208,7 @@
                 android:id="@+id/tvGoToRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/jetbrains_mono"
                 android:text="@string/action_create_account"
                 android:textColor="@color/colorPrimary"

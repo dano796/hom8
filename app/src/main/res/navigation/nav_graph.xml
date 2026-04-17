@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.homeflow.app.presentation.navigation.MainFragment"
-        android:label="HomeFlow">
+        android:label="Hom8">
         <action
             android:id="@+id/action_main_to_onboarding"
             app:destination="@id/onboardingFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/scale_fade_in"
+            app:exitAnim="@anim/scale_fade_out"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -26,8 +26,8 @@
         <action
             android:id="@+id/action_onboarding_to_main"
             app:destination="@id/mainFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/scale_fade_in"
+            app:exitAnim="@anim/scale_fade_out"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
     </fragment>

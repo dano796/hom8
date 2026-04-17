@@ -12,7 +12,7 @@
         android:id="@+id/createTaskTopBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/topBarHeight"
-        android:background="@color/colorSurface"
+        android:background="@drawable/bg_top_bar_rounded"
         android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/jetbrains_mono"
                     android:inputType="textCapSentences"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -120,7 +120,7 @@
                     android:inputType="textCapSentences|textMultiLine"
                     android:minLines="3"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

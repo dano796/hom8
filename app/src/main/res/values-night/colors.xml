@@ -1,4 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark mode colors - same as light for wireframe phase -->
+    <!-- Primary Colors - Dark Mode -->
+    <color name="colorPrimary">#38BDF8</color>
+    <color name="colorPrimaryVariant">#0EA5E9</color>
+    <color name="colorSecondary">#34D399</color>
+    <color name="colorSecondaryVariant">#10B981</color>
+
+    <!-- Background & Surface - Dark Mode -->
+    <color name="colorBackground">#0F172A</color>
+    <color name="colorSurface">#1E293B</color>
+    <color name="colorSurfaceVariant">#334155</color>
+    
+    <!-- UI Surfaces with subtle contrast -->
+    <color name="colorTopBar">#1A2332</color>
+    <color name="colorBottomNav">#1A2332</color>
+
+    <!-- Text Colors - Dark Mode -->
+    <color name="colorTextPrimary">#F1F5F9</color>
+    <color name="colorTextSecondary">#94A3B8</color>
+    <color name="colorTextTertiary">#64748B</color>
+
+    <!-- Status Colors - Dark Mode -->
+    <color name="colorError">#F87171</color>
+    <color name="colorSuccess">#34D399</color>
+    <color name="colorWarning">#FBBF24</color>
+    <color name="colorInfo">#60A5FA</color>
+
+    <!-- Premium Glass Effects - Dark Mode -->
+    <color name="glassSurface">#1A1E293B</color>
+    <color name="glassStroke">#33475569</color>
+    <color name="bottomNavPremiumBg">#1E293B</color>
+
+    <!-- Gradient Colors - Dark Mode -->
+    <color name="gradientStart">#1E293B</color>
+    <color name="gradientEnd">#0F172A</color>
+    <color name="gradientAccent1">#1E3A8A</color>
+    <color name="gradientAccent2">#065F46</color>
+
+    <!-- Accent Colors - Dark Mode (more vibrant) -->
+    <color name="accentGreen">#34D399</color>
+    <color name="accentBlue">#60A5FA</color>
+    <color name="accentPurple">#A78BFA</color>
+    <color name="accentOrange">#FBBF24</color>
+    <color name="accentPink">#F472B6</color>
+    <color name="accentRed">#F87171</color>
+
+    <!-- Shadow & Overlay - Dark Mode -->
+    <color name="shadowColor">#40000000</color>
+    <color name="overlayDark">#CC000000</color>
+    <color name="overlayLight">#1AFFFFFF</color>
+
+    <!-- Divider & Border - Dark Mode -->
+    <color name="dividerColor">#334155</color>
+    <color name="borderColor">#475569</color>
+
+    <!-- Specific UI Elements - Dark Mode -->
+    <color name="fabBackground">#38BDF8</color>
+    <color name="fabIconTint">#0F172A</color>
+    <color name="cardBackground">#1E293B</color>
+    <color name="cardStroke">#334155</color>
+
+    <!-- Task Priority Colors - Dark Mode -->
+    <color name="priorityHigh">#F87171</color>
+    <color name="priorityMedium">#FBBF24</color>
+    <color name="priorityLow">#60A5FA</color>
+
+    <!-- Expense Category Colors - Dark Mode -->
+    <color name="categoryFood">#F472B6</color>
+    <color name="categoryTransport">#60A5FA</color>
+    <color name="categoryUtilities">#FBBF24</color>
+    <color name="categoryEntertainment">#A78BFA</color>
+    <color name="categoryHealth">#34D399</color>
+    <color name="categoryOther">#94A3B8</color>
+
+    <!-- State Colors - Dark Mode -->
+    <color name="stateActive">#34D399</color>
+    <color name="stateInactive">#64748B</color>
+    <color name="statePending">#FBBF24</color>
+    <color name="stateCompleted">#60A5FA</color>
+
+    <!-- Shimmer Effect - Dark Mode -->
+    <color name="shimmerBase">#1E293B</color>
+    <color name="shimmerHighlight">#334155</color>
 </resources>
