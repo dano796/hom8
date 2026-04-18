@@ -37,6 +37,10 @@ class SessionManager @Inject constructor(
         get() = prefs.getString(KEY_PARTNER_INITIALS, "") ?: ""
         set(value) = prefs.edit().putString(KEY_PARTNER_INITIALS, value).apply()
 
+    var pendingInviteCode: String
+        get() = prefs.getString(KEY_PENDING_INVITE_CODE, "") ?: ""
+        set(value) = prefs.edit().putString(KEY_PENDING_INVITE_CODE, value).apply()
+
     val isLoggedIn: Boolean
         get() = userId.isNotEmpty()
 
@@ -56,5 +60,6 @@ class SessionManager @Inject constructor(
         private const val KEY_USER_INITIALS = "user_initials"
         private const val KEY_PARTNER_NAME = "partner_name"
         private const val KEY_PARTNER_INITIALS = "partner_initials"
+        private const val KEY_PENDING_INVITE_CODE = "pending_invite_code"
     }
 }
