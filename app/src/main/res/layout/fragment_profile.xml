@@ -332,6 +332,16 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="11sp" />
 
+                        <TextView
+                            android:id="@+id/tvShareLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing2"
+                            android:fontFamily="@font/jetbrains_mono"
+                            android:text="Compartir"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp" />
+
                     </LinearLayout>
 
                 </LinearLayout>

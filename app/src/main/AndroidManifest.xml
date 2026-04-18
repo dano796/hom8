@@ -30,6 +30,24 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            <!-- Deep link para invitaciones -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                
+                <!-- Soporta URLs como: https://hom8.app/join/HF-ABC123 -->
+                <data
+                    android:scheme="https"
+                    android:host="hom8.app"
+                    android:pathPrefix="/join" />
+                    
+                <!-- También soporta el esquema personalizado: hom8://join/HF-ABC123 -->
+                <data
+                    android:scheme="hom8"
+                    android:host="join" />
+            </intent-filter>
         </activity>
 
         <!-- FCM Service (Phase 6) -->

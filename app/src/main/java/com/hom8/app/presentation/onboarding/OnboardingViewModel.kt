@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.hom8.app.data.local.dao.HomeDao
 import com.hom8.app.data.local.dao.UserDao
 import com.hom8.app.data.local.entity.HomeEntity
@@ -59,10 +60,71 @@ class OnboardingViewModel @Inject constructor(
                 }
             }
         }
+        // 3. If still empty, try to fetch from Firestore
+        if (hogarId.isEmpty()) {
+            val userId = session.userId
+            if (userId.isNotEmpty()) {
+                hogarId = fetchUserHomeFromFirestore(userId)
+                if (hogarId.isNotEmpty()) {
+                    session.hogarId = hogarId
+                }
+            }
+        }
+        // 4. Check if there's a pending invite code from a deep link
+        if (hogarId.isEmpty() && session.pendingInviteCode.isNotEmpty()) {
+            val inviteCode = session.pendingInviteCode
+            session.pendingInviteCode = "" // Clear it immediately
+            // Process the invite code
+            joinHome(inviteCode)
+            return // joinHome will handle the next step
+        }
         if (hogarId.isNotEmpty()) {
             _uiState.update { it.copy(isLoading = false, isSetupComplete = true) }
         } else {
             _uiState.update { it.copy(isLoading = false, isAuthenticated = true, currentStep = 3) }
+        }
+    }
+
+    /**
+     * Busca en Firestore los hogares donde el usuario es miembro
+     * y sincroniza el primero encontrado a la base de datos local
+     */
+    private suspend fun fetchUserHomeFromFirestore(userId: String): String {
+        return try {
+            val querySnapshot = auth.currentUser?.let {
+                com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                    .collection("homes")
+                    .whereArrayContains("memberIds", userId)
+                    .get()
+                    .await()
+            }
+            
+            if (querySnapshot != null && !querySnapshot.isEmpty) {
+                val homeDoc = querySnapshot.documents.first()
+                val memberIds = homeDoc.get("memberIds") as? List<String> ?: emptyList()
+                val miembros = "[" + memberIds.joinToString(",") { "\"$it\"" } + "]"
+                
+                val home = HomeEntity(
+                    id = homeDoc.getString("id") ?: homeDoc.id,
+                    nombre = homeDoc.getString("nombre") ?: "Mi Hogar",
+                    codigoInvitacion = homeDoc.getString("codigoInvitacion") ?: "",
+                    miembros = miembros,
+                    gastosModo = homeDoc.getString("gastosModo") ?: "SPLIT",
+                    creadoEn = homeDoc.getLong("creadoEn") ?: System.currentTimeMillis(),
+                    synced = 1
+                )
+                
+                // Guardar en la base de datos local
+                homeDao.insertHome(home)
+                firestoreRepo.syncHome(home)
+                
+                home.id
+            } else {
+                ""
+            }
+        } catch (e: Exception) {
+            // Si falla (sin conexión, Firebase no configurado, etc.), retornar vacío
+            ""
         }
     }
 
@@ -156,7 +218,14 @@ class OnboardingViewModel @Inject constructor(
         _uiState.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             try {
-                val home = homeDao.getHomeByInviteCode(inviteCode)
+                // 1. Try to find the home in local database first
+                var home = homeDao.getHomeByInviteCode(inviteCode)
+                
+                // 2. If not found locally, search in Firestore
+                if (home == null) {
+                    home = fetchHomeFromFirestoreByCode(inviteCode)
+                }
+                
                 if (home != null) {
                     val userId = session.userId
                     // Add the joining user to the home's members list so that
@@ -181,6 +250,47 @@ class OnboardingViewModel @Inject constructor(
             } catch (e: Exception) {
                 _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al unirse al hogar") }
             }
+        }
+    }
+
+    /**
+     * Busca un hogar en Firestore por código de invitación
+     * y lo sincroniza a la base de datos local
+     */
+    private suspend fun fetchHomeFromFirestoreByCode(inviteCode: String): HomeEntity? {
+        return try {
+            val querySnapshot = FirebaseFirestore.getInstance()
+                .collection("homes")
+                .whereEqualTo("codigoInvitacion", inviteCode.trim().uppercase())
+                .limit(1)
+                .get()
+                .await()
+            
+            if (!querySnapshot.isEmpty) {
+                val homeDoc = querySnapshot.documents.first()
+                val memberIds = homeDoc.get("memberIds") as? List<String> ?: emptyList()
+                val miembros = "[" + memberIds.joinToString(",") { "\"$it\"" } + "]"
+                
+                val home = HomeEntity(
+                    id = homeDoc.getString("id") ?: homeDoc.id,
+                    nombre = homeDoc.getString("nombre") ?: "Mi Hogar",
+                    codigoInvitacion = homeDoc.getString("codigoInvitacion") ?: "",
+                    miembros = miembros,
+                    gastosModo = homeDoc.getString("gastosModo") ?: "SPLIT",
+                    creadoEn = homeDoc.getLong("creadoEn") ?: System.currentTimeMillis(),
+                    synced = 1
+                )
+                
+                // Guardar en la base de datos local
+                homeDao.insertHome(home)
+                
+                home
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            // Si falla (sin conexión, Firebase no configurado, etc.), retornar null
+            null
         }
     }
 

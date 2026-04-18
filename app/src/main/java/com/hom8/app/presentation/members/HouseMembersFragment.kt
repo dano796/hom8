@@ -3,6 +3,7 @@ package com.hom8.app.presentation.members
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,13 @@ class HouseMembersFragment : Fragment() {
             }
         }
 
+        view.findViewById<TextView>(R.id.tvShareInviteLink).setOnClickListener {
+            val code = view.findViewById<TextView>(R.id.tvMembersInviteCode).text.toString()
+            if (code.isNotEmpty() && code != "-") {
+                shareInviteLink(code, view.findViewById<TextView>(R.id.tvMembersHomeName).text.toString())
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
@@ -78,5 +86,27 @@ class HouseMembersFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun shareInviteLink(inviteCode: String, homeName: String) {
+        val inviteLink = "https://hom8.app/join/$inviteCode"
+        
+        val shareText = """
+            ¡Únete a $homeName en Hom8! 🏠
+            
+            Usa este link para unirte:
+            $inviteLink
+            
+            O ingresa el código: $inviteCode
+        """.trimIndent()
+        
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            putExtra(Intent.EXTRA_TITLE, "Invitación a Hom8")
+        }
+        
+        startActivity(Intent.createChooser(shareIntent, "Compartir invitación"))
     }
 }

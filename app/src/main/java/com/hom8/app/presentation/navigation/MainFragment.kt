@@ -66,6 +66,12 @@ class MainFragment : Fragment() {
             }
         }
 
+        // Check if user has a home — if not, go to onboarding to create/join one
+        if (session.hogarId.isEmpty()) {
+            findNavController().navigate(R.id.action_main_to_onboarding)
+            return
+        }
+
         val navHostFragment = childFragmentManager
             .findFragmentById(R.id.nav_host_bottom) as NavHostFragment
         val navController = navHostFragment.navController
