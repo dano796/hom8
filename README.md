@@ -1,4 +1,4 @@
-# HomeFlow
+# Hom8
 
 Aplicación Android para gestión de tareas y gastos del hogar, construida con Kotlin MVVM, Room, Firebase y Hilt.
 
@@ -16,7 +16,7 @@ Aplicación Android para gestión de tareas y gastos del hogar, construida con K
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/dano796/home-flow.git
+git clone https://github.com/dano796/hom8.git
 ```
 
 ### 2. Configurar Firebase
@@ -45,13 +45,13 @@ Abre el proyecto en Android Studio y ejecútalo en un dispositivo o emulador (SD
 
 ## Archivos NO incluidos en este repositorio
 
-| Archivo                    | Razón                                                                        |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| `app/google-services.json` | Contiene claves API de Firebase — genera el tuyo desde Firebase Console     |
+| Archivo                      | Razón                                                                                   |
+| ---------------------------- | ---------------------------------------------------------------------------------------- |
+| `app/google-services.json` | Contiene claves API de Firebase — genera el tuyo desde Firebase Console                 |
 | `local.properties`         | Contiene la ruta local de tu Android SDK — generado automáticamente por Android Studio |
-| `*.keystore` / `*.jks`     | Claves de firma de la app — nunca las compartas                              |
-| `keystore.properties`      | Configuración de firma con contraseñas                                       |
-| `build/`                   | Salida compilada                                                             |
+| `*.keystore` / `*.jks`   | Claves de firma de la app — nunca las compartas                                         |
+| `keystore.properties`      | Configuración de firma con contraseñas                                                 |
+| `build/`                   | Salida compilada                                                                         |
 
 ## Licencia
 
