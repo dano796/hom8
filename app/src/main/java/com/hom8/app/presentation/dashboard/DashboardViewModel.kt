@@ -32,7 +32,8 @@ class DashboardViewModel @Inject constructor(
     private val homeDao: HomeDao,
     private val activityLogDao: ActivityLogDao,
     private val session: SessionManager,
-    private val firestoreRepo: FirestoreRepository
+    private val firestoreRepo: FirestoreRepository,
+    private val userStatsRepository: com.hom8.app.domain.repository.UserStatsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DashboardUiState())
@@ -100,9 +101,19 @@ class DashboardViewModel @Inject constructor(
         viewModelScope.launch {
             val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()
-            val updated = task.copy(estado = newStatus, actualizadoEn = now)
+            
+            // Determinar si se deben otorgar puntos
+            val shouldAwardPoints = newStatus == "TERMINADO" && !task.puntosOtorgados
+            
+            val updated = task.copy(
+                estado = newStatus, 
+                actualizadoEn = now,
+                puntosOtorgados = if (shouldAwardPoints) true else task.puntosOtorgados
+            )
+            
             taskDao.updateTask(updated)
             firestoreRepo.syncTask(updated)
+            
             val tipo = if (newStatus == "TERMINADO") "TASK_COMPLETED" else "TASK_UNCOMPLETED"
             val log = ActivityLogEntity(
                 id = UUID.randomUUID().toString(),
@@ -115,6 +126,20 @@ class DashboardViewModel @Inject constructor(
             )
             activityLogDao.insertActivity(log)
             firestoreRepo.syncActivityLog(log)
+            
+            // Actualizar estadísticas solo la primera vez que se completa la tarea
+            if (shouldAwardPoints) {
+                // Determinar si se completó antes de tiempo
+                val completadaAntes = task.fechaLimite?.let { it > now } ?: false
+                
+                // Registrar la tarea completada para el usuario responsable
+                userStatsRepository.onTaskCompleted(
+                    userId = task.responsableId,
+                    hogarId = task.hogarId,
+                    prioridad = task.prioridad,
+                    completadaAntes = completadaAntes
+                )
+            }
         }
     }
 

@@ -41,7 +41,8 @@ class BalancesViewModel @Inject constructor(
     private val paymentDao: PaymentDao,
     private val homeDao: HomeDao,
     private val userDao: UserDao,
-    private val session: SessionManager
+    private val session: SessionManager,
+    private val firestoreRepository: com.hom8.app.data.remote.FirestoreRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(BalancesUiState())
@@ -76,18 +77,22 @@ class BalancesViewModel @Inject constructor(
                     val net = mutableMapOf<String, Double>()
 
                     expenses.forEach { expense ->
-                        val participantIds = parseParticipantsJson(expense.participantes)
-                        val count = participantIds.size.coerceAtLeast(1)
-                        val share = expense.monto / count
-
-                        if (expense.pagadorId == userId) {
-                            // Current user paid — every other participant owes their share
-                            participantIds.filter { it != userId }.forEach { pid ->
-                                net[pid] = (net[pid] ?: 0.0) + share
+                        val participantsData = parseParticipantsWithAmounts(expense.participantes, expense.monto)
+                        
+                        if (participantsData.isNotEmpty()) {
+                            // Nuevo formato con montos o formato antiguo procesado
+                            if (expense.pagadorId == userId) {
+                                // Current user paid — every other participant owes their assigned share
+                                participantsData.filter { it.first != userId }.forEach { (pid, amount) ->
+                                    net[pid] = (net[pid] ?: 0.0) + amount
+                                }
+                            } else {
+                                // Someone else paid — find my share and I owe it to the payer
+                                val myShare = participantsData.find { it.first == userId }?.second
+                                if (myShare != null && myShare > 0) {
+                                    net[expense.pagadorId] = (net[expense.pagadorId] ?: 0.0) - myShare
+                                }
                             }
-                        } else if (participantIds.contains(userId)) {
-                            // Someone else paid and I'm a participant — I owe my share to the payer
-                            net[expense.pagadorId] = (net[expense.pagadorId] ?: 0.0) - share
                         }
                     }
 
@@ -153,20 +158,23 @@ class BalancesViewModel @Inject constructor(
         }
     }
 
-    fun recordPayment(debt: DebtItem) {
+    fun recordPayment(debt: DebtItem, amount: Double, note: String) {
         viewModelScope.launch {
             val hogarId = session.hogarId.ifEmpty { "default" }
             val payment = PaymentEntity(
                 id = UUID.randomUUID().toString(),
                 fromUserId = debt.fromUserId,
                 toUserId = debt.toUserId,
-                monto = debt.amount,
+                monto = amount,
                 fecha = System.currentTimeMillis(),
-                nota = "Saldo liquidado",
+                nota = note.ifEmpty { "Pago registrado" },
                 hogarId = hogarId,
                 synced = 0
             )
             paymentDao.insertPayment(payment)
+            
+            // Sincronizar con Firestore
+            firestoreRepository.syncPayment(payment)
         }
     }
 
@@ -178,5 +186,38 @@ class BalancesViewModel @Inject constructor(
 
     private fun parseParticipantsJson(json: String): List<String> {
         return parseMembersJson(json)
+    }
+
+    private fun parseParticipantsWithAmounts(json: String, totalAmount: Double): List<Pair<String, Double>> {
+        return try {
+            // Intentar parsear el nuevo formato con montos
+            val type = object : com.google.gson.reflect.TypeToken<List<Map<String, Any>>>() {}.type
+            val list: List<Map<String, Any>> = com.google.gson.Gson().fromJson(json, type) ?: emptyList()
+            
+            // Verificar si es el nuevo formato (tiene "userId" y "amount")
+            if (list.isNotEmpty() && list[0].containsKey("userId") && list[0].containsKey("amount")) {
+                list.mapNotNull { map ->
+                    val userId = map["userId"] as? String ?: return@mapNotNull null
+                    val amount = when (val amt = map["amount"]) {
+                        is Double -> amt
+                        is Number -> amt.toDouble()
+                        else -> return@mapNotNull null
+                    }
+                    userId to amount
+                }
+            } else {
+                // Es formato antiguo: parsear IDs y dividir equitativamente
+                val participantIds = parseParticipantsJson(json)
+                val count = participantIds.size.coerceAtLeast(1)
+                val share = totalAmount / count
+                participantIds.map { it to share }
+            }
+        } catch (e: Exception) {
+            // Fallback: formato antiguo
+            val participantIds = parseParticipantsJson(json)
+            val count = participantIds.size.coerceAtLeast(1)
+            val share = totalAmount / count
+            participantIds.map { it to share }
+        }
     }
 }

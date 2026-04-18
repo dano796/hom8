@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.hom8.app.R
+import com.hom8.app.presentation.expenses.payment.RecordPaymentDialog
 import com.hom8.app.util.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -169,7 +170,9 @@ class BalancesFragment : Fragment() {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                setOnClickListener { viewModel.recordPayment(debt) }
+                setOnClickListener { 
+                    showPaymentDialog(debt)
+                }
             }
             row.addView(btnPay)
         }
@@ -218,5 +221,15 @@ class BalancesFragment : Fragment() {
         row.addView(tvSettledBadge)
 
         return row
+    }
+
+    private fun showPaymentDialog(debt: DebtItem) {
+        RecordPaymentDialog.newInstance(
+            fromName = debt.fromName,
+            toName = debt.toName,
+            amount = debt.amount
+        ) { amount, note ->
+            viewModel.recordPayment(debt, amount, note)
+        }.show(childFragmentManager, "RecordPaymentDialog")
     }
 }

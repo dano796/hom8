@@ -33,7 +33,7 @@ import com.hom8.app.data.local.entity.UserStatsEntity
         ActivityLogEntity::class,
         UserStatsEntity::class
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class HomeFlowDatabase : RoomDatabase() {

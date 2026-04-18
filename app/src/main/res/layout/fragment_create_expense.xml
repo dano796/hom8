@@ -55,7 +55,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/topBarHeight"
         android:overScrollMode="never"
-        android:paddingBottom="100dp">
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,6 +151,77 @@
                     android:layout_marginBottom="@dimen/spacing4"
                     app:singleSelection="true"
                     app:selectionRequired="true" />
+
+            </LinearLayout>
+
+            <!-- Participants section (visible in SPLIT mode only) -->
+            <LinearLayout
+                android:id="@+id/layoutParticipants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing2"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:letterSpacing="0.05"
+                    android:text="@string/expenses_split_with"
+                    android:textColor="@color/colorTextTertiary"
+                    android:textSize="11sp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupParticipants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing3"
+                    app:singleSelection="false" />
+
+                <!-- Split mode selector -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing2"
+                    android:fontFamily="@font/jetbrains_mono"
+                    android:letterSpacing="0.05"
+                    android:text="@string/expenses_division"
+                    android:textColor="@color/colorTextTertiary"
+                    android:textSize="11sp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupSplitMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing2"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipEqualSplit"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/expenses_equal" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCustomSplit"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/expenses_custom" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <!-- Custom amounts container (visible only in custom mode) -->
+                <LinearLayout
+                    android:id="@+id/layoutCustomAmounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginBottom="@dimen/spacing2" />
 
             </LinearLayout>
 

@@ -111,6 +111,22 @@ class FirestoreRepository @Inject constructor(
             }
     }
 
+    // ─── Payments ─────────────────────────────────────────────────────────────
+
+    fun syncPayment(payment: com.hom8.app.data.local.entity.PaymentEntity) {
+        val paymentData = payment.toMap()
+        
+        firestore.collection("homes/${payment.hogarId}/payments")
+            .document(payment.id)
+            .set(paymentData)
+            .addOnSuccessListener {
+                Log.d(TAG, "✅ Payment synced: ${payment.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync payment ${payment.id}: ${e.message}", e)
+            }
+    }
+
     // ─── Homes ────────────────────────────────────────────────────────────────
 
     fun syncHome(home: HomeEntity) {
@@ -245,8 +261,8 @@ class FirestoreRepository @Inject constructor(
     }
 
     private fun ExpenseEntity.toMap(): Map<String, Any?> {
-        // Parsear participantes JSON a lista nativa
-        val participantesList = parseParticipantesJson(participantes)
+        // Parsear participantes JSON a estructura nativa
+        val participantesData = parseParticipantesJson(participantes)
         
         return mapOf(
             "id" to id,
@@ -257,8 +273,8 @@ class FirestoreRepository @Inject constructor(
             "hogarId" to hogarId,
             "fecha" to fecha,
             "nota" to nota,
-            // Array nativo en lugar de string JSON
-            "participantes" to participantesList,
+            // Puede ser lista de strings o lista de maps con montos
+            "participantes" to participantesData,
             // Timestamp del servidor
             "serverTimestamp" to FieldValue.serverTimestamp()
         )
@@ -271,8 +287,26 @@ class FirestoreRepository @Inject constructor(
         payerName: String,
         participantNames: Map<String, String>
     ): Map<String, Any?> {
-        // Parsear participantes JSON a lista nativa
-        val participantIds = parseParticipantesJson(participantes)
+        // Parsear participantes JSON
+        val participantesData = parseParticipantesJson(participantes)
+        
+        // Extraer IDs de participantes según el formato
+        val participantIds = when (participantesData) {
+            is List<*> -> {
+                if (participantesData.isEmpty()) {
+                    emptyList()
+                } else if (participantesData[0] is String) {
+                    // Formato antiguo: lista de IDs
+                    participantesData as List<String>
+                } else if (participantesData[0] is Map<*, *>) {
+                    // Formato nuevo: lista de maps con userId y amount
+                    (participantesData as List<Map<String, Any>>).mapNotNull { it["userId"] as? String }
+                } else {
+                    emptyList()
+                }
+            }
+            else -> emptyList()
+        }
         
         // Crear lista de participantes con nombres
         val participantesConNombres = participantIds.map { userId ->
@@ -296,7 +330,8 @@ class FirestoreRepository @Inject constructor(
             "fecha" to fecha,
             "nota" to nota,
             // Arrays nativos con información completa
-            "participantes" to participantesConNombres,
+            "participantes" to participantesData,  // Formato original (con o sin montos)
+            "participantesConNombres" to participantesConNombres,  // Con nombres para legibilidad
             "participantIds" to participantIds,  // IDs simples para queries
             // Timestamp del servidor
             "serverTimestamp" to FieldValue.serverTimestamp()
@@ -346,6 +381,17 @@ class FirestoreRepository @Inject constructor(
         "serverTimestamp" to FieldValue.serverTimestamp()
     )
 
+    private fun com.hom8.app.data.local.entity.PaymentEntity.toMap(): Map<String, Any?> = mapOf(
+        "id" to id,
+        "fromUserId" to fromUserId,
+        "toUserId" to toUserId,
+        "monto" to monto,
+        "fecha" to fecha,
+        "nota" to nota,
+        "hogarId" to hogarId,
+        "serverTimestamp" to FieldValue.serverTimestamp()
+    )
+
     private fun parseMembersJson(json: String): List<String> {
         val trimmed = json.trim().removePrefix("[").removeSuffix("]")
         if (trimmed.isBlank()) return emptyList()
@@ -370,17 +416,30 @@ class FirestoreRepository @Inject constructor(
     }
     
     /**
-     * Parsea el JSON de participantes a una lista de IDs
+     * Parsea el JSON de participantes a una lista de IDs o estructura con montos
+     * Soporta dos formatos:
+     * 1. Antiguo: ["userId1", "userId2"]
+     * 2. Nuevo: [{"userId": "userId1", "amount": 50000}, {"userId": "userId2", "amount": 30000}]
      */
-    private fun parseParticipantesJson(jsonString: String?): List<String> {
-        if (jsonString.isNullOrBlank() || jsonString == "[]") return emptyList()
+    private fun parseParticipantesJson(jsonString: String?): Any {
+        if (jsonString.isNullOrBlank() || jsonString == "[]") return emptyList<String>()
         
         return try {
-            val type = object : TypeToken<List<String>>() {}.type
-            gson.fromJson<List<String>>(jsonString, type) ?: emptyList()
+            // Intentar parsear como nuevo formato (con montos)
+            val typeWithAmounts = object : TypeToken<List<Map<String, Any>>>() {}.type
+            val listWithAmounts: List<Map<String, Any>>? = gson.fromJson(jsonString, typeWithAmounts)
+            
+            if (listWithAmounts != null && listWithAmounts.isNotEmpty() && listWithAmounts[0].containsKey("userId")) {
+                // Es el nuevo formato, retornar tal cual
+                listWithAmounts
+            } else {
+                // Intentar parsear como formato antiguo (solo IDs)
+                val typeIds = object : TypeToken<List<String>>() {}.type
+                gson.fromJson<List<String>>(jsonString, typeIds) ?: emptyList<String>()
+            }
         } catch (e: Exception) {
             Log.w(TAG, "Failed to parse participantes JSON: $jsonString", e)
-            emptyList()
+            emptyList<String>()
         }
     }
 }

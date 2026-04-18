@@ -105,14 +105,20 @@
     <string name="expenses_new_expense">Nuevo Gasto</string>
     <string name="expenses_save_expense">GUARDAR GASTO</string>
     <string name="expenses_description_hint">ej. Supermercado semanal</string>
+    <string name="expenses_description_label">Descripción *</string>
+    <string name="expenses_amount_label">Cantidad *</string>
     <string name="expenses_amount_hint">0.00</string>
     <string name="expenses_category">Categoría</string>
     <string name="expenses_paid_by">Pagado por</string>
+    <string name="expenses_split_with">Dividir con</string>
     <string name="expenses_participants">Participantes</string>
     <string name="expenses_division">División</string>
     <string name="expenses_equal">Igual</string>
     <string name="expenses_custom">Personalizada</string>
+    <string name="expenses_custom_amount_hint">%1$s debe</string>
     <string name="expenses_date">Fecha</string>
+    <string name="expenses_date_today">Hoy</string>
+    <string name="expenses_note_label">Nota (opcional)</string>
     <string name="expenses_note_hint">Agregar una nota…</string>
     <string name="expenses_they_owe_you">Te deben</string>
     <string name="expenses_you_owe">Tú debes</string>
@@ -219,12 +225,6 @@
     <string name="field_email">Correo electrónico</string>
     <string name="field_password">Contraseña</string>
     <string name="field_password_register_hint">Contraseña (mín. 6 caracteres)</string>
-
-    <!-- Gastos — campos de formulario -->
-    <string name="expenses_description_label">Descripción *</string>
-    <string name="expenses_amount_label">Cantidad *</string>
-    <string name="expenses_note_label">Nota (opcional)</string>
-    <string name="expenses_date_today">Hoy</string>
 
     <!-- Categorías de gastos -->
     <string name="expense_category_food">Comida</string>

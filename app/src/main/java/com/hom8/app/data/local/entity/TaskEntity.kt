@@ -57,6 +57,9 @@ data class TaskEntity(
     @ColumnInfo(name = "actualizado_en")
     val actualizadoEn: Long = System.currentTimeMillis(),
 
+    @ColumnInfo(name = "puntos_otorgados")
+    val puntosOtorgados: Boolean = false,
+
     @ColumnInfo(name = "synced")
     val synced: Int = 0
 )

@@ -50,6 +50,13 @@ object DatabaseModule {
         }
     }
 
+    private val MIGRATION_6_7 = object : Migration(6, 7) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            // Agregar columna para rastrear si ya se otorgaron puntos por completar la tarea
+            database.execSQL("ALTER TABLE tasks ADD COLUMN puntos_otorgados INTEGER NOT NULL DEFAULT 0")
+        }
+    }
+
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): HomeFlowDatabase {
@@ -58,7 +65,7 @@ object DatabaseModule {
             HomeFlowDatabase::class.java,
             "homeflow_database"
         )
-            .addMigrations(MIGRATION_4_5)
+            .addMigrations(MIGRATION_4_5, MIGRATION_6_7)
             .fallbackToDestructiveMigration()
             .build()
     }

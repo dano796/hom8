@@ -49,6 +49,7 @@ class CreateExpenseFragment : Fragment() {
     )
 
     private var lastMembersRendered: List<ExpenseMemberOption> = emptyList()
+    private var lastParticipantsRendered: Set<String> = emptySet()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -110,6 +111,14 @@ class CreateExpenseFragment : Fragment() {
             val note = view.findViewById<TextInputEditText>(R.id.etNote).text.toString().trim()
             viewModel.saveExpense(description, amount, note)
         }
+        
+        // Split mode chips
+        view.findViewById<Chip>(R.id.chipEqualSplit).setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.setSplitMode(SplitMode.EQUAL)
+        }
+        view.findViewById<Chip>(R.id.chipCustomSplit).setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.setSplitMode(SplitMode.CUSTOM)
+        }
     }
 
     private fun observeState(view: View) {
@@ -122,6 +131,9 @@ class CreateExpenseFragment : Fragment() {
         val tvDate = view.findViewById<TextView>(R.id.tvSelectedDate)
         val chipGroupPaidBy = view.findViewById<ChipGroup>(R.id.chipGroupPaidBy)
         val layoutPaidBy = view.findViewById<LinearLayout>(R.id.layoutPaidBy)
+        val chipGroupParticipants = view.findViewById<ChipGroup>(R.id.chipGroupParticipants)
+        val layoutParticipants = view.findViewById<LinearLayout>(R.id.layoutParticipants)
+        val layoutCustomAmounts = view.findViewById<LinearLayout>(R.id.layoutCustomAmounts)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -138,6 +150,7 @@ class CreateExpenseFragment : Fragment() {
 
                     // Paid by section — visible in SPLIT mode only
                     layoutPaidBy.visibility = if (state.isSplitMode) View.VISIBLE else View.GONE
+                    layoutParticipants.visibility = if (state.isSplitMode) View.VISIBLE else View.GONE
 
                     if (state.isSplitMode) {
                         // Rebuild chips only when member list changes
@@ -150,6 +163,20 @@ class CreateExpenseFragment : Fragment() {
                                 val chip = chipGroupPaidBy.getChildAt(i) as? Chip ?: continue
                                 chip.isChecked = chip.tag == state.selectedPayerId
                             }
+                        }
+                        
+                        // Rebuild participant chips when members or selection changes
+                        if (state.members != lastMembersRendered || state.selectedParticipants != lastParticipantsRendered) {
+                            lastParticipantsRendered = state.selectedParticipants
+                            buildParticipantChips(chipGroupParticipants, state.members, state.selectedParticipants)
+                        }
+                        
+                        // Show/hide custom amounts based on split mode
+                        layoutCustomAmounts.visibility = if (state.splitMode == SplitMode.CUSTOM) View.VISIBLE else View.GONE
+                        
+                        // Build custom amount inputs when in custom mode
+                        if (state.splitMode == SplitMode.CUSTOM) {
+                            buildCustomAmountInputs(layoutCustomAmounts, state.members, state.selectedParticipants, state.customAmounts)
                         }
                     }
 
@@ -210,12 +237,81 @@ class CreateExpenseFragment : Fragment() {
                 tag = member.id
                 isCheckable = true
                 isChecked = member.id == selectedPayerId
-                chipCornerRadius = 20f
+                shapeAppearanceModel = shapeAppearanceModel.toBuilder()
+                    .setAllCornerSizes(20f * resources.displayMetrics.density)
+                    .build()
                 setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) viewModel.setPayerId(member.id)
                 }
             }
             chipGroup.addView(chip)
+        }
+    }
+
+    private fun buildParticipantChips(
+        chipGroup: ChipGroup,
+        members: List<ExpenseMemberOption>,
+        selectedParticipants: Set<String>
+    ) {
+        chipGroup.removeAllViews()
+        members.forEach { member ->
+            val chip = Chip(requireContext(), null, com.google.android.material.R.attr.chipStyle).apply {
+                text = member.name
+                tag = member.id
+                isCheckable = true
+                isChecked = selectedParticipants.contains(member.id)
+                shapeAppearanceModel = shapeAppearanceModel.toBuilder()
+                    .setAllCornerSizes(20f * resources.displayMetrics.density)
+                    .build()
+                setOnCheckedChangeListener { _, _ ->
+                    viewModel.toggleParticipant(member.id)
+                }
+            }
+            chipGroup.addView(chip)
+        }
+    }
+
+    private fun buildCustomAmountInputs(
+        container: LinearLayout,
+        members: List<ExpenseMemberOption>,
+        selectedParticipants: Set<String>,
+        customAmounts: Map<String, Double>
+    ) {
+        container.removeAllViews()
+        
+        members.filter { selectedParticipants.contains(it.id) }.forEach { member ->
+            val inputLayout = TextInputLayout(requireContext(), null, com.google.android.material.R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    bottomMargin = resources.getDimensionPixelSize(R.dimen.spacing2)
+                }
+                hint = getString(R.string.expenses_custom_amount_hint, member.name)
+                prefixText = "COP "
+                // Usar setBoxCornerRadii en lugar de boxCornerRadius
+                setBoxCornerRadii(8f, 8f, 8f, 8f)
+            }
+            
+            val editText = TextInputEditText(requireContext()).apply {
+                inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+                val currentAmount = customAmounts[member.id]
+                if (currentAmount != null && currentAmount > 0) {
+                    setText(currentAmount.toString())
+                }
+                
+                addTextChangedListener(object : android.text.TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                    override fun afterTextChanged(s: android.text.Editable?) {
+                        val amount = s.toString().toDoubleOrNull() ?: 0.0
+                        viewModel.setCustomAmount(member.id, amount)
+                    }
+                })
+            }
+            
+            inputLayout.addView(editText)
+            container.addView(inputLayout)
         }
     }
 }

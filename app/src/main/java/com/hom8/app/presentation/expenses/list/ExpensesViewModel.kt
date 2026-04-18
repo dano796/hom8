@@ -2,6 +2,8 @@ package com.hom8.app.presentation.expenses.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hom8.app.data.local.dao.ActivityLogDao
 import com.hom8.app.data.local.dao.ExpenseDao
 import com.hom8.app.data.local.dao.HomeDao
@@ -54,6 +56,7 @@ class ExpensesViewModel @Inject constructor(
     private val homeDao: HomeDao,
     private val userDao: UserDao,
     private val activityLogDao: ActivityLogDao,
+    private val paymentDao: com.hom8.app.data.local.dao.PaymentDao,
     private val session: SessionManager,
     private val firestoreRepo: FirestoreRepository
 ) : ViewModel() {
@@ -142,23 +145,105 @@ class ExpensesViewModel @Inject constructor(
         viewModelScope.launch {
             val hogarId = session.hogarId.ifEmpty { "default" }
             val userId = session.userId
-            expenseDao.getExpensesByHome(hogarId).collect { expenses ->
-                var theyOwe = 0.0
-                var youOwe = 0.0
+            
+            combine(
+                expenseDao.getExpensesByHome(hogarId),
+                paymentDao.getPaymentsByHome(hogarId)
+            ) { expenses, payments ->
+                // Calcular balance neto por usuario
+                val net = mutableMapOf<String, Double>()
+                
+                // Procesar gastos
                 expenses.forEach { expense ->
-                    val participantCount = parseParticipantCount(expense.participantes)
-                    val share = if (participantCount > 0) expense.monto / participantCount else 0.0
+                    val participantsData = parseParticipantsWithAmounts(expense.participantes, expense.monto)
+                    
                     if (expense.pagadorId == userId) {
-                        // You paid — others owe you (minus your own share)
-                        theyOwe += expense.monto - share
+                        // Yo pagué — cada participante me debe su parte
+                        participantsData.filter { it.first != userId }.forEach { (pid, amount) ->
+                            net[pid] = (net[pid] ?: 0.0) + amount
+                        }
                     } else {
-                        // Someone else paid — you owe your share
-                        youOwe += share
+                        // Otro pagó — yo le debo mi parte
+                        val myShare = participantsData.find { it.first == userId }?.second
+                        if (myShare != null && myShare > 0) {
+                            net[expense.pagadorId] = (net[expense.pagadorId] ?: 0.0) - myShare
+                        }
                     }
                 }
-                _balanceState.value = Pair(theyOwe, youOwe)
+                
+                // Aplicar pagos liquidados
+                payments.forEach { payment ->
+                    if (payment.fromUserId == userId) {
+                        // Yo pagué a alguien → reduce lo que le debo
+                        net[payment.toUserId] = (net[payment.toUserId] ?: 0.0) + payment.monto
+                    } else if (payment.toUserId == userId) {
+                        // Alguien me pagó → reduce lo que me debe
+                        net[payment.fromUserId] = (net[payment.fromUserId] ?: 0.0) - payment.monto
+                    }
+                }
+                
+                // Calcular totales
+                var theyOwe = 0.0
+                var youOwe = 0.0
+                
+                net.forEach { (_, amount) ->
+                    when {
+                        amount > 0.01 -> theyOwe += amount  // Me deben
+                        amount < -0.01 -> youOwe += -amount  // Yo debo
+                    }
+                }
+                
+                Pair(theyOwe, youOwe)
+            }.collect { balancePair ->
+                _balanceState.value = balancePair
             }
         }
+    }
+    
+    /**
+     * Parsea participantes y retorna lista de (userId, monto)
+     * Soporta formato antiguo (división equitativa) y nuevo (montos específicos)
+     */
+    private fun parseParticipantsWithAmounts(json: String, totalAmount: Double): List<Pair<String, Double>> {
+        return try {
+            val gson = com.google.gson.Gson()
+            val type = object : com.google.gson.reflect.TypeToken<List<Map<String, Any>>>() {}.type
+            val list: List<Map<String, Any>> = gson.fromJson(json, type) ?: emptyList()
+            
+            // Verificar si es el nuevo formato (tiene "userId" y "amount")
+            if (list.isNotEmpty() && list[0].containsKey("userId") && list[0].containsKey("amount")) {
+                // Formato nuevo con montos específicos
+                list.mapNotNull { map ->
+                    val userId = map["userId"] as? String ?: return@mapNotNull null
+                    val amount = when (val amt = map["amount"]) {
+                        is Double -> amt
+                        is Number -> amt.toDouble()
+                        else -> return@mapNotNull null
+                    }
+                    userId to amount
+                }
+            } else {
+                // Formato antiguo: solo IDs, división equitativa
+                val participantIds = parseParticipantsJson(json)
+                val count = participantIds.size.coerceAtLeast(1)
+                val share = totalAmount / count
+                participantIds.map { it to share }
+            }
+        } catch (e: Exception) {
+            // Fallback: formato muy antiguo como string simple
+            val participantIds = parseParticipantsJson(json)
+            val count = participantIds.size.coerceAtLeast(1)
+            val share = totalAmount / count
+            participantIds.map { it to share }
+        }
+    }
+    
+    private fun parseParticipantsJson(json: String): List<String> {
+        val trimmed = json.trim().removePrefix("[").removeSuffix("]")
+        if (trimmed.isBlank()) return emptyList()
+        return trimmed.split(",")
+            .map { it.trim().removeSurrounding("\"") }
+            .filter { it.isNotEmpty() }
     }
 
     fun setCategoryFilter(filter: ExpenseCategoryFilter) {
@@ -190,16 +275,6 @@ class ExpensesViewModel @Inject constructor(
             )
             activityLogDao.insertActivity(log)
             firestoreRepo.syncActivityLog(log)
-        }
-    }
-
-    private fun parseParticipantCount(participantesJson: String): Int {
-        return try {
-            // Simple count of items in JSON array "["a","b"]" → 2
-            if (participantesJson == "[]") 1
-            else participantesJson.split(",").size
-        } catch (_: Exception) {
-            1
         }
     }
 }

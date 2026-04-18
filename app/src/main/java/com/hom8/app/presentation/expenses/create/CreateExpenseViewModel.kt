@@ -3,6 +3,8 @@ package com.hom8.app.presentation.expenses.create
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hom8.app.data.local.dao.ActivityLogDao
 import com.hom8.app.data.local.dao.ExpenseDao
 import com.hom8.app.data.local.dao.HomeDao
@@ -27,12 +29,20 @@ data class ExpenseMemberOption(
     val initials: String
 )
 
+enum class SplitMode {
+    EQUAL,      // División equitativa
+    CUSTOM      // División personalizada
+}
+
 data class CreateExpenseUiState(
     val existingExpense: ExpenseEntity? = null,
     val selectedCategory: String = "OTROS",
     val selectedDate: Long = System.currentTimeMillis(),
     val members: List<ExpenseMemberOption> = emptyList(),
     val selectedPayerId: String = "",
+    val selectedParticipants: Set<String> = emptySet(), // IDs de participantes seleccionados
+    val splitMode: SplitMode = SplitMode.EQUAL,
+    val customAmounts: Map<String, Double> = emptyMap(), // userId -> monto personalizado
     val isSplitMode: Boolean = true,
     val isSaved: Boolean = false,
     val error: String? = null
@@ -97,8 +107,19 @@ class CreateExpenseViewModel @Inject constructor(
                 val isSplitMode = home.gastosModo == "SPLIT"
                 val currentPayer = _uiState.value.selectedPayerId
                     .ifEmpty { _uiState.value.existingExpense?.pagadorId ?: currentUserId }
+                
+                // Por defecto, todos los miembros participan en el gasto
+                val currentParticipants = _uiState.value.selectedParticipants.ifEmpty {
+                    options.map { it.id }.toSet()
+                }
+                
                 _uiState.update {
-                    it.copy(members = options, selectedPayerId = currentPayer, isSplitMode = isSplitMode)
+                    it.copy(
+                        members = options, 
+                        selectedPayerId = currentPayer, 
+                        selectedParticipants = currentParticipants,
+                        isSplitMode = isSplitMode
+                    )
                 }
             }
         }
@@ -115,17 +136,25 @@ class CreateExpenseViewModel @Inject constructor(
         viewModelScope.launch {
             expenseDao.getExpenseById(expenseId).collect { expense ->
                 if (expense != null) {
+                    // Parsear participantes del gasto existente
+                    val participants = parseParticipantsJson(expense.participantes).toSet()
+                    
                     _uiState.update {
                         it.copy(
                             existingExpense = expense,
                             selectedCategory = expense.categoria,
                             selectedDate = expense.fecha,
-                            selectedPayerId = expense.pagadorId
+                            selectedPayerId = expense.pagadorId,
+                            selectedParticipants = participants
                         )
                     }
                 }
             }
         }
+    }
+
+    private fun parseParticipantsJson(json: String): List<String> {
+        return parseMembersJson(json)
     }
 
     fun setCategory(category: String) {
@@ -138,6 +167,34 @@ class CreateExpenseViewModel @Inject constructor(
 
     fun setPayerId(userId: String) {
         _uiState.update { it.copy(selectedPayerId = userId) }
+    }
+
+    fun toggleParticipant(userId: String) {
+        _uiState.update { state ->
+            val newParticipants = if (state.selectedParticipants.contains(userId)) {
+                // No permitir deseleccionar si es el único participante
+                if (state.selectedParticipants.size > 1) {
+                    state.selectedParticipants - userId
+                } else {
+                    state.selectedParticipants
+                }
+            } else {
+                state.selectedParticipants + userId
+            }
+            state.copy(selectedParticipants = newParticipants)
+        }
+    }
+
+    fun setSplitMode(mode: SplitMode) {
+        _uiState.update { it.copy(splitMode = mode) }
+    }
+
+    fun setCustomAmount(userId: String, amount: Double) {
+        _uiState.update { state ->
+            val newAmounts = state.customAmounts.toMutableMap()
+            newAmounts[userId] = amount
+            state.copy(customAmounts = newAmounts)
+        }
     }
 
     fun saveExpense(description: String, amount: String, note: String) {
@@ -155,9 +212,43 @@ class CreateExpenseViewModel @Inject constructor(
         val hogarId = session.hogarId.ifEmpty { "default" }
         val payerId = state.selectedPayerId.ifEmpty { session.userId }
 
-        // Build participants JSON from all loaded members
-        val participantIds = state.members.map { it.id }.ifEmpty { listOf(session.userId) }
-        val participantes = "[" + participantIds.joinToString(",") { "\"$it\"" } + "]"
+        // Validar que el pagador esté entre los participantes
+        val participantIds = state.selectedParticipants.toList().ifEmpty { listOf(session.userId) }
+        if (!participantIds.contains(payerId)) {
+            _uiState.update { it.copy(error = "El pagador debe ser uno de los participantes") }
+            return
+        }
+
+        // Build participants JSON with amounts
+        val participantsList = when (state.splitMode) {
+            SplitMode.EQUAL -> {
+                // División equitativa
+                val sharePerPerson = parsedAmount / participantIds.size
+                participantIds.map { userId ->
+                    mapOf("userId" to userId, "amount" to sharePerPerson)
+                }
+            }
+            SplitMode.CUSTOM -> {
+                // División personalizada
+                val customList = participantIds.map { userId ->
+                    val customAmount = state.customAmounts[userId] ?: 0.0
+                    mapOf("userId" to userId, "amount" to customAmount)
+                }
+                
+                // Validar que la suma de montos personalizados sea igual al total
+                val totalCustom = customList.sumOf { it["amount"] as Double }
+                if (kotlin.math.abs(totalCustom - parsedAmount) > 0.01) {
+                    _uiState.update { 
+                        it.copy(error = "La suma de montos personalizados debe ser igual al total (${parsedAmount} vs ${totalCustom})") 
+                    }
+                    return
+                }
+                
+                customList
+            }
+        }
+        
+        val participantes = com.google.gson.Gson().toJson(participantsList)
 
         viewModelScope.launch {
             try {

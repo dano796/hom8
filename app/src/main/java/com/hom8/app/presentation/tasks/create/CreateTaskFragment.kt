@@ -151,7 +151,9 @@ class CreateTaskFragment : Fragment() {
                 tag = member.id
                 isCheckable = true
                 isChecked = member.id == selectedId
-                chipCornerRadius = 20f * resources.displayMetrics.density
+                shapeAppearanceModel = shapeAppearanceModel.toBuilder()
+                    .setAllCornerSizes(20f * resources.displayMetrics.density)
+                    .build()
                 setOnCheckedChangeListener { _, checked ->
                     if (checked) viewModel.setAssignee(member.id)
                 }
