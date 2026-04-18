@@ -26,6 +26,7 @@ data class AddHomeUiState(
 @HiltViewModel
 class AddHomeViewModel @Inject constructor(
     private val homeDao: HomeDao,
+    private val userDao: com.hom8.app.data.local.dao.UserDao,
     private val session: SessionManager,
     private val firestoreRepo: FirestoreRepository
 ) : ViewModel() {
@@ -128,6 +129,9 @@ class AddHomeViewModel @Inject constructor(
                 // Guardar en la base de datos local
                 homeDao.insertHome(home)
                 
+                // Cargar información de los usuarios del hogar
+                fetchUsersFromFirestore(memberIds)
+                
                 home
             } else {
                 null
@@ -140,6 +144,36 @@ class AddHomeViewModel @Inject constructor(
 
     fun clearError() {
         _uiState.update { it.copy(error = null) }
+    }
+
+    /**
+     * Carga la información de los usuarios desde Firestore
+     * y los sincroniza a la base de datos local
+     */
+    private suspend fun fetchUsersFromFirestore(userIds: List<String>) {
+        try {
+            userIds.forEach { userId ->
+                val userDoc = FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(userId)
+                    .get()
+                    .await()
+                
+                if (userDoc.exists()) {
+                    val user = com.hom8.app.data.local.entity.UserEntity(
+                        id = userDoc.getString("id") ?: userId,
+                        nombre = userDoc.getString("nombre") ?: "Usuario",
+                        email = userDoc.getString("email") ?: "",
+                        avatarUrl = userDoc.getString("avatarUrl") ?: "",
+                        rol = userDoc.getString("rol") ?: "MEMBER",
+                        hogarId = userDoc.getString("hogarId") ?: ""
+                    )
+                    userDao.insertUser(user)
+                }
+            }
+        } catch (e: Exception) {
+            // Si falla, no es crítico - los usuarios se cargarán cuando se sincronice
+        }
     }
 
     private fun generateInviteCode(): String {

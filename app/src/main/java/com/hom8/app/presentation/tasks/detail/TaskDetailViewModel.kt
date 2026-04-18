@@ -11,6 +11,7 @@ import com.hom8.app.data.local.dao.UserDao
 import com.hom8.app.data.local.entity.ActivityLogEntity
 import com.hom8.app.data.local.entity.TaskEntity
 import com.hom8.app.data.remote.FirestoreRepository
+import com.hom8.app.domain.repository.UserStatsRepository
 import com.hom8.app.util.SessionManager
 import java.util.UUID
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +37,8 @@ class TaskDetailViewModel @Inject constructor(
     private val userDao: UserDao,
     private val activityLogDao: ActivityLogDao,
     private val session: SessionManager,
-    private val firestoreRepo: FirestoreRepository
+    private val firestoreRepo: FirestoreRepository,
+    private val userStatsRepository: UserStatsRepository
 ) : ViewModel() {
 
     /** userId → display name, populated once the home loads */
@@ -117,6 +119,20 @@ class TaskDetailViewModel @Inject constructor(
             )
             activityLogDao.insertActivity(log)
             firestoreRepo.syncActivityLog(log)
+            
+            // Actualizar estadísticas cuando se completa una tarea
+            if (newStatus == "TERMINADO") {
+                // Determinar si se completó antes de tiempo
+                val completadaAntes = task.fechaLimite?.let { it > now } ?: false
+                
+                // Registrar la tarea completada para el usuario responsable
+                userStatsRepository.onTaskCompleted(
+                    userId = task.responsableId,
+                    hogarId = task.hogarId,
+                    prioridad = task.prioridad,
+                    completadaAntes = completadaAntes
+                )
+            }
         }
     }
 

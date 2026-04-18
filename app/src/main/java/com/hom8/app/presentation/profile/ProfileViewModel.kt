@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.hom8.app.data.local.dao.HomeDao
 import com.hom8.app.data.local.dao.TaskDao
+import com.hom8.app.domain.repository.UserStatsRepository
 import com.hom8.app.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +36,8 @@ class ProfileViewModel @Inject constructor(
     private val auth: FirebaseAuth,
     private val taskDao: TaskDao,
     private val homeDao: HomeDao,
-    private val session: SessionManager
+    private val session: SessionManager,
+    private val userStatsRepository: UserStatsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileUiState())
@@ -72,13 +74,23 @@ class ProfileViewModel @Inject constructor(
 
         val hogarId = session.hogarId.ifEmpty { "default" }
 
-        // Load stats from Room
+        // Inicializar estadísticas si no existen
         viewModelScope.launch {
-            taskDao.getCompletedTaskCount(uid, hogarId).collect { count ->
-                _uiState.update { it.copy(
-                    tasksDone = count,
-                    score = count * 10 // Simple scoring
-                )}
+            userStatsRepository.initializeUserStats(uid, hogarId)
+        }
+
+        // Load stats from UserStatsRepository
+        viewModelScope.launch {
+            userStatsRepository.getUserStats(uid, hogarId).collect { stats ->
+                if (stats != null) {
+                    _uiState.update { 
+                        it.copy(
+                            tasksDone = stats.tareasCompletadas,
+                            streakDays = stats.rachaActual,
+                            score = stats.puntuacionTotal
+                        )
+                    }
+                }
             }
         }
 

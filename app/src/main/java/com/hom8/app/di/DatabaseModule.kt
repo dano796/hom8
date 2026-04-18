@@ -12,6 +12,7 @@ import com.hom8.app.data.local.dao.NotificationDao
 import com.hom8.app.data.local.dao.PaymentDao
 import com.hom8.app.data.local.dao.TaskDao
 import com.hom8.app.data.local.dao.UserDao
+import com.hom8.app.data.local.dao.UserStatsDao
 import com.hom8.app.data.local.database.HomeFlowDatabase
 import dagger.Module
 import dagger.Provides
@@ -85,4 +86,7 @@ object DatabaseModule {
 
     @Provides
     fun provideActivityLogDao(database: HomeFlowDatabase): ActivityLogDao = database.activityLogDao()
+
+    @Provides
+    fun provideUserStatsDao(database: HomeFlowDatabase): UserStatsDao = database.userStatsDao()
 }

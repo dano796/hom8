@@ -10,6 +10,7 @@ import com.hom8.app.data.local.dao.UserDao
 import com.hom8.app.data.local.entity.ActivityLogEntity
 import com.hom8.app.data.local.entity.ExpenseEntity
 import com.hom8.app.data.remote.FirestoreRepository
+import com.hom8.app.domain.repository.UserStatsRepository
 import com.hom8.app.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,7 +45,8 @@ class CreateExpenseViewModel @Inject constructor(
     private val userDao: UserDao,
     private val activityLogDao: ActivityLogDao,
     private val session: SessionManager,
-    private val firestoreRepo: FirestoreRepository
+    private val firestoreRepo: FirestoreRepository,
+    private val userStatsRepository: UserStatsRepository
 ) : ViewModel() {
 
     companion object {
@@ -204,6 +206,11 @@ class CreateExpenseViewModel @Inject constructor(
                 
                 activityLogDao.insertActivity(log)
                 firestoreRepo.syncActivityLog(log)
+
+                // Registrar creación de gasto en estadísticas (solo para gastos nuevos)
+                if (state.existingExpense == null) {
+                    userStatsRepository.onExpenseCreated(session.userId, hogarId)
+                }
 
                 _uiState.update { it.copy(isSaved = true, error = null) }
             } catch (e: Exception) {

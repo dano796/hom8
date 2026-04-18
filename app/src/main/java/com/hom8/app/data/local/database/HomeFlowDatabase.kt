@@ -10,6 +10,7 @@ import com.hom8.app.data.local.dao.NotificationDao
 import com.hom8.app.data.local.dao.PaymentDao
 import com.hom8.app.data.local.dao.TaskDao
 import com.hom8.app.data.local.dao.UserDao
+import com.hom8.app.data.local.dao.UserStatsDao
 import com.hom8.app.data.local.entity.ActivityLogEntity
 import com.hom8.app.data.local.entity.ExpenseEntity
 import com.hom8.app.data.local.entity.HomeEntity
@@ -18,6 +19,7 @@ import com.hom8.app.data.local.entity.NotificationEntity
 import com.hom8.app.data.local.entity.PaymentEntity
 import com.hom8.app.data.local.entity.TaskEntity
 import com.hom8.app.data.local.entity.UserEntity
+import com.hom8.app.data.local.entity.UserStatsEntity
 
 @Database(
     entities = [
@@ -28,9 +30,10 @@ import com.hom8.app.data.local.entity.UserEntity
         ExpenseEntity::class,
         PaymentEntity::class,
         NotificationEntity::class,
-        ActivityLogEntity::class
+        ActivityLogEntity::class,
+        UserStatsEntity::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class HomeFlowDatabase : RoomDatabase() {
@@ -42,4 +45,5 @@ abstract class HomeFlowDatabase : RoomDatabase() {
     abstract fun paymentDao(): PaymentDao
     abstract fun notificationDao(): NotificationDao
     abstract fun activityLogDao(): ActivityLogDao
+    abstract fun userStatsDao(): UserStatsDao
 }

@@ -10,6 +10,7 @@ import com.hom8.app.data.local.entity.ExpenseEntity
 import com.hom8.app.data.local.entity.HomeEntity
 import com.hom8.app.data.local.entity.TaskEntity
 import com.hom8.app.data.local.entity.UserEntity
+import com.hom8.app.data.local.entity.UserStatsEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -146,6 +147,22 @@ class FirestoreRepository @Inject constructor(
             .set(userData)
             .addOnFailureListener { e ->
                 Log.e(TAG, "❌ Failed to sync user ${user.id}: ${e.message}", e)
+            }
+    }
+
+    // ─── User Stats ───────────────────────────────────────────────────────────
+
+    fun syncUserStats(stats: UserStatsEntity) {
+        val statsData = stats.toMap()
+        
+        firestore.collection("homes/${stats.hogarId}/user_stats")
+            .document(stats.userId)
+            .set(statsData)
+            .addOnSuccessListener {
+                Log.d(TAG, "✅ User stats synced for ${stats.userId}")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "❌ Failed to sync user stats ${stats.userId}: ${e.message}", e)
             }
     }
 
@@ -313,6 +330,20 @@ class FirestoreRepository @Inject constructor(
         "nombre" to nombre,
         "email" to email,
         "avatarUrl" to avatarUrl
+    )
+
+    private fun UserStatsEntity.toMap(): Map<String, Any?> = mapOf(
+        "userId" to userId,
+        "hogarId" to hogarId,
+        "tareasCompletadas" to tareasCompletadas,
+        "rachaActual" to rachaActual,
+        "rachaMaxima" to rachaMaxima,
+        "ultimaActividad" to ultimaActividad,
+        "puntuacionTotal" to puntuacionTotal,
+        "gastosCreados" to gastosCreados,
+        "tareasCreadas" to tareasCreadas,
+        "actualizadoEn" to actualizadoEn,
+        "serverTimestamp" to FieldValue.serverTimestamp()
     )
 
     private fun parseMembersJson(json: String): List<String> {

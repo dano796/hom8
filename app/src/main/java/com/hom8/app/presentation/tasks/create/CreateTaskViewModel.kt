@@ -11,6 +11,7 @@ import com.hom8.app.data.local.dao.UserDao
 import com.hom8.app.data.local.entity.ActivityLogEntity
 import com.hom8.app.data.local.entity.TaskEntity
 import com.hom8.app.data.remote.FirestoreRepository
+import com.hom8.app.domain.repository.UserStatsRepository
 import com.hom8.app.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,7 +44,8 @@ class CreateTaskViewModel @Inject constructor(
     private val userDao: UserDao,
     private val activityLogDao: ActivityLogDao,
     private val session: SessionManager,
-    private val firestoreRepo: FirestoreRepository
+    private val firestoreRepo: FirestoreRepository,
+    private val userStatsRepository: UserStatsRepository
 ) : ViewModel() {
 
     companion object {
@@ -161,6 +163,11 @@ class CreateTaskViewModel @Inject constructor(
                 
                 activityLogDao.insertActivity(log)
                 firestoreRepo.syncActivityLog(log)
+
+                // Registrar creación de tarea en estadísticas (solo para tareas nuevas)
+                if (taskId == null) {
+                    userStatsRepository.onTaskCreated(userId, hogarId)
+                }
 
                 _uiState.update { it.copy(saved = true) }
             } catch (e: Exception) {

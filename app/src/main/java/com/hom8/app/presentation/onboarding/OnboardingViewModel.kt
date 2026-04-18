@@ -118,6 +118,9 @@ class OnboardingViewModel @Inject constructor(
                 homeDao.insertHome(home)
                 firestoreRepo.syncHome(home)
                 
+                // Cargar información de los usuarios del hogar
+                fetchUsersFromFirestore(memberIds)
+                
                 home.id
             } else {
                 ""
@@ -284,6 +287,9 @@ class OnboardingViewModel @Inject constructor(
                 // Guardar en la base de datos local
                 homeDao.insertHome(home)
                 
+                // Cargar información de los usuarios del hogar
+                fetchUsersFromFirestore(memberIds)
+                
                 home
             } else {
                 null
@@ -291,6 +297,36 @@ class OnboardingViewModel @Inject constructor(
         } catch (e: Exception) {
             // Si falla (sin conexión, Firebase no configurado, etc.), retornar null
             null
+        }
+    }
+
+    /**
+     * Carga la información de los usuarios desde Firestore
+     * y los sincroniza a la base de datos local
+     */
+    private suspend fun fetchUsersFromFirestore(userIds: List<String>) {
+        try {
+            userIds.forEach { userId ->
+                val userDoc = FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(userId)
+                    .get()
+                    .await()
+                
+                if (userDoc.exists()) {
+                    val user = UserEntity(
+                        id = userDoc.getString("id") ?: userId,
+                        nombre = userDoc.getString("nombre") ?: "Usuario",
+                        email = userDoc.getString("email") ?: "",
+                        avatarUrl = userDoc.getString("avatarUrl") ?: "",
+                        rol = userDoc.getString("rol") ?: "MEMBER",
+                        hogarId = userDoc.getString("hogarId") ?: ""
+                    )
+                    userDao.insertUser(user)
+                }
+            }
+        } catch (e: Exception) {
+            // Si falla, no es crítico - los usuarios se cargarán cuando se sincronice
         }
     }
 

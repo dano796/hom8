@@ -123,7 +123,7 @@ class TaskDetailFragment : Fragment() {
         // Mark complete button
         val isDone = task.estado == "TERMINADO"
         view.findViewById<MaterialButton>(R.id.btnMarkComplete).apply {
-            text = if (isDone) "✓ MARKED AS COMPLETE" else getString(R.string.tasks_mark_complete)
+            text = if (isDone) "✓ MARCADA COMO COMPLETADA" else getString(R.string.tasks_mark_complete)
             isEnabled = true
         }
 

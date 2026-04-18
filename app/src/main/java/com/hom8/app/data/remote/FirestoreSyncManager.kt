@@ -7,10 +7,12 @@ import com.hom8.app.data.local.dao.ActivityLogDao
 import com.hom8.app.data.local.dao.ExpenseDao
 import com.hom8.app.data.local.dao.HomeDao
 import com.hom8.app.data.local.dao.TaskDao
+import com.hom8.app.data.local.dao.UserStatsDao
 import com.hom8.app.data.local.entity.ActivityLogEntity
 import com.hom8.app.data.local.entity.ExpenseEntity
 import com.hom8.app.data.local.entity.HomeEntity
 import com.hom8.app.data.local.entity.TaskEntity
+import com.hom8.app.data.local.entity.UserStatsEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -28,7 +30,9 @@ class FirestoreSyncManager @Inject constructor(
     private val taskDao: TaskDao,
     private val expenseDao: ExpenseDao,
     private val activityLogDao: ActivityLogDao,
-    private val homeDao: HomeDao
+    private val homeDao: HomeDao,
+    private val userDao: com.hom8.app.data.local.dao.UserDao,
+    private val userStatsDao: UserStatsDao
 ) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val listeners = mutableListOf<ListenerRegistration>()
@@ -39,6 +43,8 @@ class FirestoreSyncManager @Inject constructor(
         listenToExpenses(hogarId)
         listenToActivityLog(hogarId)
         listenToHome(hogarId)
+        listenToUsers(hogarId)
+        listenToUserStats(hogarId)
     }
 
     fun stopSync() {
@@ -128,6 +134,66 @@ class FirestoreSyncManager @Inject constructor(
         listeners.add(reg)
     }
 
+    // ─── Users ────────────────────────────────────────────────────────────────
+
+    private fun listenToUsers(hogarId: String) {
+        // First, get the home to know which users to listen to
+        scope.launch {
+            homeDao.getHomeById(hogarId).collect { home ->
+                if (home != null) {
+                    val memberIds = parseMembersJson(home.miembros)
+                    // Listen to each user in the home
+                    memberIds.forEach { userId ->
+                        listenToUser(userId)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun listenToUser(userId: String) {
+        val reg = firestore.collection("users")
+            .document(userId)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null || snapshot == null || !snapshot.exists()) return@addSnapshotListener
+                scope.launch {
+                    snapshot.toUser()?.let { userDao.insertUser(it) }
+                }
+            }
+        listeners.add(reg)
+    }
+
+    // ─── User Stats ───────────────────────────────────────────────────────────
+
+    private fun listenToUserStats(hogarId: String) {
+        val reg = firestore.collection("homes/$hogarId/user_stats")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null || snapshot == null) return@addSnapshotListener
+                scope.launch {
+                    snapshot.documentChanges.forEach { change ->
+                        when (change.type) {
+                            DocumentChange.Type.ADDED,
+                            DocumentChange.Type.MODIFIED -> {
+                                change.document.toUserStats(hogarId)?.let { 
+                                    userStatsDao.insertUserStats(it) 
+                                }
+                            }
+                            DocumentChange.Type.REMOVED -> {
+                                // No eliminar estadísticas, solo dejar de sincronizar
+                            }
+                        }
+                    }
+                }
+            }
+        listeners.add(reg)
+    }
+
+    private fun parseMembersJson(json: String): List<String> {
+        val trimmed = json.trim().removePrefix("[").removeSuffix("]")
+        if (trimmed.isBlank()) return emptyList()
+        return trimmed.split(",").map { it.trim().removeSurrounding("\"") }.filter { it.isNotEmpty() }
+    }
+
     // ─── Firestore document → Entity ─────────────────────────────────────────
 
     private fun com.google.firebase.firestore.DocumentSnapshot.toTask(hogarId: String): TaskEntity? {
@@ -198,6 +264,37 @@ class FirestoreSyncManager @Inject constructor(
                 miembros = miembros,
                 gastosModo = getString("gastosModo") ?: "SPLIT",
                 creadoEn = getLong("creadoEn") ?: System.currentTimeMillis(),
+                synced = 1
+            )
+        } catch (e: Exception) { null }
+    }
+
+    private fun com.google.firebase.firestore.DocumentSnapshot.toUser(): com.hom8.app.data.local.entity.UserEntity? {
+        return try {
+            com.hom8.app.data.local.entity.UserEntity(
+                id = getString("id") ?: id,
+                nombre = getString("nombre") ?: return null,
+                email = getString("email") ?: "",
+                avatarUrl = getString("avatarUrl") ?: "",
+                rol = getString("rol") ?: "MEMBER",
+                hogarId = getString("hogarId") ?: ""
+            )
+        } catch (e: Exception) { null }
+    }
+
+    private fun com.google.firebase.firestore.DocumentSnapshot.toUserStats(hogarId: String): UserStatsEntity? {
+        return try {
+            UserStatsEntity(
+                userId = getString("userId") ?: id,
+                hogarId = getString("hogarId") ?: hogarId,
+                tareasCompletadas = getLong("tareasCompletadas")?.toInt() ?: 0,
+                rachaActual = getLong("rachaActual")?.toInt() ?: 0,
+                rachaMaxima = getLong("rachaMaxima")?.toInt() ?: 0,
+                ultimaActividad = getLong("ultimaActividad") ?: 0L,
+                puntuacionTotal = getLong("puntuacionTotal")?.toInt() ?: 0,
+                gastosCreados = getLong("gastosCreados")?.toInt() ?: 0,
+                tareasCreadas = getLong("tareasCreadas")?.toInt() ?: 0,
+                actualizadoEn = getLong("actualizadoEn") ?: System.currentTimeMillis(),
                 synced = 1
             )
         } catch (e: Exception) { null }
