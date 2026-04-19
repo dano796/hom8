@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/jetbrains_mono"
+        android:fontFamily="@font/plus_jakarta_sans"
         android:textAppearance="@style/Wire.TextAppearance.Title"
         android:gravity="center"
         tools:text="Title" />

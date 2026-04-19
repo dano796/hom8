@@ -32,9 +32,7 @@
         <item name="android:statusBarColor">@color/colorSurface</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/bottomNavBackground</item>
-
-        <!-- Typography -->
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
-        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
     </style>
 </resources>
