@@ -2,34 +2,173 @@
 <resources>
     <!-- Primary Colors - Dark Mode -->
     <color name="colorPrimary">#38BDF8</color>
+    <color name="colorOnPrimary">#082F49</color>
+    <color name="colorPrimaryContainer">#0C4A6E</color>
+    <color name="colorOnPrimaryContainer">#BAE6FD</color>
     <color name="colorPrimaryVariant">#0EA5E9</color>
-    <color name="colorSecondary">#34D399</color>
-    <color name="colorSecondaryVariant">#10B981</color>
+
+    <!-- Secondary Colors - Dark Mode -->
+    <color name="colorSecondary">#94A3B8</color>
+    <color name="colorOnSecondary">#0F172A</color>
+    <color name="colorSecondaryVariant">#64748B</color>
+    <color name="colorSecondaryContainer">#1E3252</color>
+    <color name="colorOnSecondaryContainer">#CBD5E1</color>
+
+    <!-- Tertiary Colors - Dark Mode -->
+    <color name="colorTertiary">#34D399</color>
+    <color name="colorOnTertiary">#064E3B</color>
+    <color name="colorTertiaryContainer">#065F46</color>
+    <color name="colorOnTertiaryContainer">#A7F3D0</color>
+
+    <!-- Error Colors - Dark Mode -->
+    <color name="colorError">#F87171</color>
+    <color name="colorOnError">#7F1D1D</color>
+    <color name="colorErrorContainer">#7F1D1D</color>
+    <color name="colorOnErrorContainer">#FEE2E2</color>
 
     <!-- Background & Surface - Dark Mode -->
     <color name="colorBackground">#0F172A</color>
+    <color name="colorOnBackground">#F1F5F9</color>
     <color name="colorSurface">#1E293B</color>
+    <color name="colorOnSurface">#F1F5F9</color>
     <color name="colorSurfaceVariant">#334155</color>
-    
+    <color name="colorOnSurfaceVariant">#CBD5E1</color>
+
     <!-- UI Surfaces with subtle contrast -->
     <color name="colorTopBar">#1A2332</color>
     <color name="colorBottomNav">#1A2332</color>
+
+    <!-- Outline - Dark Mode -->
+    <color name="colorOutline">#475569</color>
+    <color name="colorOutlineVariant">#334155</color>
 
     <!-- Text Colors - Dark Mode -->
     <color name="colorTextPrimary">#F1F5F9</color>
     <color name="colorTextSecondary">#94A3B8</color>
     <color name="colorTextTertiary">#64748B</color>
+    <color name="colorTextHint">#475569</color>
+    <color name="colorTextOnPrimary">#082F49</color>
 
     <!-- Status Colors - Dark Mode -->
-    <color name="colorError">#F87171</color>
     <color name="colorSuccess">#34D399</color>
     <color name="colorWarning">#FBBF24</color>
+    <color name="colorWarningContainer">#78350F</color>
+    <color name="colorOnWarning">#1C0A00</color>
     <color name="colorInfo">#60A5FA</color>
+
+    <!-- Card - Dark Mode -->
+    <color name="cardBackground">#1E293B</color>
+    <color name="cardBorder">#2D3F55</color>
+    <color name="cardStroke">#334155</color>
+
+    <!-- Bottom Nav - Dark Mode -->
+    <color name="bottomNavBackground">#1E293B</color>
+    <color name="bottomNavActive">#38BDF8</color>
+    <color name="bottomNavInactive">#64748B</color>
+    <color name="bottomNavPremiumBg">#1E293B</color>
+
+    <!-- FAB - Dark Mode -->
+    <color name="fabBackground">#38BDF8</color>
+    <color name="fabIcon">#082F49</color>
+    <color name="fabIconTint">#082F49</color>
+
+    <!-- Chip - Dark Mode -->
+    <color name="chipActiveBg">#38BDF8</color>
+    <color name="chipActiveText">#082F49</color>
+    <color name="chipInactiveBg">#334155</color>
+    <color name="chipInactiveText">#CBD5E1</color>
+    <color name="chipInactiveBorder">#475569</color>
+
+    <!-- Input - Dark Mode -->
+    <color name="inputBackground">#1E293B</color>
+    <color name="inputBorder">#475569</color>
+    <color name="inputBorderFocused">#38BDF8</color>
+
+    <!-- Divider & Border - Dark Mode -->
+    <color name="divider">#334155</color>
+    <color name="dividerColor">#334155</color>
+    <color name="borderColor">#475569</color>
+    <color name="skeleton">#334155</color>
+
+    <!-- Avatar - Dark Mode -->
+    <color name="avatarBackground">#0C4A6E</color>
+    <color name="avatarBorder">#2D3F55</color>
+    <color name="avatarText">#38BDF8</color>
+
+    <!-- Badge - Dark Mode -->
+    <color name="badgeRed">#F87171</color>
+    <color name="badgeText">#FFFFFF</color>
+
+    <!-- Toggle - Dark Mode -->
+    <color name="toggleOn">#38BDF8</color>
+    <color name="toggleOff">#475569</color>
+    <color name="toggleThumb">#FFFFFF</color>
+
+    <!-- Priority Backgrounds - Dark Mode -->
+    <color name="priorityHighBg">#450A0A</color>
+    <color name="priorityHighText">#F87171</color>
+    <color name="priorityMediumBg">#431407</color>
+    <color name="priorityMediumText">#FBBF24</color>
+    <color name="priorityLowBg">#172554</color>
+    <color name="priorityLowText">#60A5FA</color>
+
+    <!-- Priority Colors - Dark Mode -->
+    <color name="priorityHigh">#F87171</color>
+    <color name="priorityMedium">#FBBF24</color>
+    <color name="priorityLow">#60A5FA</color>
+
+    <!-- Status Backgrounds - Dark Mode -->
+    <color name="statusPendingBg">#1E293B</color>
+    <color name="statusPendingText">#94A3B8</color>
+    <color name="statusInProgressBg">#0C4A6E</color>
+    <color name="statusInProgressText">#38BDF8</color>
+    <color name="statusDoneBg">#064E3B</color>
+    <color name="statusDoneText">#34D399</color>
+    <color name="statusOverdueBg">#450A0A</color>
+    <color name="statusOverdueText">#F87171</color>
+
+    <!-- Notifications - Dark Mode -->
+    <color name="notifTaskAssigned">#38BDF8</color>
+    <color name="notifDueSoon">#FBBF24</color>
+    <color name="notifOverdue">#F87171</color>
+    <color name="notifComment">#A78BFA</color>
+    <color name="notifExpense">#34D399</color>
+    <color name="notifMemberJoined">#34D399</color>
+    <color name="notifDigest">#A78BFA</color>
+
+    <!-- Balance Colors - Dark Mode -->
+    <color name="balancePositive">#34D399</color>
+    <color name="balanceNegative">#F87171</color>
+    <color name="balanceNeutral">#94A3B8</color>
+
+    <!-- Members - Dark Mode -->
+    <color name="memberColor1">#38BDF8</color>
+    <color name="memberColor2">#FBBF24</color>
+    <color name="memberColor3">#34D399</color>
+    <color name="memberColor4">#F87171</color>
+    <color name="memberColor5">#A78BFA</color>
+    <color name="memberColor6">#22D3EE</color>
+
+    <!-- Expense Categories - Dark Mode -->
+    <color name="categoryFood">#F472B6</color>
+    <color name="categorySupermarket">#34D399</color>
+    <color name="categoryServices">#60A5FA</color>
+    <color name="categoryCleaning">#22D3EE</color>
+    <color name="categoryTransport">#60A5FA</color>
+    <color name="categoryEntertainment">#A78BFA</color>
+    <color name="categoryHealth">#34D399</color>
+    <color name="categoryOther">#94A3B8</color>
+    <color name="categoryUtilities">#FBBF24</color>
+
+    <!-- State Colors - Dark Mode -->
+    <color name="stateActive">#34D399</color>
+    <color name="stateInactive">#64748B</color>
+    <color name="statePending">#FBBF24</color>
+    <color name="stateCompleted">#60A5FA</color>
 
     <!-- Premium Glass Effects - Dark Mode -->
     <color name="glassSurface">#1A1E293B</color>
     <color name="glassStroke">#33475569</color>
-    <color name="bottomNavPremiumBg">#1E293B</color>
 
     <!-- Gradient Colors - Dark Mode -->
     <color name="gradientStart">#1E293B</color>
@@ -37,7 +176,7 @@
     <color name="gradientAccent1">#1E3A8A</color>
     <color name="gradientAccent2">#065F46</color>
 
-    <!-- Accent Colors - Dark Mode (more vibrant) -->
+    <!-- Accent Colors - Dark Mode -->
     <color name="accentGreen">#34D399</color>
     <color name="accentBlue">#60A5FA</color>
     <color name="accentPurple">#A78BFA</color>
@@ -49,35 +188,17 @@
     <color name="shadowColor">#40000000</color>
     <color name="overlayDark">#CC000000</color>
     <color name="overlayLight">#1AFFFFFF</color>
+    <color name="scrim">#99000000</color>
 
-    <!-- Divider & Border - Dark Mode -->
-    <color name="dividerColor">#334155</color>
-    <color name="borderColor">#475569</color>
-
-    <!-- Specific UI Elements - Dark Mode -->
-    <color name="fabBackground">#38BDF8</color>
-    <color name="fabIconTint">#0F172A</color>
-    <color name="cardBackground">#1E293B</color>
-    <color name="cardStroke">#334155</color>
-
-    <!-- Task Priority Colors - Dark Mode -->
-    <color name="priorityHigh">#F87171</color>
-    <color name="priorityMedium">#FBBF24</color>
-    <color name="priorityLow">#60A5FA</color>
-
-    <!-- Expense Category Colors - Dark Mode -->
-    <color name="categoryFood">#F472B6</color>
-    <color name="categoryTransport">#60A5FA</color>
-    <color name="categoryUtilities">#FBBF24</color>
-    <color name="categoryEntertainment">#A78BFA</color>
-    <color name="categoryHealth">#34D399</color>
-    <color name="categoryOther">#94A3B8</color>
-
-    <!-- State Colors - Dark Mode -->
-    <color name="stateActive">#34D399</color>
-    <color name="stateInactive">#64748B</color>
-    <color name="statePending">#FBBF24</color>
-    <color name="stateCompleted">#60A5FA</color>
+    <!-- Wire aliases - Dark Mode -->
+    <color name="wire_text_primary">@color/colorTextPrimary</color>
+    <color name="wire_text_secondary">@color/colorTextSecondary</color>
+    <color name="wire_text_tertiary">@color/colorTextTertiary</color>
+    <color name="wire_text_hint">@color/colorTextHint</color>
+    <color name="wire_bg">@color/colorBackground</color>
+    <color name="wire_surface">@color/colorSurface</color>
+    <color name="wire_border">@color/colorOutline</color>
+    <color name="wire_border_light">@color/colorOutlineVariant</color>
 
     <!-- Shimmer Effect - Dark Mode -->
     <color name="shimmerBase">#1E293B</color>

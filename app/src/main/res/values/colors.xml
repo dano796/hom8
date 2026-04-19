@@ -90,7 +90,7 @@
     <color name="skeleton">#E2E8F0</color>
 
     <color name="avatarBackground">#E0F2FE</color>
-    <color name="avatarBorder">#BAE6FD</color>
+    <color name="avatarBorder">#E2E8F0</color>
     <color name="avatarText">#0369A1</color>
 
     <color name="chipActiveBg">#0369A1</color>
