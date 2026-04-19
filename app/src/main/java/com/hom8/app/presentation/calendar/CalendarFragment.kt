@@ -305,6 +305,9 @@ class CalendarFragment : Fragment() {
                     setTextColor(ContextCompat.getColor(context, R.color.colorOnPrimary))
                     background = ContextCompat.getDrawable(context, R.drawable.bg_day_selected)
                     setTypeface(this.typeface, Typeface.BOLD)
+                    val circleSize = (cellSize * 0.65f).toInt()
+                    layoutParams = LinearLayout.LayoutParams(circleSize, circleSize)
+                    gravity = android.view.Gravity.CENTER
                 }
                 isToday -> {
                     setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
