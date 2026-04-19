@@ -22,23 +22,28 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+enum class SortOrder { DEFAULT, ALPHA_ASC, ALPHA_DESC }
+
 data class TasksUiState(
     val tasks: List<TaskEntity> = emptyList(),
     val isLoading: Boolean = false,
     val searchQuery: String = "",
     val whoFilter: WhoFilter = WhoFilter.ALL,
-    val priorityFilter: PriorityFilter = PriorityFilter.ALL
+    val priorityFilter: PriorityFilter = PriorityFilter.ALL,
+    val sortOrder: SortOrder = SortOrder.DEFAULT
 ) {
     val filteredTasks: List<TaskEntity>
         get() {
             var result = tasks
-            if (whoFilter == WhoFilter.MINE) {
-                // Filtered by userId in the query, shown here for UI state clarity
-            }
             result = when (priorityFilter) {
                 PriorityFilter.HIGH -> result.filter { it.prioridad == "ALTA" }
                 PriorityFilter.MEDIUM -> result.filter { it.prioridad == "MEDIA" }
                 PriorityFilter.LOW -> result.filter { it.prioridad == "BAJA" }
+                else -> result
+            }
+            result = when (sortOrder) {
+                SortOrder.ALPHA_ASC -> result.sortedBy { it.titulo.lowercase() }
+                SortOrder.ALPHA_DESC -> result.sortedByDescending { it.titulo.lowercase() }
                 else -> result
             }
             return result
@@ -109,6 +114,17 @@ class TasksViewModel @Inject constructor(
 
     fun setPriorityFilter(filter: PriorityFilter) {
         _uiState.update { it.copy(priorityFilter = filter) }
+    }
+
+    fun toggleSort() {
+        _uiState.update { state ->
+            val next = when (state.sortOrder) {
+                SortOrder.DEFAULT -> SortOrder.ALPHA_ASC
+                SortOrder.ALPHA_ASC -> SortOrder.ALPHA_DESC
+                SortOrder.ALPHA_DESC -> SortOrder.DEFAULT
+            }
+            state.copy(sortOrder = next)
+        }
     }
 
     fun toggleTaskDone(task: TaskEntity) {

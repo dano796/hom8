@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,6 +39,7 @@ class TasksListFragment : Fragment() {
     private lateinit var chipGroupPriority: ChipGroup
     private lateinit var etSearch: TextInputEditText
     private lateinit var fabAddTask: FloatingActionButton
+    private lateinit var btnSortTasks: ImageButton
     private lateinit var tasksAdapter: TasksAdapter
 
     override fun onCreateView(
@@ -61,6 +64,7 @@ class TasksListFragment : Fragment() {
         chipGroupPriority = view.findViewById(R.id.chipGroupPriority)
         etSearch = view.findViewById(R.id.etSearch)
         fabAddTask = view.findViewById(R.id.fabAddTask)
+        btnSortTasks = view.findViewById(R.id.btnSortTasks)
     }
 
     private fun setupAdapter() {
@@ -86,6 +90,10 @@ class TasksListFragment : Fragment() {
             val action = TasksListFragmentDirections
                 .actionTasksListToCreateTask(null)
             findNavController().navigate(action)
+        }
+
+        btnSortTasks.setOnClickListener {
+            viewModel.toggleSort()
         }
 
         etSearch.addTextChangedListener { text ->
@@ -122,6 +130,12 @@ class TasksListFragment : Fragment() {
                     )
                     layoutEmpty.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
                     rvTasks.visibility = if (filtered.isEmpty()) View.GONE else View.VISIBLE
+
+                    val sortActive = state.sortOrder != SortOrder.DEFAULT
+                    btnSortTasks.imageTintList = if (sortActive)
+                        ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
+                    else
+                        ContextCompat.getColorStateList(requireContext(), R.color.colorTextPrimary)
                 }
             }
         }
@@ -141,10 +155,6 @@ class TasksListFragment : Fragment() {
                 R.id.menuDeleteTask -> {
                     viewModel.deleteTask(task)
                     Snackbar.make(requireView(), R.string.tasks_deleted_message, Snackbar.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.menuToggleComplete -> {
-                    viewModel.toggleTaskDone(task)
                     true
                 }
                 else -> false
