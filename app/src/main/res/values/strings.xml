@@ -20,7 +20,7 @@
     <string name="action_log_out">CERRAR SESIÓN</string>
     <string name="action_continue">CONTINUAR</string>
     <string name="action_mark_all">Marcar todo</string>
-    <string name="action_see_all">Ver todo →</string>
+    <string name="action_see_all">Ver todo</string>
     <string name="action_see_details">Ver detalles →</string>
 
     <!-- Onboarding -->
@@ -78,7 +78,8 @@
     <string name="tasks_attach_hint">Adjuntar imagen o documento</string>
     <string name="tasks_initial_comment">Comentario inicial</string>
     <string name="tasks_comment_hint">Deja una nota para el asignado…</string>
-    <string name="tasks_mark_complete">✓ MARCAR COMO COMPLETADA</string>
+    <string name="tasks_mark_complete">MARCAR COMO COMPLETADA</string>
+    <string name="tasks_mark_pending">MARCAR COMO PENDIENTE</string>
     <string name="tasks_task_detail">Detalle de la Tarea</string>
     <string name="tasks_details">DETALLES</string>
     <string name="tasks_description">DESCRIPCIÓN</string>
