@@ -148,15 +148,15 @@
     </style>
 
     <style name="Widget.Hom8.BottomNav.ActiveIndicator" parent="">
-        <item name="android:width">64dp</item>
-        <item name="android:height">32dp</item>
+        <item name="android:width">40dp</item>
+        <item name="android:height">36dp</item>
         <item name="android:color">@color/colorPrimaryContainer</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Hom8.BottomNav.ActiveIndicator</item>
     </style>
 
     <style name="ShapeAppearance.Hom8.BottomNav.ActiveIndicator" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">12dp</item>
     </style>
 
     <style name="Widget.Hom8.Card.Glass" parent="Widget.Hom8.Card">

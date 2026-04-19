@@ -89,7 +89,7 @@
                 style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing2"
+                android:layout_marginTop="@dimen/spacing4"
                 app:layout_constraintTop_toBottomOf="@id/cardPersonalInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -211,7 +211,7 @@
                 style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing2"
+                android:layout_marginTop="@dimen/spacing4"
                 app:layout_constraintTop_toBottomOf="@id/cardStats"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -222,14 +222,6 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:padding="@dimen/spacing3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/jetbrains_mono"
-                        android:text="🌙"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="@dimen/spacing2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -258,7 +250,7 @@
                 style="@style/Widget.Hom8.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing2"
+                android:layout_marginTop="@dimen/spacing4"
                 app:layout_constraintTop_toBottomOf="@id/cardDarkMode"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">

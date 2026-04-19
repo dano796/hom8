@@ -39,6 +39,7 @@
         app:itemIconTint="@color/bottom_nav_color_premium"
         app:itemTextColor="@color/bottom_nav_color_premium"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:itemActiveIndicatorStyle="@style/Widget.Hom8.BottomNav.ActiveIndicator" />
 
 </LinearLayout>

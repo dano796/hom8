@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing3"
             android:fontFamily="@font/jetbrains_mono"
-            android:text="Balances →"
+            android:text="@string/expenses_balance"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 
