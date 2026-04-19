@@ -23,7 +23,7 @@
             android:id="@+id/etRegisterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:inputType="textPersonName"
             android:textColor="@color/colorTextPrimary"
             android:textSize="13sp" />
@@ -46,7 +46,7 @@
             android:id="@+id/etRegisterEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorTextPrimary"
             android:textSize="13sp" />
@@ -69,7 +69,7 @@
             android:id="@+id/etRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:inputType="textPassword"
             android:textColor="@color/colorTextPrimary"
             android:textSize="13sp" />

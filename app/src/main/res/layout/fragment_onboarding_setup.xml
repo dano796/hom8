@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:text="@string/onboarding_setup_title"
             android:textColor="@color/colorTextPrimary"
             android:textSize="24sp"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:text="@string/onboarding_setup_subtitle"
             android:textColor="@color/colorTextSecondary"
             android:textSize="13sp" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@color/colorErrorContainer"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:textColor="@color/colorError"
@@ -91,7 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_create_home"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="15sp"
@@ -100,7 +100,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_create_home_desc"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
@@ -135,7 +135,7 @@
                             android:id="@+id/etHomeName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:inputType="textCapWords"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="13sp" />
@@ -194,7 +194,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_join_home"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="15sp"
@@ -203,7 +203,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_join_home_desc"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
@@ -238,7 +238,7 @@
                             android:id="@+id/etInviteCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:inputType="textCapCharacters"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="13sp" />
@@ -258,7 +258,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="32dp"
             android:enabled="false"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:text="@string/action_continue"
             android:textSize="14sp"
             android:textStyle="bold"

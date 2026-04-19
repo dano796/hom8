@@ -44,7 +44,7 @@
             android:id="@+id/tvActivityText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/colorTextSecondary"
@@ -55,7 +55,7 @@
             android:id="@+id/tvActivityTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:textColor="@color/colorTextTertiary"
             android:textSize="10sp"
             tools:text="2h ago" />

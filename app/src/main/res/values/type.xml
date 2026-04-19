@@ -4,8 +4,8 @@
 
     <!-- Display -->
     <style name="Wire.TextAppearance.Display" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
@@ -16,8 +16,8 @@
 
     <!-- Heading -->
     <style name="Wire.TextAppearance.Heading" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
@@ -28,24 +28,24 @@
 
     <!-- Title -->
     <style name="Wire.TextAppearance.Title" parent="TextAppearance.Material3.TitleMedium">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <!-- Subtitle -->
     <style name="Wire.TextAppearance.Subtitle" parent="TextAppearance.Material3.TitleSmall">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <!-- Body -->
     <style name="Wire.TextAppearance.Body" parent="TextAppearance.Material3.BodyMedium">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
@@ -56,16 +56,16 @@
 
     <!-- Caption -->
     <style name="Wire.TextAppearance.Caption" parent="TextAppearance.Material3.LabelSmall">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/colorTextTertiary</item>
     </style>
 
     <!-- Label (uppercase, tracking) -->
     <style name="Wire.TextAppearance.Label" parent="TextAppearance.Material3.LabelMedium">
-        <item name="fontFamily">@font/jetbrains_mono</item>
-        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/colorTextTertiary</item>
         <item name="android:textAllCaps">true</item>

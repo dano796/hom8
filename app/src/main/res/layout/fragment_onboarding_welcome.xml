@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/jetbrains_mono"
+                    android:fontFamily="@font/plus_jakarta_sans"
                     android:text="HF"
                     android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/jetbrains_mono"
+                android:fontFamily="@font/plus_jakarta_sans"
                 android:text="HomeFlow"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="28sp"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/jetbrains_mono"
+                android:fontFamily="@font/plus_jakarta_sans"
                 android:text="@string/onboarding_tagline"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp" />
@@ -109,7 +109,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_tasks"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp"
@@ -118,7 +118,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_tasks_desc"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
@@ -169,7 +169,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_expenses"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp"
@@ -178,7 +178,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_expenses_desc"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_sync"
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp"
@@ -238,7 +238,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/jetbrains_mono"
+                            android:fontFamily="@font/plus_jakarta_sans"
                             android:text="@string/onboarding_feature_sync_desc"
                             android:textColor="@color/colorTextTertiary"
                             android:textSize="12sp" />
@@ -257,7 +257,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:text="@string/action_create_account"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -269,7 +269,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/jetbrains_mono"
+            android:fontFamily="@font/plus_jakarta_sans"
             android:text="@string/onboarding_have_account"
             android:textSize="13sp"
             app:cornerRadius="12dp" />
