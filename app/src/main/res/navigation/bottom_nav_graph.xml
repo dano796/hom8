@@ -24,7 +24,20 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_dashboard_to_notifications"
+            app:destination="@id/notificationsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <!-- Notifications -->
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.hom8.app.presentation.notifications.NotificationsFragment"
+        android:label="Notifications" />
 
     <!-- Tasks List -->
     <fragment

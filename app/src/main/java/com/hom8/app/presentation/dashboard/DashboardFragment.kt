@@ -140,7 +140,8 @@ class DashboardFragment : Fragment() {
         }
 
         btnNotifications.setOnClickListener {
-            // Notifications screen to be added in future phase
+            val action = DashboardFragmentDirections.actionDashboardToNotifications()
+            findNavController().navigate(action)
         }
 
         tvSeeAllTasks.setOnClickListener {
