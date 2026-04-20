@@ -62,6 +62,10 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profile_to_houseMembers)
         }
 
+        view.findViewById<MaterialButton>(R.id.btnCredits).setOnClickListener {
+            showCreditsDialog()
+        }
+
         view.findViewById<MaterialButton>(R.id.btnLogOut).setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Cerrar sesión")
@@ -145,5 +149,19 @@ class ProfileFragment : Fragment() {
         }
         
         startActivity(Intent.createChooser(shareIntent, "Compartir invitación"))
+    }
+
+    private fun showCreditsDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_credits, null)
+        
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogView)
+            .create()
+        
+        dialogView.findViewById<MaterialButton>(R.id.btnCloseCredits).setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        dialog.show()
     }
 }

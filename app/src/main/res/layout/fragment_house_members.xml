@@ -36,6 +36,14 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/ivAppLogo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="Hom8 Logo"
+            android:src="@drawable/ic_logo_hom8" />
+
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

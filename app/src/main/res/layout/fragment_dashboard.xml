@@ -45,6 +45,15 @@
 
         </LinearLayout>
 
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/ivAppLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/spacing2"
+            android:contentDescription="Hom8 Logo"
+            android:src="@drawable/ic_logo_hom8" />
+
         <!-- Touch target size: min 48dp x 48dp -->
         <ImageButton
             android:id="@+id/btnNotifications"
