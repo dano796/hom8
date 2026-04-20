@@ -68,8 +68,9 @@
             android:text="@string/onboarding_google_sso"
             android:textSize="13sp"
             app:cornerRadius="12dp"
-            app:icon="@drawable/ic_home"
-            app:iconTint="@color/colorPrimary" />
+            app:icon="@drawable/ic_google"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
 
         <!-- Divider -->
         <LinearLayout

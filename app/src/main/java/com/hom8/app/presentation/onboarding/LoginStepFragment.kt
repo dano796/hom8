@@ -1,17 +1,24 @@
 package com.hom8.app.presentation.onboarding
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +32,50 @@ import kotlinx.coroutines.launch
 class LoginStepFragment : Fragment() {
 
     private val viewModel: OnboardingViewModel by viewModels({ requireParentFragment() })
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                account.idToken?.let { token ->
+                    Log.d("LoginStepFragment", "Google Sign-In exitoso, token obtenido")
+                    viewModel.signInWithGoogle(token)
+                } ?: run {
+                    Log.e("LoginStepFragment", "No se pudo obtener el idToken")
+                    Snackbar.make(
+                        requireView(),
+                        "Error al obtener credenciales de Google",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            } catch (e: ApiException) {
+                Log.e("LoginStepFragment", "Error en Google Sign-In: ${e.statusCode}", e)
+                Snackbar.make(
+                    requireView(),
+                    "Error al iniciar sesión con Google: ${e.message}",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        } else {
+            Log.d("LoginStepFragment", "Google Sign-In cancelado por el usuario")
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        // Configurar Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +93,7 @@ class LoginStepFragment : Fragment() {
         val tvError = view.findViewById<TextView>(R.id.tvLoginError)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressLogin)
         val btnSignIn = view.findViewById<MaterialButton>(R.id.btnSignIn)
+        val btnGoogleSignIn = view.findViewById<MaterialButton>(R.id.btnGoogleSignIn)
 
         // Back → Welcome
         view.findViewById<ImageButton>(R.id.btnBackSignIn).setOnClickListener {
@@ -57,13 +109,11 @@ class LoginStepFragment : Fragment() {
             }
         }
 
-        // Google (placeholder)
-        view.findViewById<MaterialButton>(R.id.btnGoogleSignIn).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.dialog_google_signin_title))
-                .setMessage(getString(R.string.dialog_google_signin_message))
-                .setPositiveButton(getString(R.string.dialog_ok), null)
-                .show()
+        // Google Sign-In
+        btnGoogleSignIn.setOnClickListener {
+            Log.d("LoginStepFragment", "Iniciando Google Sign-In")
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(signInIntent)
         }
 
         // Forgot password
@@ -97,6 +147,7 @@ class LoginStepFragment : Fragment() {
                 viewModel.uiState.collect { state ->
                     progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
                     btnSignIn.isEnabled = !state.isLoading
+                    btnGoogleSignIn.isEnabled = !state.isLoading
 
                     if (state.error != null) {
                         tvError.text = state.error
