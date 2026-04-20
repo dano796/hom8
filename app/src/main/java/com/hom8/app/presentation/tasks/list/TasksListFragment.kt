@@ -26,11 +26,15 @@ import com.google.android.material.textfield.TextInputEditText
 import com.hom8.app.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TasksListFragment : Fragment() {
 
     private val viewModel: TasksViewModel by viewModels()
+    
+    @Inject
+    lateinit var session: com.hom8.app.util.SessionManager
 
     private lateinit var rvTasks: RecyclerView
     private lateinit var tvTaskCount: TextView
@@ -69,7 +73,17 @@ class TasksListFragment : Fragment() {
 
     private fun setupAdapter() {
         tasksAdapter = TasksAdapter(
-            onToggleDone = { task -> viewModel.toggleTaskDone(task) },
+            currentUserId = session.userId,
+            onToggleDone = { task -> 
+                val success = viewModel.toggleTaskDone(task)
+                if (!success) {
+                    Snackbar.make(
+                        requireView(), 
+                        "Solo el responsable de la tarea puede marcarla como completada", 
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            },
             onItemClick = { task ->
                 val action = TasksListFragmentDirections
                     .actionTasksListToTaskDetail(task.id)
@@ -77,6 +91,13 @@ class TasksListFragment : Fragment() {
             },
             onMenuClick = { task, anchor ->
                 showTaskMenu(task, anchor)
+            },
+            onUnauthorizedToggle = { task ->
+                Snackbar.make(
+                    requireView(), 
+                    "Solo el responsable de la tarea puede marcarla como completada", 
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         )
         rvTasks.apply {

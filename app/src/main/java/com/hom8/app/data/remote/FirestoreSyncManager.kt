@@ -38,6 +38,7 @@ class FirestoreSyncManager @Inject constructor(
     private val listeners = mutableListOf<ListenerRegistration>()
 
     fun startSync(hogarId: String) {
+        android.util.Log.d("FirestoreSyncManager", "🚀 Starting sync for home: $hogarId")
         stopSync()
         listenToTasks(hogarId)
         listenToExpenses(hogarId)
@@ -45,9 +46,11 @@ class FirestoreSyncManager @Inject constructor(
         listenToHome(hogarId)
         listenToUsers(hogarId)
         listenToUserStats(hogarId)
+        android.util.Log.d("FirestoreSyncManager", "✅ All listeners started for home: $hogarId")
     }
 
     fun stopSync() {
+        android.util.Log.d("FirestoreSyncManager", "🛑 Stopping sync (${listeners.size} listeners)")
         listeners.forEach { it.remove() }
         listeners.clear()
     }
@@ -57,22 +60,42 @@ class FirestoreSyncManager @Inject constructor(
     private fun listenToTasks(hogarId: String) {
         val reg = firestore.collection("homes/$hogarId/tasks")
             .addSnapshotListener { snapshot, error ->
-                if (error != null || snapshot == null) return@addSnapshotListener
+                if (error != null) {
+                    android.util.Log.e("FirestoreSyncManager", "❌ Error listening to tasks: ${error.message}", error)
+                    return@addSnapshotListener
+                }
+                if (snapshot == null) {
+                    android.util.Log.w("FirestoreSyncManager", "⚠️ Tasks snapshot is null")
+                    return@addSnapshotListener
+                }
+                
+                android.util.Log.d("FirestoreSyncManager", "📥 Received ${snapshot.documentChanges.size} task changes for home $hogarId")
+                
                 scope.launch {
                     snapshot.documentChanges.forEach { change ->
                         when (change.type) {
-                            DocumentChange.Type.ADDED,
+                            DocumentChange.Type.ADDED -> {
+                                change.document.toTask(hogarId)?.let { 
+                                    taskDao.insertTask(it)
+                                    android.util.Log.d("FirestoreSyncManager", "✅ Task ADDED: ${it.id} - ${it.titulo}")
+                                }
+                            }
                             DocumentChange.Type.MODIFIED -> {
-                                change.document.toTask(hogarId)?.let { taskDao.insertTask(it) }
+                                change.document.toTask(hogarId)?.let { 
+                                    taskDao.insertTask(it)
+                                    android.util.Log.d("FirestoreSyncManager", "✅ Task MODIFIED: ${it.id} - ${it.titulo}")
+                                }
                             }
                             DocumentChange.Type.REMOVED -> {
                                 taskDao.deleteTaskById(change.document.id)
+                                android.util.Log.d("FirestoreSyncManager", "✅ Task REMOVED: ${change.document.id}")
                             }
                         }
                     }
                 }
             }
         listeners.add(reg)
+        android.util.Log.d("FirestoreSyncManager", "🎧 Started listening to tasks for home: $hogarId")
     }
 
     // ─── Expenses ─────────────────────────────────────────────────────────────
@@ -196,8 +219,16 @@ class FirestoreSyncManager @Inject constructor(
 
     // ─── Firestore document → Entity ─────────────────────────────────────────
 
+    @Suppress("UNCHECKED_CAST")
     private fun com.google.firebase.firestore.DocumentSnapshot.toTask(hogarId: String): TaskEntity? {
         return try {
+            // Convertir arrays nativos de Firestore a JSON strings para Room
+            val etiquetasArray = get("etiquetas") as? List<*> ?: emptyList<Any>()
+            val checklistArray = get("checklist") as? List<*> ?: emptyList<Any>()
+            val comentariosArray = get("comentarios") as? List<*> ?: emptyList<Any>()
+            val actividadArray = get("actividad") as? List<*> ?: emptyList<Any>()
+            val adjuntosArray = get("adjuntos") as? List<*> ?: emptyList<Any>()
+            
             TaskEntity(
                 id = getString("id") ?: id,
                 titulo = getString("titulo") ?: return null,
@@ -209,20 +240,27 @@ class FirestoreSyncManager @Inject constructor(
                 prioridad = getString("prioridad") ?: "MEDIA",
                 estado = getString("estado") ?: "PENDIENTE",
                 recurrencia = getString("recurrencia"),
-                etiquetas = getString("etiquetas") ?: "[]",
-                checklist = getString("checklist") ?: "[]",
-                comentarios = getString("comentarios") ?: "[]",
-                actividad = getString("actividad") ?: "[]",
-                adjuntos = getString("adjuntos") ?: "[]",
+                etiquetas = com.google.gson.Gson().toJson(etiquetasArray),
+                checklist = com.google.gson.Gson().toJson(checklistArray),
+                comentarios = com.google.gson.Gson().toJson(comentariosArray),
+                actividad = com.google.gson.Gson().toJson(actividadArray),
+                adjuntos = com.google.gson.Gson().toJson(adjuntosArray),
                 creadoEn = getLong("creadoEn") ?: System.currentTimeMillis(),
                 actualizadoEn = getLong("actualizadoEn") ?: System.currentTimeMillis(),
                 synced = 1
             )
-        } catch (e: Exception) { null }
+        } catch (e: Exception) { 
+            android.util.Log.e("FirestoreSyncManager", "❌ Error converting task document ${this.id}: ${e.message}", e)
+            null 
+        }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun com.google.firebase.firestore.DocumentSnapshot.toExpense(hogarId: String): ExpenseEntity? {
         return try {
+            // Convertir array nativo de Firestore a JSON string para Room
+            val participantesArray = get("participantes") as? List<*> ?: emptyList<Any>()
+            
             ExpenseEntity(
                 id = getString("id") ?: id,
                 descripcion = getString("descripcion") ?: return null,
@@ -232,10 +270,13 @@ class FirestoreSyncManager @Inject constructor(
                 hogarId = getString("hogarId") ?: hogarId,
                 fecha = getLong("fecha") ?: System.currentTimeMillis(),
                 nota = getString("nota") ?: "",
-                participantes = getString("participantes") ?: "[]",
+                participantes = com.google.gson.Gson().toJson(participantesArray),
                 synced = 1
             )
-        } catch (e: Exception) { null }
+        } catch (e: Exception) { 
+            android.util.Log.e("FirestoreSyncManager", "❌ Error converting expense document ${this.id}: ${e.message}", e)
+            null 
+        }
     }
 
     private fun com.google.firebase.firestore.DocumentSnapshot.toActivityLog(hogarId: String): ActivityLogEntity? {

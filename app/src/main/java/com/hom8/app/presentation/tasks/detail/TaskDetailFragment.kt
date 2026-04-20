@@ -57,7 +57,15 @@ class TaskDetailFragment : Fragment() {
         }
 
         view.findViewById<MaterialButton>(R.id.btnMarkComplete).setOnClickListener {
-            viewModel.toggleComplete()
+            val state = viewModel.uiState.value
+            if (state.canToggleComplete) {
+                viewModel.toggleComplete()
+            } else {
+                // Mostrar mensaje explicando por qué no puede completar la tarea
+                state.toggleDisabledReason?.let { reason ->
+                    Snackbar.make(requireView(), reason, Snackbar.LENGTH_LONG).show()
+                }
+            }
         }
 
         viewModel.loadTask(args.taskId)
@@ -124,7 +132,18 @@ class TaskDetailFragment : Fragment() {
         val isDone = task.estado == "TERMINADO"
         view.findViewById<MaterialButton>(R.id.btnMarkComplete).apply {
             text = if (isDone) getString(R.string.tasks_mark_pending) else getString(R.string.tasks_mark_complete)
-            isEnabled = true
+            
+            // Habilitar/deshabilitar según si el usuario es el responsable
+            val state = viewModel.uiState.value
+            isEnabled = state.canToggleComplete
+            alpha = if (state.canToggleComplete) 1.0f else 0.5f
+            
+            // Cambiar el estilo visual cuando está deshabilitado
+            if (!state.canToggleComplete) {
+                setTextColor(ContextCompat.getColor(ctx, R.color.colorTextSecondary))
+            } else {
+                setTextColor(ContextCompat.getColor(ctx, R.color.white))
+            }
         }
 
         // Created by row — show only when creadoPor is set

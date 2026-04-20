@@ -24,9 +24,11 @@ import java.util.Date
 import java.util.Locale
 
 class TasksAdapter(
+    private val currentUserId: String,
     private val onToggleDone: (TaskEntity) -> Unit,
     private val onItemClick: (TaskEntity) -> Unit,
-    private val onMenuClick: (TaskEntity, View) -> Unit
+    private val onMenuClick: (TaskEntity, View) -> Unit,
+    private val onUnauthorizedToggle: (TaskEntity) -> Unit
 ) : ListAdapter<TaskEntity, TasksAdapter.ViewHolder>(DIFF) {
 
     private val gson = Gson()
@@ -66,6 +68,11 @@ class TasksAdapter(
 
         // Checkbox
         holder.cbDone.isChecked = isDone
+        
+        // Verificar si el usuario actual puede completar esta tarea
+        val canToggle = task.responsableId == currentUserId
+        holder.cbDone.isEnabled = canToggle
+        holder.cbDone.alpha = if (canToggle) 1.0f else 0.5f
 
         // Priority badge
         when (task.prioridad) {
@@ -138,7 +145,13 @@ class TasksAdapter(
         }
 
         // Click listeners
-        holder.cbDone.setOnClickListener { onToggleDone(task) }
+        holder.cbDone.setOnClickListener { 
+            if (task.responsableId == currentUserId) {
+                onToggleDone(task)
+            } else {
+                onUnauthorizedToggle(task)
+            }
+        }
         holder.itemView.setOnClickListener { onItemClick(task) }
         holder.btnMenu.setOnClickListener { onMenuClick(task, holder.btnMenu) }
     }
