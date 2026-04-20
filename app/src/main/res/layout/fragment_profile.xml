@@ -37,11 +37,19 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/topBarHeight"
-        android:padding="@dimen/spacing4">
+        android:overScrollMode="never"
+        android:fillViewport="true"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing4">
 
             <!-- Personal info card -->
             <com.google.android.material.card.MaterialCardView
@@ -357,8 +365,7 @@
                 android:layout_marginTop="@dimen/spacing3"
                 app:layout_constraintTop_toBottomOf="@id/cardMyHome"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <!-- Manage Homes button -->
                 <com.google.android.material.button.MaterialButton
@@ -421,6 +428,8 @@
 
             </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

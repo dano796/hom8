@@ -149,23 +149,22 @@ class BalancesFragment : Fragment() {
         val tvDebtDesc = TextView(context).apply {
             typeface = ResourcesCompat.getFont(context, R.font.jetbrains_mono)
             val arrow = if (debt.isYouDebtor) "→" else "←"
+            // Formato limpio: "Nombre ← Nombre: $XX.XXX"
             text = "${debt.fromName} $arrow ${debt.toName}: ${currencyFmt.format(debt.amount)}"
             setTextColor(ContextCompat.getColor(context, R.color.colorTextPrimary))
-            textSize = 13f
+            textSize = 14f
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         }
         row.addView(tvDebtDesc)
 
         if (debt.isYouDebtor) {
-            val btnPay = MaterialButton(context, null, com.google.android.material.R.attr.materialButtonStyle).apply {
-                text = getString(R.string.expenses_pay)
-                setTextColor(ContextCompat.getColor(context, R.color.colorOnPrimary))
-                backgroundTintList = android.content.res.ColorStateList.valueOf(
-                    ContextCompat.getColor(context, R.color.colorPrimary)
-                )
-                textSize = 11f
-                cornerRadius = 8
-                setPadding(24, 8, 24, 8)
+            val btnPay = MaterialButton(context, null, com.google.android.material.R.attr.materialButtonOutlinedStyle).apply {
+                text = "Pagar"
+                setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                textSize = 12f
+                cornerRadius = resources.getDimensionPixelSize(R.dimen.spacing2)
+                val px = resources.getDimensionPixelSize(R.dimen.spacing2)
+                setPadding(px * 2, px, px * 2, px)
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
