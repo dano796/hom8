@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- HomeFlow Typography System - JetBrains Mono -->
+    <!-- Hom8 Typography System -->
 
     <!-- Display -->
     <style name="Wire.TextAppearance.Display" parent="TextAppearance.Material3.DisplaySmall">

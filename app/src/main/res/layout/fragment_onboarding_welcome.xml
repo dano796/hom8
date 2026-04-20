@@ -25,7 +25,7 @@
                 android:id="@+id/ivOnboardingLogo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="HomeFlow Logo"
+                android:contentDescription="Hom8 Logo"
                 android:src="@drawable/ic_logo_hom8" />
 
             <TextView
@@ -33,9 +33,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-8dp"
                 android:fontFamily="@font/plus_jakarta_sans"
-                android:text="HomeFlow"
+                android:text="@string/app_name"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="28sp"
+                android:textSize="36sp"
+                android:letterSpacing="-0.02"
                 android:textStyle="bold" />
 
             <TextView
