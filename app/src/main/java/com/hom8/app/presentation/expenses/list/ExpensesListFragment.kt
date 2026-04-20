@@ -117,20 +117,46 @@ class ExpensesListFragment : Fragment() {
 
     private fun showModeDialog() {
         val currentMode = viewModel.uiState.value.isSplitMode
-        val options = arrayOf(
-            "Dividir gastos — compartir costos y saldos",
-            "Solo seguimiento — registrar gastos sin dividir"
-        )
-        val checkedItem = if (currentMode) 0 else 1
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Modo de gastos")
-            .setSingleChoiceItems(options, checkedItem) { dialog, which ->
-                viewModel.setExpensesMode(which == 0)
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        
+        val dialogView = layoutInflater.inflate(R.layout.dialog_expense_mode, null)
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogView)
+            .setBackground(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            .create()
+        
+        // Make dialog background transparent
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        
+        val cardSplitMode = dialogView.findViewById<View>(R.id.cardSplitMode)
+        val cardTrackingMode = dialogView.findViewById<View>(R.id.cardTrackingMode)
+        val radioSplitMode = dialogView.findViewById<android.widget.RadioButton>(R.id.radioSplitMode)
+        val radioTrackingMode = dialogView.findViewById<android.widget.RadioButton>(R.id.radioTrackingMode)
+        val btnCancel = dialogView.findViewById<View>(R.id.btnCancel)
+        
+        // Set initial selection
+        radioSplitMode.isChecked = currentMode
+        radioTrackingMode.isChecked = !currentMode
+        
+        // Handle card clicks
+        cardSplitMode.setOnClickListener {
+            radioSplitMode.isChecked = true
+            radioTrackingMode.isChecked = false
+            viewModel.setExpensesMode(true)
+            dialog.dismiss()
+        }
+        
+        cardTrackingMode.setOnClickListener {
+            radioSplitMode.isChecked = false
+            radioTrackingMode.isChecked = true
+            viewModel.setExpensesMode(false)
+            dialog.dismiss()
+        }
+        
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        dialog.show()
     }
 
     private fun observeState(view: View) {

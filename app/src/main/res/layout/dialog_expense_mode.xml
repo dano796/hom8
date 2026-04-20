@@ -1,60 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing4"
+    app:cardBackgroundColor="@color/colorSurface"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="@dimen/spacing5">
 
-    <TextView
+    <!-- Header con icono -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Modo de gastos"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorOnSurface"
-        android:layout_marginBottom="8dp" />
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/spacing3"
+        android:orientation="horizontal">
 
-    <TextView
+        <!-- Icono de configuración -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing3"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/colorPrimaryContainer">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_settings_expense"
+                app:tint="@color/colorPrimary" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/plus_jakarta_sans"
+                android:text="Modo de gastos"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/plus_jakarta_sans"
+                android:text="Elige cómo gestionar los gastos"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Elige cómo quieres gestionar los gastos de tu hogar"
-        android:textSize="14sp"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:layout_marginBottom="24dp" />
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/spacing4"
+        android:background="@color/colorOutlineVariant" />
 
+    <!-- Opción 1: Dividir gastos -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardSplitMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="@dimen/spacing3"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorSurfaceVariant"
         app:strokeWidth="2dp"
-        app:strokeColor="?attr/colorPrimary">
+        app:strokeColor="@color/colorPrimary">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="@dimen/spacing4"
             android:gravity="center_vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:cardCornerRadius="24dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                app:cardCornerRadius="22dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="?attr/colorPrimaryContainer">
+                app:cardBackgroundColor="@color/colorPrimary">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="💰"
-                    android:textSize="24sp"
-                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_split_expense"
+                    app:tint="@color/white" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -63,24 +118,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginStart="@dimen/spacing3"
+                android:layout_marginEnd="@dimen/spacing2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/plus_jakarta_sans"
                     android:text="Dividir gastos"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:textColor="@color/colorTextPrimary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Compartir costos y calcular saldos entre miembros"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:text="Compartir costos y saldos"
                     android:textSize="13sp"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:layout_marginTop="4dp" />
+                    android:textColor="@color/colorTextSecondary"
+                    android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
@@ -89,43 +146,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:focusable="false" />
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Opción 2: Solo seguimiento -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardTrackingMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing4"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/colorSurfaceVariant"
         app:strokeWidth="1dp"
-        app:strokeColor="?attr/colorOutline">
+        app:strokeColor="@color/colorOutline">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="@dimen/spacing4"
             android:gravity="center_vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:cardCornerRadius="24dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                app:cardCornerRadius="22dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="?attr/colorSecondaryContainer">
+                app:cardBackgroundColor="@color/colorSecondaryContainer">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="📊"
-                    android:textSize="24sp"
-                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_tracking"
+                    app:tint="@color/colorSecondary" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -134,24 +195,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginStart="@dimen/spacing3"
+                android:layout_marginEnd="@dimen/spacing2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/plus_jakarta_sans"
                     android:text="Solo seguimiento"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:textColor="@color/colorTextPrimary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Registrar gastos sin dividir entre miembros"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:text="Registrar gastos sin dividir"
                     android:textSize="13sp"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:layout_marginTop="4dp" />
+                    android:textColor="@color/colorTextSecondary"
+                    android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
@@ -160,26 +223,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:focusable="false" />
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="24dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            style="@style/Widget.Material3.Button.TextButton" />
-
-    </LinearLayout>
+    <!-- Botón -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:fontFamily="@font/plus_jakarta_sans"
+        android:text="Cancelar"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp"
+        app:cornerRadius="12dp" />
 
 </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
