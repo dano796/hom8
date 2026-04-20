@@ -30,6 +30,9 @@ import java.util.Locale
 class DashboardFragment : Fragment() {
 
     private val viewModel: DashboardViewModel by viewModels()
+    
+    @javax.inject.Inject
+    lateinit var session: com.hom8.app.util.SessionManager
 
     private lateinit var todayAdapter: TodayTasksAdapter
     private lateinit var upcomingAdapter: UpcomingTasksAdapter
@@ -95,11 +98,28 @@ class DashboardFragment : Fragment() {
 
     private fun setupAdapters() {
         todayAdapter = TodayTasksAdapter(
-            onToggleDone = { viewModel.toggleTaskDone(it) },
+            currentUserId = session.userId,
+            onToggleDone = { task ->
+                val success = viewModel.toggleTaskDone(task)
+                if (!success) {
+                    com.google.android.material.snackbar.Snackbar.make(
+                        requireView(),
+                        "Solo el responsable de la tarea puede marcarla como completada",
+                        com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            },
             onItemClick = { task ->
                 val action = DashboardFragmentDirections
                     .actionDashboardToTaskDetail(task.id)
                 findNavController().navigate(action)
+            },
+            onUnauthorizedToggle = { task ->
+                com.google.android.material.snackbar.Snackbar.make(
+                    requireView(),
+                    "Solo el responsable de la tarea puede marcarla como completada",
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                ).show()
             }
         )
         upcomingAdapter = UpcomingTasksAdapter(

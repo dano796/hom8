@@ -27,7 +27,9 @@ data class TaskDetailUiState(
     val createdByName: String = "",
     val assigneeName: String = "Sin asignar",
     val isLoading: Boolean = true,
-    val deleted: Boolean = false
+    val deleted: Boolean = false,
+    val canToggleComplete: Boolean = false,
+    val toggleDisabledReason: String? = null
 )
 
 @HiltViewModel
@@ -96,11 +98,38 @@ class TaskDetailViewModel @Inject constructor(
             else ->
                 membersMap[task.creadoPor] ?: task.creadoPor.take(8)
         }
-        _uiState.update { it.copy(task = task, assigneeName = assigneeName, createdByName = createdByName, isLoading = false) }
+        
+        // Determinar si el usuario actual puede marcar la tarea como completada
+        val canToggleComplete = task.responsableId == currentUserId
+        val toggleDisabledReason = if (!canToggleComplete && task.responsableId.isNotEmpty()) {
+            "Solo $assigneeName puede marcar esta tarea como completada"
+        } else if (task.responsableId.isEmpty()) {
+            "Esta tarea no tiene un responsable asignado"
+        } else {
+            null
+        }
+        
+        _uiState.update { 
+            it.copy(
+                task = task, 
+                assigneeName = assigneeName, 
+                createdByName = createdByName, 
+                isLoading = false,
+                canToggleComplete = canToggleComplete,
+                toggleDisabledReason = toggleDisabledReason
+            ) 
+        }
     }
 
     fun toggleComplete() {
         val task = _uiState.value.task ?: return
+        
+        // Verificar que el usuario actual sea el responsable de la tarea
+        if (!_uiState.value.canToggleComplete) {
+            android.util.Log.w("TaskDetailViewModel", "⚠️ Usuario ${session.userId} intentó completar tarea asignada a ${task.responsableId}")
+            return
+        }
+        
         viewModelScope.launch {
             val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()

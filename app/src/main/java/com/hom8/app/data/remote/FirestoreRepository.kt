@@ -34,9 +34,14 @@ class FirestoreRepository @Inject constructor(
     fun syncTask(task: TaskEntity) {
         val taskData = task.toMap()
         
+        Log.d(TAG, "📤 Syncing task ${task.id} to Firestore: ${task.titulo}")
+        
         firestore.collection("homes/${task.hogarId}/tasks")
             .document(task.id)
             .set(taskData)
+            .addOnSuccessListener {
+                Log.d(TAG, "✅ Task synced successfully: ${task.id}")
+            }
             .addOnFailureListener { e ->
                 Log.e(TAG, "❌ Failed to sync task ${task.id}: ${e.message}", e)
             }
@@ -53,9 +58,18 @@ class FirestoreRepository @Inject constructor(
     ) {
         val taskData = task.toMapWithMetadata(creatorName, assigneeName)
         
+        Log.d(TAG, "📤 Syncing task ${task.id} with metadata to Firestore")
+        Log.d(TAG, "   - Title: ${task.titulo}")
+        Log.d(TAG, "   - Assigned to: $assigneeName (${task.responsableId})")
+        Log.d(TAG, "   - Created by: $creatorName (${task.creadoPor})")
+        Log.d(TAG, "   - Home: ${task.hogarId}")
+        
         firestore.collection("homes/${task.hogarId}/tasks")
             .document(task.id)
             .set(taskData)
+            .addOnSuccessListener {
+                Log.d(TAG, "✅ Task synced successfully with metadata: ${task.id}")
+            }
             .addOnFailureListener { e ->
                 Log.e(TAG, "❌ Failed to sync task ${task.id}: ${e.message}", e)
             }

@@ -127,7 +127,14 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    fun toggleTaskDone(task: TaskEntity) {
+    fun toggleTaskDone(task: TaskEntity): Boolean {
+        // Verificar que el usuario actual sea el responsable de la tarea
+        val currentUserId = session.userId
+        if (task.responsableId != currentUserId) {
+            android.util.Log.w("TasksViewModel", "⚠️ Usuario $currentUserId intentó completar tarea asignada a ${task.responsableId}")
+            return false
+        }
+        
         viewModelScope.launch {
             val newStatus = if (task.estado == "TERMINADO") "PENDIENTE" else "TERMINADO"
             val now = System.currentTimeMillis()
@@ -171,6 +178,7 @@ class TasksViewModel @Inject constructor(
                 )
             }
         }
+        return true
     }
 
     fun deleteTask(task: TaskEntity) {
