@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de privacidad - Hom8</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Política de privacidad</h1>
+        <p class="subtitle"><strong>Hom8</strong></p>
+      </header>
+
+      <p>Última actualización: abril de 2026</p>
+
+      <h2><strong>INFORMACIÓN GENERAL</strong></h2>
+
+      <p>
+        Esta Política de Privacidad describe cómo Hom8 ("nosotros", "la App")
+        recopila, utiliza y protege la información personal cuando usas nuestra
+        aplicación móvil. Al registrarte y usar Hom8, aceptas las prácticas
+        descritas en este documento.
+      </p>
+
+      <p>
+        Hom8 es una aplicación colaborativa de gestión del hogar. Para funcionar
+        correctamente, necesita crear y mantener una cuenta de usuario asociada
+        a tus datos básicos de identificación y a los datos del hogar que
+        compartes con otros miembros.
+      </p>
+
+      <h2><strong>DATOS QUE RECOPILAMOS</strong></h2>
+
+      <p>Al registrarte y usar Hom8, recopilamos la siguiente información:</p>
+
+      <h3>Datos de cuenta</h3>
+      <ul>
+        <li>Nombre completo</li>
+        <li>Dirección de correo electrónico</li>
+        <li>Contraseña (almacenada de forma cifrada por Firebase Auth)</li>
+        <li>
+          Foto de perfil (opcional, si usas Google Sign-In o la subes
+          manualmente)
+        </li>
+      </ul>
+
+      <h3>Datos del hogar</h3>
+      <ul>
+        <li>Nombre del hogar y código de invitación</li>
+        <li>
+          Tareas creadas: título, descripción, prioridad, fecha límite,
+          asignados, subtareas
+        </li>
+        <li>Gastos registrados: monto, categoría, participantes, notas</li>
+        <li>Pagos y balances entre miembros</li>
+        <li>Registro de actividad del hogar (feed de eventos)</li>
+        <li>Notificaciones generadas dentro de la app</li>
+      </ul>
+
+      <h3>Datos de uso</h3>
+      <ul>
+        <li>
+          Estadísticas de uso propias del perfil: tareas completadas, racha de
+          días, puntos
+        </li>
+        <li>Preferencias de la app (modo oscuro, configuración del hogar)</li>
+      </ul>
+
+      <h2><strong>CÓMO USAMOS TUS DATOS</strong></h2>
+
+      <p>Usamos la información recopilada exclusivamente para:</p>
+
+      <ul>
+        <li>Crear y autenticar tu cuenta de usuario</li>
+        <li>
+          Sincronizar los datos del hogar entre todos los miembros en tiempo
+          real
+        </li>
+        <li>Mostrar tareas, gastos y actividad relevante dentro de la app</li>
+        <li>Calcular balances y deudas entre miembros del hogar</li>
+        <li>
+          Enviar notificaciones relacionadas con tu hogar (asignaciones,
+          vencimientos, nuevos gastos)
+        </li>
+        <li>Mostrar tus estadísticas de participación en el hogar</li>
+      </ul>
+
+      <p>
+        <strong
+          >No utilizamos tus datos para publicidad, análisis de comportamiento
+          externo ni los compartimos con terceros con fines comerciales.</strong
+        >
+      </p>
+
+      <h2><strong>ALMACENAMIENTO Y SEGURIDAD</strong></h2>
+
+      <p>Hom8 utiliza una arquitectura híbrida de almacenamiento:</p>
+
+      <h3>Almacenamiento local (dispositivo)</h3>
+      <ul>
+        <li>
+          <strong>Base de datos Room (SQLite):</strong> caché local de tareas,
+          gastos, miembros y notificaciones para funcionamiento offline.
+        </li>
+        <li>
+          <strong>SharedPreferences:</strong> sesión activa, preferencias del
+          usuario y configuración de la app.
+        </li>
+      </ul>
+
+      <h3>Almacenamiento en la nube (Firebase)</h3>
+      <ul>
+        <li>
+          <strong>Firebase Authentication:</strong> gestiona el registro e
+          inicio de sesión de forma segura. Las contraseñas nunca se almacenan
+          en texto plano.
+        </li>
+        <li>
+          <strong>Firebase Firestore:</strong> almacena los datos del hogar
+          (tareas, gastos, miembros) y los sincroniza entre dispositivos en
+          tiempo real.
+        </li>
+        <li>
+          <strong>Firebase Storage:</strong> almacena archivos adjuntos o fotos
+          de perfil subidas por el usuario.
+        </li>
+      </ul>
+
+      <p>
+        Los datos almacenados en Firebase se alojan en servidores de Google y
+        están protegidos por las políticas de seguridad de Google Cloud
+        Platform. Puedes consultar las prácticas de seguridad de Firebase en
+        <a href="https://firebase.google.com/support/privacy" target="_blank"
+          >firebase.google.com/support/privacy</a
+        >.
+      </p>
+
+      <h2><strong>SERVICIOS DE TERCEROS</strong></h2>
+
+      <p>Hom8 utiliza los siguientes servicios de terceros:</p>
+
+      <ul>
+        <li>
+          <strong>Firebase (Google):</strong> autenticación, base de datos en
+          tiempo real y almacenamiento de archivos. Consulta la política de
+          privacidad de Google en
+          <a href="https://policies.google.com/privacy" target="_blank"
+            >policies.google.com/privacy</a
+          >.
+        </li>
+        <li>
+          <strong>Google Sign-In:</strong> opción de inicio de sesión con cuenta
+          de Google. Solo se accede al nombre y correo electrónico del perfil de
+          Google.
+        </li>
+      </ul>
+
+      <p>
+        Hom8 <strong>no utiliza</strong> servicios de publicidad, rastreadores
+        de comportamiento ni plataformas de analytics externas.
+      </p>
+
+      <h2><strong>PERMISOS DE LA APLICACIÓN</strong></h2>
+
+      <p>Hom8 puede solicitar los siguientes permisos en tu dispositivo:</p>
+
+      <ul>
+        <li>
+          <strong>Internet:</strong> necesario para sincronizar datos con
+          Firebase y autenticar tu cuenta.
+        </li>
+        <li>
+          <strong>Acceso a red:</strong> para verificar el estado de la conexión
+          y activar la sincronización cuando hay internet disponible.
+        </li>
+        <li>
+          <strong>Notificaciones:</strong> para enviarte alertas sobre actividad
+          en tu hogar (asignaciones, vencimientos, nuevos gastos).
+        </li>
+        <li>
+          <strong>Vibración:</strong> para retroalimentación háptica en
+          interacciones de la app.
+        </li>
+      </ul>
+
+      <p>
+        No solicitamos ni utilizamos permisos de: Cámara, Micrófono, Ubicación
+        GPS, Contactos ni Calendario del dispositivo.
+      </p>
+
+      <h2><strong>COMPARTIR DATOS CON OTROS MIEMBROS</strong></h2>
+
+      <p>
+        Hom8 es una aplicación colaborativa. Al unirte a un hogar, los
+        siguientes datos son visibles para los demás miembros:
+      </p>
+
+      <ul>
+        <li>Tu nombre y foto de perfil</li>
+        <li>Las tareas que te han asignado o que has completado</li>
+        <li>Tu participación en gastos compartidos</li>
+        <li>Tu actividad reciente dentro del hogar</li>
+      </ul>
+
+      <p>
+        Esta información solo es accesible dentro del hogar al que perteneces y
+        no se comparte con terceros ni con otros hogares.
+      </p>
+
+      <h2><strong>DATOS DE MENORES DE EDAD</strong></h2>
+
+      <p>
+        Hom8 no está dirigida a menores de 13 años. No recopilamos
+        intencionadamente información personal de menores de esa edad. Si eres
+        padre o tutor y crees que tu hijo ha proporcionado información personal
+        en la app, contáctanos para eliminar dicha información.
+      </p>
+
+      <h2><strong>TUS DERECHOS</strong></h2>
+
+      <p>Como usuario de Hom8, tienes derecho a:</p>
+
+      <ul>
+        <li>
+          <strong>Acceder:</strong> consultar todos los datos asociados a tu
+          cuenta directamente desde la app.
+        </li>
+        <li>
+          <strong>Corregir:</strong> actualizar tu nombre, foto de perfil y
+          demás información desde tu perfil.
+        </li>
+        <li>
+          <strong>Eliminar:</strong> al desinstalar la app, los datos locales se
+          eliminan. Para solicitar la eliminación de tus datos en la nube,
+          contáctanos.
+        </li>
+        <li>
+          <strong>Salir de un hogar:</strong> puedes abandonar un hogar en
+          cualquier momento, dejando de tener acceso a sus datos compartidos.
+        </li>
+      </ul>
+
+      <h2><strong>CAMBIOS A ESTA POLÍTICA</strong></h2>
+
+      <p>
+        Podemos actualizar esta Política de Privacidad ocasionalmente para
+        reflejar cambios en la app o en la legislación aplicable. Los cambios se
+        publicarán en esta página con una fecha de actualización revisada. Te
+        recomendamos revisarla periódicamente.
+      </p>
+
+      <h2><strong>CONTACTO</strong></h2>
+
+      <p>
+        Si tienes preguntas o solicitudes relacionadas con esta Política de
+        Privacidad, puedes contactarnos:
+      </p>
+
+      <ul>
+        <li>Correo electrónico: daniel.ortiza.col@upb.edu.co</li>
+        <li>
+          GitHub:
+          <a href="https://github.com/dano796/hom8" target="_blank"
+            >github.com/dano796/hom8</a
+          >
+        </li>
+        <li>Universidad Pontificia Bolivariana — Medellín, Colombia</li>
+      </ul>
+
+      <footer>
+        <p><strong>Hom8</strong></p>
+        <p>© 2026 Todos los derechos reservados</p>
+        <p class="footer-links">
+          <a href="index.html">Volver a inicio</a> —
+          <a href="terms.html">Términos y condiciones</a> —
+          <a href="delete-account.html">Eliminar cuenta</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

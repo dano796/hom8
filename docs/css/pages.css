@@ -1,0 +1,245 @@
+/* Content Pages Styles (Terms, Privacy) */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding-bottom: 40px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.subtitle strong {
+  font-size: 1.25rem;
+  color: var(--foreground);
+}
+
+/* Content */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 48px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+p {
+  color: var(--muted-foreground);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+ul {
+  margin: 16px 0;
+  padding-left: 24px;
+  color: var(--muted-foreground);
+}
+
+li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Footer */
+footer {
+  margin-top: 100px;
+  padding: 48px 0;
+  border-top: 2px solid var(--border);
+  text-align: center;
+}
+
+footer p {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+footer p strong {
+  font-size: 1.25rem;
+  color: var(--foreground);
+}
+
+footer a {
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
+
+.footer-links {
+  margin-top: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 28px;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  header {
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-top: 36px;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-top: 24px;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+  }
+
+  footer a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 24px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.125rem;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+}
+
+/* Delete Account Page */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.step-text {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  padding-top: 4px;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0.875rem 1.75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  margin: 0.5rem 0 0.5rem;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.cta-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.warning {
+  background: #2d1515;
+  border: 1px solid #ef4444;
+  border-left: 4px solid #ef4444;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.warning strong {
+  color: #ffffff;
+}
